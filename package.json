@@ -1,0 +1,311 @@
+{
+  "name": "analyzemeateam-website",
+  "version": "2.0.0",
+  "description": "The Algorithm of Defense - Revolutionary 5-3-1 Triangle Defense platform website",
+  "keywords": [
+    "triangle-defense",
+    "football-analytics",
+    "defensive-coaching",
+    "5-3-1-system",
+    "cls-analysis",
+    "formation-analysis",
+    "denauld-brown",
+    "coaching-intelligence",
+    "football-ai",
+    "defensive-strategy"
+  ],
+  "author": {
+    "name": "AnalyzeMyTeam",
+    "email": "tech@analyzemeateam.com",
+    "url": "https://analyzemeateam.com"
+  },
+  "contributors": [
+    {
+      "name": "Denauld Brown",
+      "email": "denauld@analyzemeateam.com",
+      "url": "https://analyzemeateam.com/#about",
+      "role": "Triangle Defense Methodology Creator"
+    }
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://analyzemeateam.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/analyzemeateam/amt-website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/analyzemeateam/amt-website/issues",
+    "email": "support@analyzemeateam.com"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "scripts": {
+    "dev": "npm-run-all --parallel serve watch:*",
+    "build": "npm-run-all clean build:*",
+    "build:css": "npm run css:minify",
+    "build:js": "npm run js:minify",
+    "build:html": "npm run html:minify",
+    "build:images": "npm run images:optimize",
+    "serve": "live-server --port=3000 --open=/",
+    "watch:css": "chokidar 'css/**/*.css' -c 'npm run css:process'",
+    "watch:js": "chokidar 'js/**/*.js' -c 'npm run js:process'",
+    "css:process": "npm-run-all css:autoprefixer css:minify",
+    "css:autoprefixer": "postcss css/style.css css/blog.css --use autoprefixer --dir dist/css/",
+    "css:minify": "cleancss -o dist/css/style.min.css css/style.css && cleancss -o dist/css/blog.min.css css/blog.css",
+    "js:process": "npm run js:minify",
+    "js:minify": "terser js/script.js -o dist/js/script.min.js --compress --mangle && terser js/blog.js -o dist/js/blog.min.js --compress --mangle",
+    "html:minify": "html-minifier --input-dir ./ --output-dir dist/ --file-ext html --remove-comments --collapse-whitespace --minify-css --minify-js",
+    "images:optimize": "imagemin 'assets/**/*.{jpg,jpeg,png,gif,svg}' --out-dir=dist/assets/",
+    "clean": "rimraf dist/",
+    "lint": "npm-run-all lint:*",
+    "lint:css": "stylelint 'css/**/*.css'",
+    "lint:js": "eslint 'js/**/*.js'",
+    "lint:html": "htmlhint '*.html'",
+    "format": "npm-run-all format:*",
+    "format:css": "prettier --write 'css/**/*.css'",
+    "format:js": "prettier --write 'js/**/*.js'",
+    "format:html": "prettier --write '*.html'",
+    "test": "npm-run-all test:*",
+    "test:accessibility": "pa11y http://localhost:3000",
+    "test:performance": "lighthouse http://localhost:3000 --output json --output-path ./reports/lighthouse.json",
+    "test:html": "html-validate *.html",
+    "test:links": "blc http://localhost:3000 -r",
+    "validate": "npm-run-all validate:*",
+    "validate:html": "html-validate *.html",
+    "validate:css": "css-tree-validate css/style.css css/blog.css",
+    "validate:manifest": "web-app-manifest-validator --manifest manifest.json",
+    "optimize": "npm-run-all optimize:*",
+    "optimize:images": "imagemin-cli assets/**/*.{png,jpg,jpeg,gif,svg} --out-dir=assets/optimized/",
+    "optimize:fonts": "subfont --inline-css --font-display=swap *.html",
+    "audit": "npm-run-all audit:*",
+    "audit:security": "npm audit",
+    "audit:lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./reports/lighthouse.html",
+    "audit:speed": "pagespeed-insights http://localhost:3000",
+    "deploy:staging": "npm run build && rsync -avz --delete dist/ staging:/var/www/staging.analyzemeateam.com/",
+    "deploy:production": "npm run build && npm run test && rsync -avz --delete dist/ production:/var/www/analyzemeateam.com/",
+    "pwa:test": "pwa-test-tool http://localhost:3000",
+    "seo:test": "seolint http://localhost:3000",
+    "triangle-defense:validate": "echo 'Validating Triangle Defense methodology content...' && npm run validate",
+    "beehive:build": "echo 'Building Beehive Blog optimizations...' && npm run build:css && npm run build:js",
+    "mo-report:optimize": "echo 'Optimizing MO Report assets...' && npm run optimize:images",
+    "nfl-edge:optimize": "echo 'Optimizing NFL Edge assets...' && npm run optimize:images",
+    "analytics:setup": "echo 'Setting up analytics tracking...' && node scripts/setup-analytics.js",
+    "sitemap:generate": "node scripts/generate-sitemap.js",
+    "robots:validate": "node scripts/validate-robots.js",
+    "performance:report": "npm-run-all test:performance audit:lighthouse",
+    "security:scan": "npm audit && node scripts/security-scan.js",
+    "backup": "node scripts/backup-content.js",
+    "precommit": "npm-run-all lint test validate",
+    "prepush": "npm run audit:security",
+    "postinstall": "echo 'AnalyzeMyTeam development environment ready! Run npm run dev to start.'",
+    "prestart": "npm run clean",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "blc": "^4.0.2",
+    "chokidar-cli": "^3.0.0",
+    "clean-css-cli": "^5.6.2",
+    "css-tree-validate": "^2.0.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-html": "^7.1.0",
+    "html-minifier": "^4.0.0",
+    "html-validate": "^8.7.0",
+    "htmlhint": "^1.1.4",
+    "husky": "^8.0.3",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^7.0.0",
+    "imagemin-giflossy": "^5.1.10",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^10.0.1",
+    "lighthouse": "^11.2.0",
+    "live-server": "^1.2.2",
+    "npm-run-all": "^4.1.5",
+    "pa11y": "^6.2.3",
+    "pagespeed-insights": "^1.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^3.0.3",
+    "pwa-test-tool": "^1.0.0",
+    "rimraf": "^5.0.5",
+    "seolint": "^1.0.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0",
+    "subfont": "^7.1.0",
+    "terser": "^5.22.0",
+    "web-app-manifest-validator": "^1.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "not dead",
+    "> 0.5%",
+    "last 2 versions"
+  ],
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "serviceworker": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "plugins": [
+      "html"
+    ],
+    "rules": {
+      "no-console": "warn",
+      "no-unused-vars": "error",
+      "prefer-const": "error",
+      "no-var": "error"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "color-hex-case": "lower",
+      "color-hex-length": "short",
+      "declaration-block-trailing-semicolon": "always",
+      "indentation": 2,
+      "max-empty-lines": 2,
+      "rule-empty-line-before": [
+        "always",
+        {
+          "except": [
+            "first-nested"
+          ]
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 100,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit",
+      "pre-push": "npm run prepush"
+    }
+  },
+  "config": {
+    "triangle_defense": {
+      "version": "5.3.1",
+      "formations": [
+        "Larry",
+        "Linda", 
+        "Rita",
+        "Ricky",
+        "Leon",
+        "Randy",
+        "Pat"
+      ],
+      "methodology": {
+        "cls_analysis": true,
+        "mo_targeting": true,
+        "formation_classification": true
+      }
+    },
+    "publications": {
+      "mo_report": {
+        "frequency": "weekly",
+        "target": "college_football"
+      },
+      "nfl_edge": {
+        "frequency": "weekly",
+        "target": "professional_football"
+      }
+    },
+    "analytics": {
+      "google_analytics": "GA_MEASUREMENT_ID",
+      "performance_tracking": true,
+      "user_engagement": true
+    },
+    "deployment": {
+      "staging_url": "https://staging.analyzemeateam.com",
+      "production_url": "https://analyzemeateam.com",
+      "cdn_enabled": true
+    }
+  },
+  "funding": {
+    "type": "corporate",
+    "url": "https://analyzemeateam.com/#contact"
+  },
+  "triangle_defense_metadata": {
+    "methodology_creator": "Denauld Brown",
+    "system_type": "5-3-1 Triangle Defense",
+    "analysis_framework": "CLS (Configuration, Location, Situation)",
+    "supported_levels": [
+      "high_school",
+      "college",
+      "professional"
+    ],
+    "ai_integration": {
+      "pattern_recognition": true,
+      "predictive_analysis": true,
+      "formation_classification": true,
+      "tendency_mapping": true
+    },
+    "content_types": [
+      "methodology_guides",
+      "formation_analysis",
+      "coaching_insights",
+      "statistical_analysis",
+      "video_breakdowns"
+    ]
+  },
+  "technical_specifications": {
+    "framework": "Vanilla JavaScript",
+    "css_methodology": "Custom CSS with CSS Grid/Flexbox",
+    "pwa_enabled": true,
+    "offline_support": true,
+    "responsive_design": true,
+    "accessibility_level": "WCAG 2.1 AA",
+    "performance_target": {
+      "lighthouse_score": ">95",
+      "first_contentful_paint": "<1.5s",
+      "largest_contentful_paint": "<2.5s",
+      "cumulative_layout_shift": "<0.1"
+    }
+  },
+  "content_management": {
+    "blog_platform": "Static HTML with JSON data",
+    "content_types": {
+      "blog_posts": "The Beehive Blog",
+      "publications": "The MO Report, NFL Edge",
+      "methodology": "Triangle Defense guides",
+      "case_studies": "Formation analysis"
+    },
+    "update_frequency": {
+      "blog": "weekly",
+      "publications": "weekly", 
+      "methodology": "monthly",
+      "case_studies": "bi-weekly"
+    }
+  },
+  "coaching_tools": {
+    "formation_analyzer": "In development",
+    "triangle_calculator": "In development",
+    "cls_framework_tool": "In development",
+    "mo_identifier": "In development",
+    "tendency_mapper": "Planned",
+    "success_tracker": "Planned"
+  }
+}
