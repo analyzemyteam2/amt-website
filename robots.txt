@@ -1,0 +1,298 @@
+# AnalyzeMyTeam - The Algorithm of Defense
+# Robots.txt - SEO and Search Engine Guidelines
+
+# =============================================================================
+# USER AGENT DIRECTIVES
+# =============================================================================
+
+# Allow all search engines to index the site
+User-agent: *
+Allow: /
+
+# =============================================================================
+# SPECIFIC SEARCH ENGINE OPTIMIZATIONS
+# =============================================================================
+
+# Google Bot - Full access with crawl delay
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing Bot - Full access
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo Bot - Full access
+User-agent: Slurp
+Allow: /
+
+# DuckDuckGo Bot - Full access
+User-agent: DuckDuckBot
+Allow: /
+
+# =============================================================================
+# CONTENT RESTRICTIONS
+# =============================================================================
+
+# Block access to administrative and development files
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /vendor/
+
+# Block access to configuration and sensitive files
+Disallow: /config/
+Disallow: /includes/
+Disallow: /scripts/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.htaccess
+Disallow: /web.config
+
+# Block access to temporary and cache files
+Disallow: /tmp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /*.log
+Disallow: /*.tmp
+Disallow: /*.bak
+
+# Block access to development and testing directories
+Disallow: /dev/
+Disallow: /development/
+Disallow: /test/
+Disallow: /testing/
+Disallow: /staging/
+Disallow: /beta/
+
+# =============================================================================
+# TRIANGLE DEFENSE PROTECTED CONTENT
+# =============================================================================
+
+# Protect proprietary coaching materials
+Disallow: /coaching-materials/
+Disallow: /playbooks/
+Disallow: /formations/
+Disallow: /scouting-reports/
+Disallow: /training-videos/
+Disallow: /client-data/
+
+# Protect AI and analysis data
+Disallow: /ai-models/
+Disallow: /analysis-data/
+Disallow: /machine-learning/
+Disallow: /datasets/
+Disallow: /research/
+
+# Protect internal tools and systems
+Disallow: /internal/
+Disallow: /staff-only/
+Disallow: /denauld-private/
+Disallow: /coaching-staff/
+
+# =============================================================================
+# MEDIA AND ASSET RESTRICTIONS
+# =============================================================================
+
+# Allow indexing of public images and media
+Allow: /assets/
+Allow: /images/
+Allow: /media/
+Allow: /css/
+Allow: /js/
+
+# Block indexing of large files and downloads
+Disallow: /downloads/
+Disallow: /*.zip
+Disallow: /*.rar
+Disallow: /*.tar.gz
+Disallow: /*.pdf$
+
+# Block indexing of raw and source files
+Disallow: /*.psd
+Disallow: /*.ai
+Disallow: /*.sketch
+Disallow: /*.fig
+
+# =============================================================================
+# DYNAMIC CONTENT AND PARAMETERS
+# =============================================================================
+
+# Block indexing of search results and filtered pages
+Disallow: /*?search=*
+Disallow: /*?filter=*
+Disallow: /*?s=*
+Disallow: /*?q=*
+Disallow: /*?query=*
+
+# Block indexing of pagination and sorting parameters
+Disallow: /*?page=*
+Disallow: /*?p=*
+Disallow: /*?sort=*
+Disallow: /*?order=*
+
+# Block indexing of session and tracking parameters
+Disallow: /*?session=*
+Disallow: /*?sid=*
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+
+# Block indexing of print and mobile versions
+Disallow: /*?print=*
+Disallow: /*?mobile=*
+Disallow: /print/
+Disallow: /m/
+
+# =============================================================================
+# ALLOW SPECIFIC IMPORTANT CONTENT
+# =============================================================================
+
+# Ensure key pages are crawlable
+Allow: /index.html
+Allow: /blog.html
+Allow: /blog/
+Allow: /publications/
+Allow: /triangle-defense/
+Allow: /about/
+Allow: /contact/
+
+# Allow access to structured data and feeds
+Allow: /sitemap.xml
+Allow: /sitemap.html
+Allow: /rss.xml
+Allow: /feed.xml
+Allow: /atom.xml
+
+# Allow access to important SEO files
+Allow: /robots.txt
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png
+Allow: /browserconfig.xml
+Allow: /manifest.json
+
+# =============================================================================
+# SOCIAL MEDIA AND EXTERNAL BOTS
+# =============================================================================
+
+# Facebook Bot - Allow for social sharing
+User-agent: facebookexternalhit
+Allow: /
+Allow: /og-images/
+
+# Twitter Bot - Allow for card generation
+User-agent: Twitterbot
+Allow: /
+Allow: /twitter-cards/
+
+# LinkedIn Bot - Allow for professional sharing
+User-agent: LinkedInBot
+Allow: /
+
+# WhatsApp Bot - Allow for message sharing
+User-agent: WhatsApp
+Allow: /
+
+# =============================================================================
+# BAD BOTS AND SCRAPERS
+# =============================================================================
+
+# Block known bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: rogerbot
+Disallow: /
+
+# Block aggressive crawlers
+User-agent: *bot*spam*
+Disallow: /
+
+User-agent: *scraper*
+Disallow: /
+
+User-agent: *crawler*
+Disallow: /
+
+# =============================================================================
+# ARCHIVE AND BACKUP RESTRICTIONS
+# =============================================================================
+
+# Block access to backup and archive files
+Disallow: /backups/
+Disallow: /backup/
+Disallow: /*.sql
+Disallow: /*.gz
+Disallow: /*.tar
+
+# Block access to version control
+Disallow: /.git/
+Disallow: /.svn/
+Disallow: /.hg/
+
+# =============================================================================
+# PERFORMANCE AND BANDWIDTH
+# =============================================================================
+
+# Set crawl delay for bandwidth management
+Crawl-delay: 2
+
+# Request crawlers to be respectful
+# Visit: https://analyzemeateam.com/crawl-budget
+
+# =============================================================================
+# SITEMAPS
+# =============================================================================
+
+# Primary sitemap location
+Sitemap: https://analyzemeateam.com/sitemap.xml
+
+# Blog-specific sitemap
+Sitemap: https://analyzemeateam.com/blog-sitemap.xml
+
+# News sitemap for timely content
+Sitemap: https://analyzemeateam.com/news-sitemap.xml
+
+# Image sitemap for media content
+Sitemap: https://analyzemeateam.com/image-sitemap.xml
+
+# Video sitemap for training content
+Sitemap: https://analyzemeateam.com/video-sitemap.xml
+
+# =============================================================================
+# ADDITIONAL NOTES
+# =============================================================================
+
+# This robots.txt file is optimized for AnalyzeMyTeam - The Algorithm of Defense
+# 
+# Key Priorities:
+# 1. Protect proprietary Triangle Defense methodology and client data
+# 2. Optimize for search engine discovery of public content
+# 3. Allow social media bots for sharing and engagement
+# 4. Block malicious crawlers and content scrapers
+# 5. Manage server bandwidth and crawl budget efficiently
+#
+# For questions about crawling policies, contact: seo@analyzemeateam.com
+#
+# Last Updated: December 2024
+# Website: https://analyzemeateam.com
+# Technical Contact: tech@analyzemeateam.com
+
+# =============================================================================
+# END OF ROBOTS.TXT
+# =============================================================================
