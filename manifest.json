@@ -1,0 +1,346 @@
+{
+  "name": "AnalyzeMyTeam - The Algorithm of Defense",
+  "short_name": "AnalyzeMyTeam",
+  "description": "Revolutionary 5-3-1 Triangle Defense system that decodes mathematical patterns hiding in plain sight, turning offensive chaos into defensive order.",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#e2021a",
+  "background_color": "#15151a",
+  "lang": "en-US",
+  "dir": "ltr",
+  
+  "categories": [
+    "education",
+    "sports",
+    "productivity",
+    "business"
+  ],
+  
+  "icons": [
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icons/icon-monochrome.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "monochrome"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/homepage-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "AnalyzeMyTeam Homepage - The Algorithm of Defense"
+    },
+    {
+      "src": "/assets/screenshots/blog-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "The Beehive Blog - Football Intelligence Hub"
+    },
+    {
+      "src": "/assets/screenshots/triangle-defense-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "5-3-1 Triangle Defense System Overview"
+    },
+    {
+      "src": "/assets/screenshots/homepage-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "AnalyzeMyTeam Desktop Experience"
+    },
+    {
+      "src": "/assets/screenshots/blog-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "The Beehive Blog Desktop Interface"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "The Beehive Blog",
+      "short_name": "Blog",
+      "description": "Access the latest defensive analysis and Triangle Defense insights",
+      "url": "/blog.html",
+      "icons": [
+        {
+          "src": "/assets/icons/blog-shortcut.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Triangle Defense",
+      "short_name": "5-3-1 System",
+      "description": "Learn the revolutionary 5-3-1 Triangle Defense methodology",
+      "url": "/triangle-defense/",
+      "icons": [
+        {
+          "src": "/assets/icons/triangle-shortcut.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "The MO Report",
+      "short_name": "MO Report",
+      "description": "Weekly college football defensive analysis",
+      "url": "/mo-report/",
+      "icons": [
+        {
+          "src": "/assets/icons/mo-report-shortcut.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "The NFL Edge",
+      "short_name": "NFL Edge",
+      "description": "Professional football intelligence and analysis",
+      "url": "/nfl-edge/",
+      "icons": [
+        {
+          "src": "/assets/icons/nfl-edge-shortcut.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://analyzemeateam.com/manifest.json"
+    }
+  ],
+
+  "prefer_related_applications": false,
+
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+
+  "protocol_handlers": [
+    {
+      "protocol": "web+analyzemeateam",
+      "url": "/?formation=%s"
+    }
+  ],
+
+  "file_handlers": [
+    {
+      "action": "/formation-analyzer/",
+      "accept": {
+        "video/*": [".mp4", ".mov", ".avi"],
+        "image/*": [".jpg", ".jpeg", ".png", ".gif"]
+      },
+      "launch_type": "single-client"
+    }
+  ],
+
+  "share_target": {
+    "action": "/share/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "formation_video",
+          "accept": ["video/*", "image/*"]
+        }
+      ]
+    }
+  },
+
+  "web_accessible_resources": [
+    "assets/icons/*",
+    "assets/screenshots/*",
+    "css/*.css",
+    "js/*.js"
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; worker-src 'self';"
+  },
+
+  "permissions": [
+    "storage"
+  ],
+
+  "features": [
+    "CrossOriginEmbedderPolicyCredentialless"
+  ],
+
+  "offline_enabled": true,
+
+  "note_taking": {
+    "new_note_url": "/coaching-notes/"
+  },
+
+  "widgets": [
+    {
+      "name": "Formation Quick Analyzer",
+      "short_name": "Formation Analyzer",
+      "description": "Quick analysis widget for offensive formations",
+      "tag": "formation_analyzer",
+      "template": "formation-widget",
+      "ms_ac_template": "formation-adaptive-card.json",
+      "data": "/api/widget/formation-data",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/assets/widgets/formation-analyzer-widget.png",
+          "sizes": "320x240",
+          "label": "Formation Analyzer Widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/assets/icons/widget-formation.png",
+          "sizes": "64x64"
+        }
+      ]
+    },
+    {
+      "name": "Triangle Defense Quick Reference",
+      "short_name": "Triangle Ref",
+      "description": "Quick reference for Triangle Defense principles",
+      "tag": "triangle_reference",
+      "template": "triangle-widget", 
+      "data": "/api/widget/triangle-data",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "/assets/widgets/triangle-reference-widget.png",
+          "sizes": "320x240",
+          "label": "Triangle Defense Reference Widget"
+        }
+      ],
+      "icons": [
+        {
+          "src": "/assets/icons/widget-triangle.png",
+          "sizes": "64x64"
+        }
+      ]
+    }
+  ],
+
+  "handle_links": "preferred",
+
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+
+  "id": "analyzemeateam-triangle-defense",
+
+  "custom": {
+    "triangle_defense": {
+      "version": "5.3.1",
+      "methodology": "Denauld Brown Triangle System",
+      "supported_formations": [
+        "Larry", "Linda", "Rita", "Ricky", 
+        "Leon", "Randy", "Pat"
+      ],
+      "analytics": {
+        "cls_analysis": true,
+        "mo_targeting": true,
+        "formation_prediction": true,
+        "success_tracking": true
+      }
+    },
+    "publications": {
+      "mo_report": {
+        "frequency": "weekly",
+        "focus": "college_football",
+        "analysis_depth": "comprehensive"
+      },
+      "nfl_edge": {
+        "frequency": "weekly", 
+        "focus": "professional_football",
+        "analysis_depth": "professional"
+      }
+    },
+    "coaching_tools": {
+      "formation_analyzer": true,
+      "triangle_calculator": true,
+      "cls_framework": true,
+      "mo_identifier": true
+    },
+    "ai_integration": {
+      "pattern_recognition": true,
+      "predictive_analysis": true,
+      "formation_classification": true,
+      "tendency_mapping": true
+    }
+  }
+}
