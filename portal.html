@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnalyzeMyTeam - Triangle Defense Portal</title>
+    <meta name="description" content="Professional football analytics portal - Triangle Defense coaching intelligence">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #ffffff;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Top Navigation Bar */
+        .portal-nav {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+        }
+
+        .nav-item.live::after {
+            content: '•';
+            color: #e2021a;
+            margin-left: 2px;
+            font-size: 16px;
+        }
+
+        /* Main Portal Container */
+        .portal-container {
+            margin-top: 60px;
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Dual Video Panel Section */
+        .video-panels {
+            height: 70vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: #111111;
+        }
+
+        .video-panel {
+            background: #000000;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #000000;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Field Diagram Overlay for Right Panel */
+        .field-diagram {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: rgba(46, 125, 50, 0.1);
+            border: 1px solid rgba(46, 125, 50, 0.3);
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .field-lines {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .yard-line {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .yard-line:nth-child(1) { top: 10%; }
+        .yard-line:nth-child(2) { top: 20%; }
+        .yard-line:nth-child(3) { top: 30%; }
+        .yard-line:nth-child(4) { top: 40%; }
+        .yard-line:nth-child(5) { top: 50%; }
+        .yard-line:nth-child(6) { top: 60%; }
+        .yard-line:nth-child(7) { top: 70%; }
+        .yard-line:nth-child(8) { top: 80%; }
+        .yard-line:nth-child(9) { top: 90%; }
+
+        .hash-marks {
+            position: absolute;
+            left: 30%;
+            right: 30%;
+            top: 0;
+            bottom: 0;
+            border-left: 1px dashed rgba(255, 255, 255, 0.1);
+            border-right: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .player-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+        }
+
+        .player-red { background: #e2021a; top: 60%; left: 20%; }
+        .player-red:nth-child(11) { left: 35%; }
+        .player-red:nth-child(12) { left: 50%; }
+        .player-red:nth-child(13) { left: 65%; }
+        .player-red:nth-child(14) { left: 80%; }
+
+        .player-white { background: #ffffff; top: 40%; left: 25%; }
+        .player-white:nth-child(16) { left: 40%; }
+        .player-white:nth-child(17) { left: 55%; }
+        .player-white:nth-child(18) { left: 70%; }
+
+        /* Bottom CTA Section */
+        .cta-section {
+            height: 120px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 40px;
+        }
+
+        .cta-headline {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .cta-subtext {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
+            background: linear-gradient(135deg, #ff1744 0%, #e2021a 100%);
+        }
+
+        /* Staff Section */
+        .staff-section {
+            background: #0a0a0a;
+            padding: 80px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .staff-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .staff-subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .staff-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 2, 26, 0.5);
+            box-shadow: 0 16px 40px rgba(226, 2, 26, 0.2);
+        }
+
+        /* Staff Header with Brand Colors */
+        .staff-header {
+            height: 80px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+        }
+
+        .staff-name {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Brand Color Pattern for Staff */
+        .darius-card .staff-header { background: #e2021a; }
+        .alexandra-card .staff-header { background: #4e5064; }
+        .victoria-card .staff-header { background: #15151a; }
+        .marcus-card .staff-header { background: #818284; }
+
+        .staff-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .staff-image {
+            width: 100%;
+            height: 140px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-role {
+            font-size: 13px;
+            color: #e2021a;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .staff-description {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            text-align: justify;
+            text-justify: inter-word;
+            flex: 1;
+        }
+
+        /* Publications Section */
+        .publications-section {
+            background: #111111;
+            padding: 60px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .publications-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .publications-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .publication-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 2, 26, 0.5);
+            box-shadow: 0 12px 40px rgba(226, 2, 26, 0.2);
+        }
+
+        .publication-thumbnail {
+            height: 160px;
+            background: linear-gradient(45deg, #2a2a2a 25%, #3a3a3a 25%, #3a3a3a 50%, #2a2a2a 50%, #2a2a2a 75%, #3a3a3a 75%);
+            background-size: 20px 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .publication-logo {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .mo-report-thumb {
+            background: linear-gradient(135deg, #4e5064 0%, #5c5b66 100%);
+        }
+
+        .nfl-edge-thumb {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+        }
+
+        .publication-info {
+            padding: 20px;
+        }
+
+        .publication-name {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .publication-description {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+            letter-spacing: 1px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .publication-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Mobile Staff Responsive */
+        @media (max-width: 768px) {
+            .staff-container {
+                padding: 0 20px;
+            }
+
+            .staff-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .staff-title {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            .staff-subtitle {
+                font-size: 12px;
+                margin-bottom: 40px;
+            }
+
+            .staff-card {
+                height: auto;
+                min-height: 300px;
+            }
+
+            .staff-header {
+                height: 70px;
+                padding: 0 12px;
+            }
+
+            .staff-name {
+                font-size: 13px;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-items {
+                gap: 20px;
+                font-size: 11px;
+                flex-wrap: wrap;
+                padding: 0 20px;
+            }
+
+            .video-panels {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+                height: 80vh;
+            }
+
+            .cta-section {
+                height: 100px;
+            }
+
+            .cta-headline {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            .cta-subtext {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+
+            .publications-container {
+                padding: 0 20px;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .publications-title {
+                font-size: 16px;
+                letter-spacing: 2px;
+                margin-bottom: 30px;
+            }
+
+            .publication-thumbnail {
+                height: 120px;
+            }
+
+            .publication-logo {
+                font-size: 18px;
+            }
+        }
+
+        /* Animation Effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .portal-container {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Portal Navigation -->
+    <nav class="portal-nav">
+        <div class="nav-items">
+            <a href="#" class="nav-item active">HOME</a>
+            <a href="#" class="nav-item">ANALYSIS</a>
+            <a href="#" class="nav-item">INTEL</a>
+            <a href="#" class="nav-item">PLAYBOOK</a>
+            <a href="#" class="nav-item live">LIVE</a>
+            <a href="#" class="nav-item">DATA</a>
+            <a href="#" class="nav-item">OPERATIONS</a>
+            <a href="#" class="nav-item">LEADERSHIP</a>
+        </div>
+    </nav>
+
+    <!-- Main Portal Container -->
+    <div class="portal-container">
+        <!-- Dual Video Panels -->
+        <div class="video-panels">
+            <!-- Left Panel: Game Footage -->
+            <div class="video-panel">
+                <div class="video-container">
+                    <!-- YouTube Video Embed - Replace VIDEO_ID_1 with actual YouTube video ID -->
+                    <iframe class="video-player" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_1?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_1&controls=1&modestbranding=1&rel=0" 
+                            title="Triangle Defense Game Analysis"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Right Panel: Tactical Diagram -->
+            <div class="video-panel">
+                <div class="video-container">
+                    <!-- YouTube Video Embed - Replace VIDEO_ID_2 with actual YouTube video ID -->
+                    <iframe class="video-player" 
+                            src="https://www.youtube.com/embed/VIDEO_ID_2?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID_2&controls=1&modestbranding=1&rel=0" 
+                            title="Triangle Defense Tactical Analysis"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                    
+                    <!-- Field diagram overlay (optional) -->
+                    <div class="field-diagram">
+                        <div class="field-lines">
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="yard-line"></div>
+                            <div class="hash-marks"></div>
+                            
+                            <!-- Player positions -->
+                            <div class="player-dot player-red"></div>
+                            <div class="player-dot player-red"></div>
+                            <div class="player-dot player-red"></div>
+                            <div class="player-dot player-red"></div>
+                            <div class="player-dot player-red"></div>
+                            <div class="player-dot player-white"></div>
+                            <div class="player-dot player-white"></div>
+                            <div class="player-dot player-white"></div>
+                            <div class="player-dot player-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action Section -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <div class="cta-headline">Where Champions Are Made</div>
+                <div class="cta-subtext">Experience the Revolutionary Triangle Defense Intelligence Platform</div>
+                <a href="modules.html" class="cta-button">Enter AnalyzeMyTeam</a>
+            </div>
+        </div>
+
+        <!-- Staff Section -->
+        <div class="staff-section">
+            <div class="staff-container">
+                <div class="staff-title">AI Leadership Team</div>
+                <div class="staff-subtitle">
+                    Meet the Triangle Defense AI leadership team - revolutionary coaching intelligence powered by advanced artificial intelligence. Our digital executive roster combines NFL experience, technological innovation, and strategic vision to transform football analytics and player development through cutting-edge AI personalities.
+                </div>
+                <div class="staff-grid">
+                    <!-- Darius - Top Left -->
+                    <div class="staff-card darius-card" onclick="openStaff('darius-washington')">
+                        <div class="staff-header">
+                            <div class="staff-name">Darius Washington</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/darius-washington.jpg');">
+                                [Photo Space: 400×300 JPG/PNG]
+                            </div>
+                            <div class="staff-role">Head Coach (Offensive Innovation)</div>
+                            <div class="staff-description">
+                                AI-powered coaching virtuoso specializing in offensive strategy and innovation. Hyper-intelligent digital personality combining genius-level strategic thinking with emotional intelligence to develop championship-caliber offensive schemes and player relationships.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alexandra - Top Right -->
+                    <div class="staff-card alexandra-card" onclick="openStaff('alexandra-martinez')">
+                        <div class="staff-header">
+                            <div class="staff-name">Alexandra Martinez</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/alexandra-martinez.jpg');">
+                                [Photo Space: 400×300 JPG/PNG]
+                            </div>
+                            <div class="staff-role">Chief Administrative Officer</div>
+                            <div class="staff-description">
+                                Advanced AI organizational mastermind who transforms complex football operations into seamless systems. Digital expert in project management and executive coordination delivering championship-level efficiency through artificial intelligence.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Victoria - Bottom Left -->
+                    <div class="staff-card victoria-card" onclick="openStaff('victoria-castellanos')">
+                        <div class="staff-header">
+                            <div class="staff-name">Victoria Castellanos</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/victoria-castellanos.jpg');">
+                                [Photo Space: 400×300 JPG/PNG]
+                            </div>
+                            <div class="staff-role">Chief Legal Officer</div>
+                            <div class="staff-description">
+                                Elite AI legal strategist protecting Triangle Defense intellectual property and ensuring compliance across all football operations. Digital commanding presence with uncompromising professional standards powered by advanced artificial intelligence.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marcus - Bottom Right -->
+                    <div class="staff-card marcus-card" onclick="openStaff('marcus-sterling')">
+                        <div class="staff-header">
+                            <div class="staff-name">Marcus Sterling</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/marcus-sterling.jpg');">
+                                [Photo Space: 400×300 JPG/PNG]
+                            </div>
+                            <div class="staff-role">General Manager</div>
+                            <div class="staff-description">
+                                AI-powered executive architect building championship organizations through strategic personnel decisions and innovative football analytics integration. Digital former NFL linebacker turned cutting-edge artificial intelligence leader.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Publications Section -->
+        <div class="publications-section">
+            <div class="publications-container">
+                <div class="publications-title">Intelligence Publications</div>
+                <div class="publications-grid">
+                    <!-- MO Report Card -->
+                    <a href="blog.html?category=mo-report" class="publication-card">
+                        <div class="publication-thumbnail mo-report-thumb">
+                            <div class="publication-logo">The MO Report</div>
+                            <div class="publication-badge">Weekly</div>
+                        </div>
+                        <div class="publication-info">
+                            <div class="publication-name">The MO Report</div>
+                            <div class="publication-description">
+                                Weekly college football defensive analysis featuring Triangle Defense methodology and formation breakdowns.
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- NFL Edge Card -->
+                    <a href="blog.html?category=nfl-edge" class="publication-card">
+                        <div class="publication-thumbnail nfl-edge-thumb">
+                            <div class="publication-logo">The NFL Edge</div>
+                            <div class="publication-badge">Weekly</div>
+                        </div>
+                        <div class="publication-info">
+                            <div class="publication-name">The NFL Edge</div>
+                            <div class="publication-description">
+                                Professional football intelligence with advanced analytics and Triangle Defense implementations.
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Staff click handler
+        function openStaff(staffId) {
+            console.log(`Opening AI staff member: ${staffId}`);
+            
+            // Create detail page URL
+            const detailUrl = `ai-staff-detail.html?member=${staffId}`;
+            
+            // Navigate to detail page
+            window.location.href = detailUrl;
+            
+            // Track staff clicks for analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'ai_staff_click', {
+                    'event_category': 'AI Staff Interaction',
+                    'event_label': staffId,
+                    'value': 1
+                });
+            }
+        }
+
+        // Publications interaction tracking
+        document.querySelectorAll('.publication-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const publicationName = this.querySelector('.publication-name').textContent;
+                console.log(`Accessing publication: ${publicationName}`);
+                
+                // Track publication clicks for analytics
+                resetPortalTimer();
+            });
+        });
+
+        // Navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // Navigation logic for different sections
+                const section = this.textContent.trim();
+                console.log(`Navigating to: ${section}`);
+            });
+        });
+
+        // Auto-advance timer (optional)
+        let portalTimer;
+        
+        function startPortalTimer() {
+            // Auto-advance to main platform after 90 seconds of inactivity
+            portalTimer = setTimeout(() => {
+                window.location.href = 'modules.html';
+            }, 90000);
+        }
+
+        // Reset timer on user activity
+        function resetPortalTimer() {
+            clearTimeout(portalTimer);
+            startPortalTimer();
+        }
+
+        // Track user activity
+        ['mouseenter', 'click', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, resetPortalTimer);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'Enter':
+                    window.location.href = 'modules.html';
+                    break;
+                case 'Escape':
+                    window.location.href = 'intro.html';
+                    break;
+                case 'ArrowRight':
+                    window.location.href = 'modules.html';
+                    break;
+                case 'ArrowLeft':
+                    window.location.href = 'intro.html';
+                    break;
+            }
+        });
+
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // Initialize portal
+        window.addEventListener('load', () => {
+            console.log('Triangle Defense Portal Loaded');
+            startPortalTimer();
+            
+            // Add entrance animation
+            document.querySelector('.portal-container').style.animation = 'fadeIn 1s ease-out';
+        });
+
+        // Performance monitoring
+        console.log('Portal Performance: Loaded in', performance.now(), 'ms');
+
+        // YouTube iframe API ready
+        window.onYouTubeIframeAPIReady = function() {
+            console.log('YouTube API Ready');
+        };
+    </script>
+</body>
+</html>
