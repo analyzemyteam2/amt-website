@@ -21,7 +21,7 @@
             overflow-x: hidden;
         }
 
-        /* MASTER NAVIGATION - Shows after intro */
+        /* MASTER NAVIGATION */
         .master-nav {
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
@@ -36,12 +36,9 @@
             right: 0;
             z-index: 1000;
             padding: 0 40px;
-            transform: translateY(-100%);
-            transition: all 0.5s ease;
-        }
-
-        .master-nav.visible {
+            opacity: 1;
             transform: translateY(0);
+            transition: all 0.5s ease;
         }
 
         .nav-brand {
@@ -196,7 +193,7 @@
             transform: translateY(-50px);
         }
 
-        /* INTRO SECTION - PERMANENT */
+        /* INTRO SECTION - CLEAN WITHOUT TIMER */
         .intro-section {
             height: 100vh;
             display: flex;
@@ -208,6 +205,7 @@
             opacity: 1;
             transform: translateY(0);
             pointer-events: all;
+            margin-top: 70px;
         }
 
         .triangle-logo {
@@ -302,28 +300,13 @@
             animation: fadeInUp 1s ease-out 1.2s forwards;
         }
 
-        .intro-timer {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.5s forwards;
-            transition: all 0.5s ease;
-        }
-
-        .intro-timer.completed {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-
         .intro-actions {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
             opacity: 0;
-            animation: fadeInUp 1s ease-out 2s forwards;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
         }
 
         .enter-button {
@@ -339,9 +322,6 @@
             cursor: pointer;
             transition: all 0.4s ease;
             box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
-            opacity: 0;
-            transform: scale(0.9);
-            animation: buttonAppear 0.8s ease-out 8s forwards;
         }
 
         .enter-button:hover {
@@ -349,11 +329,11 @@
             box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
         }
 
-        .skip-button {
+        .leadership-button {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 8px 20px;
+            border: 1px solid rgba(212, 219, 105, 0.5);
+            color: #d4db69;
+            padding: 10px 25px;
             border-radius: 20px;
             font-size: 11px;
             letter-spacing: 2px;
@@ -362,10 +342,10 @@
             transition: all 0.3s ease;
         }
 
-        .skip-button:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .leadership-button:hover {
+            background: rgba(212, 219, 105, 0.1);
+            border-color: #d4db69;
             color: #ffffff;
-            border-color: #ffffff;
         }
 
         @keyframes fadeInUp {
@@ -376,17 +356,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes buttonAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
             }
         }
 
@@ -752,6 +721,10 @@
                 margin-top: 60px;
                 padding: 40px 20px;
             }
+
+            .intro-section {
+                margin-top: 60px;
+            }
         }
 
         /* Scrollbar Styling */
@@ -774,7 +747,7 @@
     </style>
 </head>
 <body>
-    <!-- MASTER NAVIGATION (appears after timer) -->
+    <!-- MASTER NAVIGATION -->
     <nav class="master-nav" id="masterNav">
         <div class="nav-brand">
             <div class="nav-logo">▲</div>
@@ -782,12 +755,12 @@
         </div>
         
         <div class="nav-main">
-            <a class="nav-link" onclick="scrollToSection('intro')">HOME</a>
+            <a class="nav-link active" onclick="scrollToSection('intro')">HOME</a>
             <a class="nav-link" onclick="scrollToSection('portal')">ANALYSIS</a>
             <a class="nav-link" onclick="scrollToSection('portal')">INTEL</a>
             <a class="nav-link" onclick="scrollToSection('portal')">PLAYBOOK</a>
             <a class="nav-link live" onclick="scrollToSection('portal')">LIVE</a>
-            <a class="nav-link" onclick="scrollToSection('portal')">DATA</a>
+            <a class="nav-link" onclick="openLeadershipShowcase()">LEADERSHIP</a>
             <a class="nav-link" onclick="scrollToSection('modules')">MODULES</a>
         </div>
         
@@ -804,7 +777,7 @@
     <!-- MAIN CONTENT CONTAINER -->
     <div class="main-content">
         
-        <!-- INTRO SECTION - PERMANENT -->
+        <!-- INTRO SECTION - CLEAN -->
         <section class="intro-section" id="introSection">
             <div class="triangle-logo">
                 <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-image">
@@ -816,10 +789,9 @@
             </h1>
             <p class="intro-subtitle">Coaching Intelligence Platform</p>
             <p class="intro-powered">Powered by the Defensive Algorithm</p>
-            <div class="intro-timer" id="introTimer">Platform launching in <span id="countdown">7</span> seconds</div>
             <div class="intro-actions">
-                <button class="enter-button" id="enterButton" onclick="enterPlatform()">Enter Platform</button>
-                <button class="skip-button" onclick="enterPlatform()">Skip Timer</button>
+                <button class="enter-button" onclick="scrollToSection('portal')">Enter Platform</button>
+                <button class="leadership-button" onclick="openLeadershipShowcase()">Meet Our AI Leaders</button>
             </div>
         </section>
 
@@ -1112,53 +1084,12 @@
 
     <script>
         // GLOBAL VARIABLES
-        let introTimer;
-        let countdown = 7;
-        let navigationVisible = false;
+        let navigationVisible = true;
 
         // INITIALIZE WEBSITE
         window.addEventListener('load', () => {
             console.log('AnalyzeMyTeam Unified Website Loaded');
-            startIntroTimer();
         });
-
-        // INTRO TIMER FUNCTION
-        function startIntroTimer() {
-            const countdownElement = document.getElementById('countdown');
-            const timerElement = document.getElementById('introTimer');
-            
-            introTimer = setInterval(() => {
-                countdown--;
-                countdownElement.textContent = countdown;
-                
-                if (countdown <= 0) {
-                    clearInterval(introTimer);
-                    timerElement.classList.add('completed');
-                    showNavigation();
-                }
-            }, 1000);
-        }
-
-        // SHOW NAVIGATION FUNCTION
-        function showNavigation() {
-            if (!navigationVisible) {
-                document.getElementById('masterNav').classList.add('visible');
-                navigationVisible = true;
-                console.log('Navigation activated - Platform ready');
-            }
-        }
-
-        // ENTER PLATFORM FUNCTION
-        function enterPlatform() {
-            clearInterval(introTimer);
-            document.getElementById('introTimer').classList.add('completed');
-            showNavigation();
-            
-            // Smooth scroll to portal section
-            setTimeout(() => {
-                scrollToSection('portal');
-            }, 500);
-        }
 
         // SCROLL TO SECTION FUNCTION
         function scrollToSection(sectionName) {
@@ -1186,9 +1117,13 @@
             }
         }
 
+        // OPEN LEADERSHIP SHOWCASE
+        function openLeadershipShowcase() {
+            window.open('leadership.html', '_blank');
+        }
+
         // LOGIN FUNCTIONS
         function showLogin() {
-            // Simulate login modal (simplified for demo)
             const userType = prompt('Select User Type:\n1. Head Coach\n2. Executive\n3. Analyst\n4. Coordinator\n5. Guest\n\nEnter number (1-5):');
             const username = prompt('Enter username:');
             
@@ -1209,15 +1144,12 @@
         }
 
         function simulateLogin(username, userType) {
-            // Hide login button, show user info
             document.querySelector('.login-button').style.display = 'none';
             document.getElementById('userInfo').style.display = 'flex';
             
-            // Update user info
             document.getElementById('userName').textContent = username;
             document.getElementById('userAvatar').textContent = username.substring(0, 2).toUpperCase();
             
-            // Set avatar color based on user type
             const avatar = document.getElementById('userAvatar');
             switch(userType) {
                 case 'head-coach':
@@ -1249,17 +1181,13 @@
         document.addEventListener('keydown', (e) => {
             switch(e.key) {
                 case 'Enter':
-                    if (!navigationVisible) {
-                        enterPlatform();
-                    }
+                    scrollToSection('portal');
                     break;
                 case 'Escape':
                     scrollToSection('intro');
                     break;
                 case 'ArrowDown':
-                    if (navigationVisible) {
-                        scrollToSection('portal');
-                    }
+                    scrollToSection('portal');
                     break;
             }
         });
@@ -1272,8 +1200,6 @@
             card.addEventListener('click', function() {
                 const moduleName = this.querySelector('.module-name').textContent;
                 console.log(`Module clicked: ${moduleName}`);
-                
-                // Future: Navigate to module detail page
                 alert(`${moduleName} module selected. Full functionality coming soon!`);
             });
         });
@@ -1283,13 +1209,10 @@
             card.addEventListener('click', function() {
                 const staffName = this.querySelector('.staff-name').textContent;
                 console.log(`Staff member clicked: ${staffName}`);
-                
-                // Future: Show staff detail modal or page
                 alert(`${staffName} profile selected. Full AI interaction coming soon!`);
             });
         });
 
-        // PERFORMANCE MONITORING
         console.log('Website Performance: Loaded in', performance.now(), 'ms');
     </script>
 </body>
