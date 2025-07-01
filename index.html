@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnalyzeMyTeam - Triangle Defense Intelligence Platform</title>
+    <title>AnalyzeMyTeam - Coaching Intelligence Platform</title>
     <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology">
     
     <style>
@@ -241,6 +241,40 @@
             margin-bottom: 20px;
             opacity: 0;
             animation: fadeInUp 1s ease-out 0.5s forwards;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        /* Sleek Techie Styling for AnalyzeMyTeam */
+        .amt-text {
+            display: inline-block;
+            position: relative;
+        }
+
+        .amt-letter {
+            display: inline-block;
+            font-weight: 600;
+            text-shadow: 0 0 10px currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .amt-letter.a-letter {
+            color: #e2021a;
+            text-shadow: 0 0 15px #e2021a;
+        }
+
+        .amt-letter.m-letter {
+            color: #d4db69;
+            text-shadow: 0 0 15px #d4db69;
+        }
+
+        .amt-letter.t-letter {
+            color: #a1a1a1;
+            text-shadow: 0 0 15px #a1a1a1;
+        }
+
+        .amt-letter.regular {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
         }
 
         .intro-subtitle {
@@ -734,7 +768,11 @@
             <div class="triangle-logo">
                 <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-image">
             </div>
-            <h1 class="intro-title">Triangle Defense</h1>
+            <h1 class="intro-title">
+                <span class="amt-text">
+                    <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
+                </span>
+            </h1>
             <p class="intro-subtitle">Coaching Intelligence Platform</p>
             <p class="intro-powered">Powered by the Defensive Algorithm</p>
             <div class="intro-timer" id="introTimer">Auto-advancing in <span id="countdown">7</span> seconds</div>
