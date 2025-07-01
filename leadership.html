@@ -15,14 +15,14 @@
 
         body {
             font-family: 'Arial', 'Helvetica', sans-serif;
-            background: radial-gradient(circle at center, #1a0a0a 0%, #000000 70%);
+            background: #000000;
             height: 100vh;
             overflow: hidden;
             color: white;
             position: relative;
         }
 
-        /* Particle Background Effect */
+        /* Particle Background System */
         .particles {
             position: absolute;
             top: 0;
@@ -35,7 +35,7 @@
 
         .particle {
             position: absolute;
-            background: rgba(226, 2, 26, 0.1);
+            background: radial-gradient(circle, rgba(226, 2, 26, 0.1) 0%, rgba(212, 219, 105, 0.05) 100%);
             border-radius: 50%;
             animation: particleMove 25s linear infinite;
         }
@@ -57,8 +57,8 @@
             }
         }
 
-        /* AMT Header */
-        .amt-header {
+        /* Header */
+        .header {
             position: absolute;
             top: 2rem;
             left: 50%;
@@ -67,7 +67,7 @@
             z-index: 10;
         }
 
-        .amt-title {
+        .header-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
@@ -100,7 +100,7 @@
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
         }
 
-        .amt-tagline {
+        .header-tagline {
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.8);
             font-weight: 300;
@@ -109,7 +109,7 @@
         }
 
         /* Dynamic Showcase Container */
-        .dynamic-showcase {
+        .showcase-container {
             height: 100vh;
             display: flex;
             align-items: center;
@@ -118,7 +118,7 @@
             z-index: 5;
         }
 
-        .leader-container {
+        .leader-display {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -131,7 +131,7 @@
             transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .leader-container.active {
+        .leader-display.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -143,7 +143,7 @@
             padding-right: 4rem;
         }
 
-        .leader-title {
+        .leader-name {
             font-size: 2.8rem;
             font-weight: 800;
             margin-bottom: 1rem;
@@ -194,25 +194,25 @@
         }
 
         /* Brand Color Roles */
-        .darius-leader .leader-role { color: #e2021a; }
-        .darius-leader .leader-quote::before,
-        .darius-leader .leader-quote::after { color: #e2021a; }
+        .darius .leader-role { color: #e2021a; }
+        .darius .leader-quote::before,
+        .darius .leader-quote::after { color: #e2021a; }
 
-        .alexandra-leader .leader-role { color: #4e5064; }
-        .alexandra-leader .leader-quote::before,
-        .alexandra-leader .leader-quote::after { color: #4e5064; }
+        .alexandra .leader-role { color: #4e5064; }
+        .alexandra .leader-quote::before,
+        .alexandra .leader-quote::after { color: #4e5064; }
 
-        .victoria-leader .leader-role { color: #a1a1a1; }
-        .victoria-leader .leader-quote::before,
-        .victoria-leader .leader-quote::after { color: #a1a1a1; }
+        .victoria .leader-role { color: #a1a1a1; }
+        .victoria .leader-quote::before,
+        .victoria .leader-quote::after { color: #a1a1a1; }
 
-        .marcus-leader .leader-role { color: #818284; }
-        .marcus-leader .leader-quote::before,
-        .marcus-leader .leader-quote::after { color: #818284; }
+        .marcus .leader-role { color: #818284; }
+        .marcus .leader-quote::before,
+        .marcus .leader-quote::after { color: #818284; }
 
-        .mel-leader .leader-role { color: #d4db69; }
-        .mel-leader .leader-quote::before,
-        .mel-leader .leader-quote::after { color: #d4db69; }
+        .mel .leader-role { color: #d4db69; }
+        .mel .leader-quote::before,
+        .mel .leader-quote::after { color: #d4db69; }
 
         /* Image Section */
         .image-section {
@@ -232,29 +232,29 @@
             transition: all 1s ease;
         }
 
-        .leader-container.active .leader-image {
+        .leader-display.active .leader-image {
             transform: scale(1);
             animation: float 4s ease-in-out infinite;
         }
 
         /* Brand Color Borders */
-        .darius-leader .leader-image { 
+        .darius .leader-image { 
             border-color: #e2021a; 
             box-shadow: 0 25px 80px rgba(226, 2, 26, 0.4);
         }
-        .alexandra-leader .leader-image { 
+        .alexandra .leader-image { 
             border-color: #4e5064; 
             box-shadow: 0 25px 80px rgba(78, 80, 100, 0.4);
         }
-        .victoria-leader .leader-image { 
+        .victoria .leader-image { 
             border-color: #a1a1a1; 
             box-shadow: 0 25px 80px rgba(161, 161, 161, 0.4);
         }
-        .marcus-leader .leader-image { 
+        .marcus .leader-image { 
             border-color: #818284; 
             box-shadow: 0 25px 80px rgba(129, 130, 132, 0.4);
         }
-        .mel-leader .leader-image { 
+        .mel .leader-image { 
             border-color: #d4db69; 
             box-shadow: 0 25px 80px rgba(212, 219, 105, 0.4);
         }
@@ -264,8 +264,8 @@
             50% { transform: translateY(-15px) scale(1.02); }
         }
 
-        /* Progress Indicators */
-        .progress-bar {
+        /* Progress Navigation */
+        .progress-nav {
             position: absolute;
             bottom: 4rem;
             left: 50%;
@@ -295,7 +295,7 @@
         .progress-dot[data-leader="3"].active { background: #818284; }
         .progress-dot[data-leader="4"].active { background: #d4db69; }
 
-        /* Auto-advance Progress Bar */
+        /* Auto-advance Timer */
         .timer-bar {
             position: absolute;
             bottom: 0;
@@ -305,6 +305,7 @@
             transform-origin: left;
             transform: scaleX(0);
             transition: transform 8s linear;
+            z-index: 5;
         }
 
         .timer-bar.active {
@@ -337,21 +338,14 @@
             transform: translateY(-2px);
         }
 
-        /* Instructions */
+        /* Instructions - Hidden */
         .instructions {
-            position: absolute;
-            bottom: 8rem;
-            right: 2rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 11px;
-            text-align: right;
-            letter-spacing: 1px;
-            z-index: 10;
+            display: none;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .leader-container {
+            .leader-display {
                 flex-direction: column;
                 text-align: center;
                 padding: 2rem;
@@ -368,7 +362,7 @@
                 height: 350px;
             }
 
-            .leader-title {
+            .leader-name {
                 font-size: 2rem;
             }
 
@@ -376,12 +370,8 @@
                 font-size: 1.2rem;
             }
 
-            .amt-title {
+            .header-title {
                 font-size: 1.8rem;
-            }
-
-            .instructions {
-                display: none;
             }
         }
 
@@ -421,20 +411,20 @@
     <!-- Back Button -->
     <a href="index.html" class="back-button">← Back to Platform</a>
 
-    <!-- AMT Header -->
-    <div class="amt-header">
-        <div class="amt-title">
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">
             <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
         </div>
-        <div class="amt-tagline">AI Leadership Intelligence</div>
+        <div class="header-tagline">AI Leadership Intelligence</div>
     </div>
 
     <!-- Dynamic Showcase -->
-    <div class="dynamic-showcase">
+    <div class="showcase-container">
         <!-- Darius Washington -->
-        <div class="leader-container darius-leader" id="leader-0">
+        <div class="leader-display darius active" id="leader-0">
             <div class="quote-section">
-                <div class="leader-title">Darius Washington</div>
+                <div class="leader-name">Darius Washington</div>
                 <div class="leader-role">Head Coach • Offensive Innovation</div>
                 <div class="leader-quote">
                     Marcus shows me what they can't stop. M.E.L. reveals how to attack it. I make it unstoppable. Every play call is calculated, every formation is perfection. This is where championship offense is born!
@@ -446,9 +436,9 @@
         </div>
 
         <!-- Alexandra Martinez -->
-        <div class="leader-container alexandra-leader" id="leader-1">
+        <div class="leader-display alexandra" id="leader-1">
             <div class="quote-section">
-                <div class="leader-title">Alexandra Martinez</div>
+                <div class="leader-name">Alexandra Martinez</div>
                 <div class="leader-role">Chief Administrative Officer • Operations Mastermind</div>
                 <div class="leader-quote">
                     While they focus on game plans, I orchestrate the symphony behind the scenes. Every detail, every timeline, every resource allocation flows through my systems. Championship organizations are built on flawless execution.
@@ -460,9 +450,9 @@
         </div>
 
         <!-- Victoria Castellanos -->
-        <div class="leader-container victoria-leader" id="leader-2">
+        <div class="leader-display victoria" id="leader-2">
             <div class="quote-section">
-                <div class="leader-title">Victoria Castellanos</div>
+                <div class="leader-name">Victoria Castellanos</div>
                 <div class="leader-role">Chief Legal Officer • Strategic Protection</div>
                 <div class="leader-quote">
                     Innovation without protection is vulnerability. I ensure our Triangle Defense methodology remains our competitive advantage. Every contract, every partnership, every strategic move is legally bulletproof.
@@ -474,9 +464,9 @@
         </div>
 
         <!-- Marcus Sterling -->
-        <div class="leader-container marcus-leader" id="leader-3">
+        <div class="leader-display marcus" id="leader-3">
             <div class="quote-section">
-                <div class="leader-title">Marcus Sterling</div>
+                <div class="leader-name">Marcus Sterling</div>
                 <div class="leader-role">General Manager • Talent Architect</div>
                 <div class="leader-quote">
                     M.E.L. analyzes the data. I interpret the possibilities. Together, we build championship rosters. Every personnel decision shapes destiny. Every strategic choice creates legends.
@@ -488,9 +478,9 @@
         </div>
 
         <!-- M.E.L. AI -->
-        <div class="leader-container mel-leader" id="leader-4">
+        <div class="leader-display mel" id="leader-4">
             <div class="quote-section">
-                <div class="leader-title">M.E.L.</div>
+                <div class="leader-name">M.E.L.</div>
                 <div class="leader-role">Master Intelligence Engine • AI Coordinator</div>
                 <div class="leader-quote">
                     I am the neural network connecting every decision. The leadership thinks, the analysts discover, I ensure perfect execution. Intelligence without action is meaningless. I am action perfected.
@@ -502,20 +492,13 @@
         </div>
     </div>
 
-    <!-- Progress Indicators -->
-    <div class="progress-bar">
+    <!-- Progress Navigation -->
+    <div class="progress-nav">
         <div class="progress-dot active" data-leader="0"></div>
         <div class="progress-dot" data-leader="1"></div>
         <div class="progress-dot" data-leader="2"></div>
         <div class="progress-dot" data-leader="3"></div>
         <div class="progress-dot" data-leader="4"></div>
-    </div>
-
-    <!-- Instructions -->
-    <div class="instructions">
-        Click dots to navigate<br>
-        Press ← → to control<br>
-        Space to pause/play
     </div>
 
     <!-- Timer Bar -->
@@ -526,7 +509,7 @@
         let currentLeader = 0;
         let autoAdvanceTimer;
         let isPaused = false;
-        const leaders = document.querySelectorAll('.leader-container');
+        const leaders = document.querySelectorAll('.leader-display');
         const progressDots = document.querySelectorAll('.progress-dot');
         const timerBar = document.getElementById('timer-bar');
 
@@ -561,7 +544,7 @@
             }, 100);
             
             currentLeader = index;
-            console.log(`Showcasing: ${leaders[index].querySelector('.leader-title').textContent}`);
+            console.log(`Showcasing: ${leaders[index].querySelector('.leader-name').textContent}`);
         }
 
         // Next Leader Function
@@ -634,11 +617,11 @@
         });
 
         // Mouse Hover Pause/Resume
-        document.querySelector('.dynamic-showcase').addEventListener('mouseenter', () => {
+        document.querySelector('.showcase-container').addEventListener('mouseenter', () => {
             pauseAutoAdvance();
         });
 
-        document.querySelector('.dynamic-showcase').addEventListener('mouseleave', () => {
+        document.querySelector('.showcase-container').addEventListener('mouseleave', () => {
             if (!isPaused) {
                 resumeAutoAdvance();
             }
