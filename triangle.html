@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Defense - 5-3-1 Methodology</title>
+    <meta name="description" content="Triangle Defense methodology combining spatial geometry with defensive principles for enhanced football intelligence">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(226, 2, 26, 0.1) 0%, rgba(212, 219, 105, 0.05) 100%);
+            border-radius: 50%;
+            animation: particleFloat 25s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(226, 2, 26, 0.2);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: #000000;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .nav-brand-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .amt-letter {
+            display: inline-block;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .amt-letter.a-letter {
+            color: #e2021a;
+            text-shadow: 0 0 15px #e2021a;
+        }
+
+        .amt-letter.m-letter {
+            color: #d4db69;
+            text-shadow: 0 0 15px #d4db69;
+        }
+
+        .amt-letter.t-letter {
+            color: #a1a1a1;
+            text-shadow: 0 0 15px #a1a1a1;
+        }
+
+        .amt-letter.regular {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            color: #000000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(226, 2, 26, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding-top: 70px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(26, 24, 26, 0.8) 0%, rgba(0, 0, 0, 0.9) 70%);
+        }
+
+        .triangle-display {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: triangleFloat 4s ease-in-out infinite;
+        }
+
+        .triangle-logo {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.8));
+        }
+
+        @keyframes triangleFloat {
+            0%, 100% { 
+                transform: translateY(0px) scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.8));
+            }
+            50% { 
+                transform: translateY(-15px) scale(1.02) rotate(2deg);
+                filter: drop-shadow(0 0 40px rgba(226, 2, 26, 1));
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .hero-value {
+            font-size: 2rem;
+            color: #d4db69;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Methodology Grid */
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .method-card {
+            background: rgba(26, 24, 26, 0.6);
+            border: 1px solid rgba(226, 2, 26, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 219, 105, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 219, 105, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .method-card:hover::before {
+            left: 100%;
+        }
+
+        /* Method Number - Updated for Icons */
+        .method-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            color: #000000;
+            font-weight: 800;
+            animation: methodFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes methodFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .method-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #d4db69;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .method-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        /* Learn More Section */
+        .certification-cta {
+            background: linear-gradient(135deg, rgba(212, 219, 105, 0.1) 0%, rgba(226, 2, 26, 0.1) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .cert-title {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cert-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cert-btn {
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            color: #000000;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(226, 2, 26, 0.3);
+        }
+
+        .cert-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(226, 2, 26, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 3rem 1rem;
+            }
+
+            .main-nav {
+                padding: 0 1rem;
+            }
+
+            .nav-brand-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <div class="nav-logo">▲</div>
+            <div class="nav-brand-text">
+                <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
+            </div>
+        </div>
+        <a href="index.html" class="back-btn">← Back to Platform</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="triangle-display">
+                <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-logo">
+            </div>
+            <h1 class="hero-title">Triangle Defense</h1>
+            <p class="hero-subtitle">Revolutionary Defensive Methodology</p>
+            <p class="hero-value">Where Geometry Meets Football Intelligence</p>
+        </section>
+
+        <!-- Methodology Section -->
+        <section class="content-section reveal">
+            <h2 class="section-title">The Triangle Concept</h2>
+            <p class="section-subtitle">
+                A revolutionary approach that combines spatial geometry with defensive principles to create more predictable and controllable outcomes
+            </p>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-number">📐</div>
+                    <h3 class="method-title">Spatial Analysis</h3>
+                    <p class="method-description">
+                        Understanding field geometry and spatial relationships to predict offensive movements and create defensive advantages through positioning.
+                    </p>
+                </div>
+                <div class="method-card">
+                    <div class="method-number">🧠</div>
+                    <h3 class="method-title">Pattern Recognition</h3>
+                    <p class="method-description">
+                        Advanced analysis of offensive tendencies and formations to anticipate plays before they develop into scoring opportunities.
+                    </p>
+                </div>
+                <div class="method-card">
+                    <div class="method-number">⚡</div>
+                    <h3 class="method-title">Adaptive Framework</h3>
+                    <p class="method-description">
+                        Dynamic defensive principles that adjust to offensive alignments while maintaining structural integrity and communication.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section class="content-section reveal">
+            <h2 class="section-title">Defensive Philosophy</h2>
+            <p class="section-subtitle">
+                Moving beyond traditional reactive defense to a proactive, intelligence-driven approach
+            </p>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-number">🎯</div>
+                    <h3 class="method-title">Predictive Defense</h3>
+                    <p class="method-description">
+                        Anticipating offensive concepts through mathematical analysis rather than simply reacting to what you see.
+                    </p>
+                </div>
+                <div class="method-card">
+                    <div class="method-number">🔄</div>
+                    <h3 class="method-title">Systematic Approach</h3>
+                    <p class="method-description">
+                        Consistent principles that scale from youth football to professional levels while maintaining core concepts.
+                    </p>
+                </div>
+                <div class="method-card">
+                    <div class="method-number">📊</div>
+                    <h3 class="method-title">Data Integration</h3>
+                    <p class="method-description">
+                        Combining traditional coaching wisdom with modern analytics to create more effective defensive strategies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn More Section -->
+        <section class="content-section reveal">
+            <div class="certification-cta">
+                <h2 class="cert-title">Learn More About Triangle Defense</h2>
+                <p class="cert-description">
+                    Discover how geometric principles and advanced analytics can enhance your defensive approach. Explore the methodology that's changing how coaches think about defense.
+                </p>
+                <button class="cert-btn" onclick="window.location.href='#contact'">Contact Us</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Particle System
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = Math.random() * 8 + 3 + 'px';
+            particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 25000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 400);
+
+        // Scroll Reveal Animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+
+        console.log('Triangle Defense Methodology Loaded');
+    </script>
+</body>
+</html>
