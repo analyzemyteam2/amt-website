@@ -280,6 +280,20 @@
             }
         }
 
+        /* Triangle SVG Placeholder */
+        .triangle-placeholder {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 2rem;
+            animation: triangleFloat 4s ease-in-out infinite;
+        }
+
+        .triangle-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.6));
+        }
+
         .hero-title {
             font-size: 3.5rem;
             font-weight: 300;
@@ -476,6 +490,58 @@
             font-size: 0.95rem;
         }
 
+        /* Quick Access Grid */
+        .quick-access {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quick-access-title {
+            font-size: 2.2rem;
+            text-align: center;
+            color: #d4db69;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .quick-card {
+            background: rgba(26, 24, 26, 0.6);
+            border: 1px solid rgba(226, 2, 26, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 219, 105, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .quick-card-title {
+            font-size: 1.2rem;
+            color: #d4db69;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .quick-card-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -543,7 +609,8 @@
                 padding: 3rem 1rem;
             }
 
-            .feature-grid {
+            .feature-grid,
+            .quick-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -579,149 +646,149 @@
         </div>
         <ul class="nav-links">
             <li class="nav-item">
-                <a href="#revolution" class="nav-link">REVOLUTION</a>
+                <a href="leadership.html" class="nav-link">REVOLUTION</a>
                 <div class="nav-dropdown">
-                    <a href="#leadership-showcase" class="dropdown-item">
+                    <a href="leadership.html" class="dropdown-item">
                         <div class="dropdown-title">Leadership Showcase</div>
                         <div class="dropdown-subtitle">Meet Darius, M.E.L., Marcus & the championship team</div>
                     </a>
-                    <a href="#platform-overview" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">Platform Overview</div>
                         <div class="dropdown-subtitle">Complete AMT ecosystem revolution</div>
                     </a>
-                    <a href="#ai-evolution" class="dropdown-item">
+                    <a href="innovation.html" class="dropdown-item">
                         <div class="dropdown-title">AI Coaching Evolution</div>
                         <div class="dropdown-subtitle">25 championship professionals powered by AI</div>
                     </a>
-                    <a href="#demo-request" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">Live Demo Request</div>
                         <div class="dropdown-subtitle">Experience the revolution firsthand</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#triangle" class="nav-link">TRIANGLE</a>
+                <a href="triangle.html" class="nav-link">TRIANGLE</a>
                 <div class="nav-dropdown">
-                    <a href="#methodology" class="dropdown-item">
-                        <div class="dropdown-title">5-3-1 Methodology</div>
-                        <div class="dropdown-subtitle">The defensive system worth $100M+</div>
+                    <a href="triangle.html" class="dropdown-item">
+                        <div class="dropdown-title">Triangle Methodology</div>
+                        <div class="dropdown-subtitle">Revolutionary defensive system</div>
                     </a>
-                    <a href="#formation-recognition" class="dropdown-item">
+                    <a href="triangle.html" class="dropdown-item">
                         <div class="dropdown-title">Formation Recognition</div>
-                        <div class="dropdown-subtitle">Larry, Linda, Rita - all formations decoded</div>
+                        <div class="dropdown-subtitle">Advanced pattern analysis</div>
                     </a>
-                    <a href="#ip-protection" class="dropdown-item">
-                        <div class="dropdown-title">Legal IP Protection</div>
-                        <div class="dropdown-subtitle">Trademark and copyright secured</div>
+                    <a href="triangle.html" class="dropdown-item">
+                        <div class="dropdown-title">Geometric Principles</div>
+                        <div class="dropdown-subtitle">Where geometry meets football</div>
                     </a>
-                    <a href="#coaching-certification" class="dropdown-item">
-                        <div class="dropdown-title">Coaching Certification</div>
-                        <div class="dropdown-subtitle">Become Triangle Defense certified</div>
+                    <a href="triangle.html" class="dropdown-item">
+                        <div class="dropdown-title">Learn More</div>
+                        <div class="dropdown-subtitle">Discover Triangle Defense concepts</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#intelligence" class="nav-link">INTELLIGENCE</a>
+                <a href="mel.html" class="nav-link">INTELLIGENCE</a>
                 <div class="nav-dropdown">
-                    <a href="#mel-coordinator" class="dropdown-item">
+                    <a href="mel.html" class="dropdown-item">
                         <div class="dropdown-title">M.E.L. Master Coordinator</div>
                         <div class="dropdown-subtitle">The AI brain orchestrating all intelligence</div>
                     </a>
-                    <a href="#darius-washington" class="dropdown-item">
-                        <div class="dropdown-title">Darius Washington HC</div>
-                        <div class="dropdown-subtitle">Offensive innovation and motivational leadership</div>
+                    <a href="leadership.html" class="dropdown-item">
+                        <div class="dropdown-title">AI Leadership Team</div>
+                        <div class="dropdown-subtitle">Complete coaching intelligence staff</div>
                     </a>
-                    <a href="#marcus-sterling" class="dropdown-item">
-                        <div class="dropdown-title">Marcus Sterling GM</div>
-                        <div class="dropdown-subtitle">Strategic personnel and organizational mastery</div>
+                    <a href="innovation.html" class="dropdown-item">
+                        <div class="dropdown-title">Technology Pipeline</div>
+                        <div class="dropdown-subtitle">Advanced AI and analytics systems</div>
                     </a>
-                    <a href="#complete-staff" class="dropdown-item">
-                        <div class="dropdown-title">Complete AI Staff</div>
-                        <div class="dropdown-subtitle">All 25 championship professionals</div>
+                    <a href="mel.html" class="dropdown-item">
+                        <div class="dropdown-title">Intelligence Capabilities</div>
+                        <div class="dropdown-subtitle">Game planning and strategic analysis</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#enterprise" class="nav-link">ENTERPRISE</a>
+                <a href="enterprise.html" class="nav-link">ENTERPRISE</a>
                 <div class="nav-dropdown">
-                    <a href="#nfl-solutions" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">NFL Solutions</div>
-                        <div class="dropdown-subtitle">Billion-dollar franchise technology</div>
+                        <div class="dropdown-subtitle">Professional franchise technology</div>
                     </a>
-                    <a href="#college-programs" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">College Programs</div>
                         <div class="dropdown-subtitle">Championship recruiting and development</div>
                     </a>
-                    <a href="#strategic-partnerships" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">Strategic Partnerships</div>
-                        <div class="dropdown-subtitle">Fortune 500 integrations</div>
+                        <div class="dropdown-subtitle">Technology and education collaborations</div>
                     </a>
-                    <a href="#enterprise-demo" class="dropdown-item">
+                    <a href="enterprise.html" class="dropdown-item">
                         <div class="dropdown-title">Enterprise Demo</div>
                         <div class="dropdown-subtitle">Private consultation for organizations</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#domination" class="nav-link">DOMINATION</a>
+                <a href="domination.html" class="nav-link">DOMINATION</a>
                 <div class="nav-dropdown">
-                    <a href="#success-metrics" class="dropdown-item">
+                    <a href="domination.html" class="dropdown-item">
                         <div class="dropdown-title">Success Metrics</div>
-                        <div class="dropdown-subtitle">34% improvement rates proven</div>
+                        <div class="dropdown-subtitle">Proven performance improvements</div>
                     </a>
-                    <a href="#championship-stories" class="dropdown-item">
+                    <a href="domination.html" class="dropdown-item">
                         <div class="dropdown-title">Championship Stories</div>
                         <div class="dropdown-subtitle">Teams that won with AMT advantage</div>
                     </a>
-                    <a href="#roi-calculator" class="dropdown-item">
+                    <a href="domination.html" class="dropdown-item">
                         <div class="dropdown-title">ROI Calculator</div>
                         <div class="dropdown-subtitle">Measure your competitive advantage</div>
                     </a>
-                    <a href="#case-studies" class="dropdown-item">
+                    <a href="domination.html" class="dropdown-item">
                         <div class="dropdown-title">Case Studies</div>
                         <div class="dropdown-subtitle">Deep dives into AMT victories</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#innovation" class="nav-link">INNOVATION</a>
+                <a href="innovation.html" class="nav-link">INNOVATION</a>
                 <div class="nav-dropdown">
-                    <a href="#research-development" class="dropdown-item">
+                    <a href="innovation.html" class="dropdown-item">
                         <div class="dropdown-title">Research & Development</div>
-                        <div class="dropdown-subtitle">Technology 5 years ahead</div>
+                        <div class="dropdown-subtitle">Technology years ahead</div>
                     </a>
-                    <a href="#computer-vision" class="dropdown-item">
+                    <a href="innovation.html" class="dropdown-item">
                         <div class="dropdown-title">Computer Vision Pipeline</div>
-                        <div class="dropdown-subtitle">OpenCV + YOLO + Blender integration</div>
+                        <div class="dropdown-subtitle">Advanced analysis systems</div>
                     </a>
-                    <a href="#predictive-analytics" class="dropdown-item">
+                    <a href="innovation.html" class="dropdown-item">
                         <div class="dropdown-title">Predictive Analytics</div>
                         <div class="dropdown-subtitle">Formation tendency prediction</div>
                     </a>
-                    <a href="#future-roadmap" class="dropdown-item">
+                    <a href="innovation.html" class="dropdown-item">
                         <div class="dropdown-title">Future Roadmap</div>
                         <div class="dropdown-subtitle">What's coming next in football AI</div>
                     </a>
                 </div>
             </li>
             <li class="nav-item">
-                <a href="#pricing" class="nav-link">PRICING</a>
+                <a href="pricing.html" class="nav-link">PRICING</a>
                 <div class="nav-dropdown">
-                    <a href="#youth-league" class="dropdown-item">
+                    <a href="pricing.html" class="dropdown-item">
                         <div class="dropdown-title">Youth League Starter</div>
                         <div class="dropdown-subtitle">$99/month - Professional intelligence for every level</div>
                     </a>
-                    <a href="#high-school" class="dropdown-item">
+                    <a href="pricing.html" class="dropdown-item">
                         <div class="dropdown-title">High School Elite</div>
                         <div class="dropdown-subtitle">$499/month - Championship development programs</div>
                     </a>
-                    <a href="#college" class="dropdown-item">
+                    <a href="pricing.html" class="dropdown-item">
                         <div class="dropdown-title">College Domination</div>
                         <div class="dropdown-subtitle">$2,999/month - Recruiting and game-day advantage</div>
                     </a>
-                    <a href="#nfl-enterprise" class="dropdown-item">
+                    <a href="pricing.html" class="dropdown-item">
                         <div class="dropdown-title">NFL Enterprise</div>
-                        <div class="dropdown-subtitle">$50,000+/month - Super Bowl-winning technology</div>
+                        <div class="dropdown-subtitle">Custom pricing - Championship technology</div>
                     </a>
                 </div>
             </li>
@@ -738,15 +805,31 @@
     <main class="main-content">
         <!-- Hero Section -->
         <section id="home" class="hero-section">
-            <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-logo">
+            <!-- Triangle Logo (use PNG if available, SVG fallback) -->
+            <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-logo" 
+                 onerror="this.style.display='none'; document.getElementById('triangle-fallback').style.display='block';">
+            
+            <!-- SVG Fallback -->
+            <div id="triangle-fallback" class="triangle-placeholder" style="display: none;">
+                <svg class="triangle-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="triangleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e2021a;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#d4db69;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <polygon points="100,20 180,160 20,160" fill="url(#triangleGrad)" stroke="none"/>
+                </svg>
+            </div>
+            
             <h1 class="hero-title">
                 <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
             </h1>
             <p class="hero-subtitle">Coaching Intelligence Platform</p>
             <p class="hero-tagline">Powered by the Defensive Algorithm</p>
             <div class="hero-actions">
-                <a href="#platform" class="btn-primary">Enter Platform</a>
-                <a href="#leadership" class="btn-secondary">Meet Our AI Leaders</a>
+                <a href="enterprise.html" class="btn-primary">Enter Platform</a>
+                <a href="leadership.html" class="btn-secondary">Meet Our AI Leaders</a>
             </div>
         </section>
 
@@ -778,6 +861,29 @@
                         Advanced data processing and predictive modeling for strategic decision-making during live gameplay.
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Section -->
+        <section class="quick-access reveal">
+            <h2 class="quick-access-title">Explore the Platform</h2>
+            <div class="quick-grid">
+                <a href="triangle.html" class="quick-card">
+                    <h3 class="quick-card-title">Triangle Defense</h3>
+                    <p class="quick-card-description">Revolutionary defensive methodology</p>
+                </a>
+                <a href="mel.html" class="quick-card">
+                    <h3 class="quick-card-title">M.E.L. AI</h3>
+                    <p class="quick-card-description">Master intelligence engine</p>
+                </a>
+                <a href="innovation.html" class="quick-card">
+                    <h3 class="quick-card-title">Innovation</h3>
+                    <p class="quick-card-description">Cutting-edge technology</p>
+                </a>
+                <a href="domination.html" class="quick-card">
+                    <h3 class="quick-card-title">Championship Results</h3>
+                    <p class="quick-card-description">Proven success metrics</p>
+                </a>
             </div>
         </section>
     </main>
@@ -829,42 +935,6 @@
         }
 
         window.addEventListener('scroll', revealOnScroll);
-
-        // Smooth Scrolling for Navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navigation Active State
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
 
         console.log('AnalyzeMyTeam Platform Loaded');
     </script>
