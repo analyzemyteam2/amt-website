@@ -3,359 +3,1181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnalyzeMyTeam - The Algorithm of Defense</title>
-    <meta name="description" content="The Algorithm of Defense: Our revolutionary 5-3-1 Triangle System decodes the mathematical patterns hiding in plain sight, exposing why traditional defenses fail and how spatial geometry changes everything.">
+    <title>AnalyzeMyTeam - Triangle Defense Intelligence Platform</title>
+    <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #ffffff;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* MASTER NAVIGATION - Shows after intro */
+        .master-nav {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 40px;
+            transform: translateY(-100%);
+            transition: all 0.5s ease;
+        }
+
+        .master-nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .nav-brand-text {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .nav-main {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ffffff;
+            background: rgba(226, 2, 26, 0.2);
+        }
+
+        .nav-link.live::after {
+            content: '•';
+            color: #e2021a;
+            margin-left: 4px;
+            font-size: 14px;
+        }
+
+        /* Login Section */
+        .nav-login {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-button {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(226, 2, 26, 0.5);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .user-name {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        /* MAIN CONTENT SECTIONS */
+        .main-content {
+            position: relative;
+        }
+
+        .content-section {
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateX(100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+        }
+
+        .content-section.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+            pointer-events: all;
+        }
+
+        .content-section.prev {
+            transform: translateX(-100%);
+        }
+
+        /* INTRO SECTION */
+        .intro-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a0a0a 0%, #000000 70%);
+            position: relative;
+        }
+
+        .triangle-logo {
+            width: 200px;
+            height: 173px;
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            margin-bottom: 40px;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px rgba(226, 2, 26, 0.6));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 40px rgba(226, 2, 26, 0.9));
+                transform: scale(1.05);
+            }
+        }
+
+        .intro-title {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .intro-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .intro-timer {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+        }
+
+        .skip-button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .skip-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* PORTAL SECTION */
+        .portal-section {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .video-panels {
+            height: 60vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: #111111;
+        }
+
+        .video-panel {
+            background: #000000;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a1a1a 25%, #2a2a2a 25%, #2a2a2a 50%, #1a1a1a 50%);
+            background-size: 40px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cta-headline {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .cta-subtext {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 18px 45px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
+        }
+
+        /* AI Leadership Section */
+        .staff-section {
+            background: #0a0a0a;
+            padding: 80px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .staff-subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .staff-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 2, 26, 0.5);
+            box-shadow: 0 16px 40px rgba(226, 2, 26, 0.2);
+        }
+
+        .staff-header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .staff-name {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .darius-card .staff-header { background: #e2021a; }
+        .alexandra-card .staff-header { background: #4e5064; }
+        .victoria-card .staff-header { background: #15151a; }
+        .marcus-card .staff-header { background: #818284; }
+
+        .staff-content {
+            padding: 24px;
+        }
+
+        .staff-image {
+            width: 100%;
+            height: 160px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .staff-role {
+            font-size: 12px;
+            color: #e2021a;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .staff-description {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* MODULES SECTION */
+        .modules-section {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            padding: 60px 40px;
+        }
+
+        .modules-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .modules-title {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .modules-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .module-card {
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(226, 2, 26, 0.5);
+            box-shadow: 0 16px 40px rgba(226, 2, 26, 0.2);
+        }
+
+        .module-header {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .module-name {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        /* Module Brand Colors */
+        .executive-suite .module-header { background: #e2021a; }
+        .dynamic-fabricator .module-header { background: #15151a; }
+        .game-changer .module-header { background: #4e5064; }
+        .mel-ai .module-header { background: #818284; }
+        .q3-module .module-header { background: #5c5b66; }
+        .dynamic-predictor .module-header { background: #1a181a; }
+        .power-playbooks .module-header { background: #a1a1a1; color: #000000; }
+        .amt-scout .module-header { background: #d4db69; color: #000000; }
+        .amt-recruit .module-header { background: #e2021a; }
+        .amt-strength .module-header { background: #15151a; }
+        .amt-medicine .module-header { background: #4e5064; }
+        .amt-academics .module-header { background: #818284; }
+
+        .module-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .module-description {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            text-align: justify;
+            text-justify: inter-word;
+            flex: 1;
+        }
+
+        .module-action {
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .learn-more {
+            color: #e2021a;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .arrow-icon {
+            color: #e2021a;
+            font-size: 12px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .master-nav {
+                padding: 0 20px;
+                height: 60px;
+            }
+
+            .nav-main {
+                gap: 15px;
+            }
+
+            .nav-link {
+                font-size: 10px;
+                padding: 6px 8px;
+            }
+
+            .nav-brand-text {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+
+            .video-panels {
+                grid-template-columns: 1fr;
+                height: 50vh;
+            }
+
+            .intro-title {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+
+            .cta-headline {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .staff-grid,
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modules-section,
+            .portal-section {
+                margin-top: 60px;
+                padding: 40px 20px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff1744 0%, #e2021a 100%);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">AnalyzeMyTeam</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#triangle-defense">5-3-1 System</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="#contact" class="nav-cta">Join Revolution</a></li>
-            </ul>
-            <div class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- MASTER NAVIGATION (hidden during intro) -->
+    <nav class="master-nav" id="masterNav">
+        <div class="nav-brand">
+            <div class="nav-logo">▲</div>
+            <div class="nav-brand-text">AnalyzeMyTeam</div>
+        </div>
+        
+        <div class="nav-main">
+            <a class="nav-link active" onclick="showSection('portal')">HOME</a>
+            <a class="nav-link" onclick="showSection('portal')">ANALYSIS</a>
+            <a class="nav-link" onclick="showSection('portal')">INTEL</a>
+            <a class="nav-link" onclick="showSection('portal')">PLAYBOOK</a>
+            <a class="nav-link live" onclick="showSection('portal')">LIVE</a>
+            <a class="nav-link" onclick="showSection('portal')">DATA</a>
+            <a class="nav-link" onclick="showSection('modules')">MODULES</a>
+        </div>
+        
+        <div class="nav-login">
+            <button class="login-button" onclick="showLogin()">LOGIN</button>
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <span class="user-name" id="userName">John Doe</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    The Algorithm of Defense
-                </h1>
-                <h2 class="hero-subtitle">
-                    Challenging Everything You Know About Football
-                </h2>
-                <p class="hero-description">
-                    AnalyzeMyTeam breaks down the NFL's most 'unstoppable' plays to reveal why they're actually predictable. Our revolutionary <strong>5-3-1 Triangle System</strong> decodes the mathematical patterns hiding in plain sight, exposing why traditional defenses fail and how spatial geometry changes everything.
+    <!-- MAIN CONTENT CONTAINER -->
+    <div class="main-content">
+        
+        <!-- INTRO SECTION -->
+        <section class="content-section active intro-section" id="introSection">
+            <div class="triangle-logo"></div>
+            <h1 class="intro-title">Triangle Defense</h1>
+            <p class="intro-subtitle">Coaching Intelligence Platform</p>
+            <div class="intro-timer" id="introTimer">Auto-advancing in <span id="countdown">7</span> seconds</div>
+            <button class="skip-button" onclick="skipIntro()">Skip to Platform</button>
+        </section>
+
+        <!-- PORTAL SECTION -->
+        <section class="content-section portal-section" id="portalSection">
+            <!-- Video Panels -->
+            <div class="video-panels">
+                <div class="video-panel">
+                    <div class="video-placeholder">GAME ANALYSIS VIDEO</div>
+                </div>
+                <div class="video-panel">
+                    <div class="video-placeholder">TACTICAL BREAKDOWN</div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2 class="cta-headline">Where Champions Are Made</h2>
+                <p class="cta-subtext">Experience the Revolutionary Triangle Defense Intelligence Platform</p>
+                <button class="cta-button" onclick="showSection('modules')">Enter AnalyzeMyTeam</button>
+            </div>
+
+            <!-- AI Leadership Team -->
+            <div class="staff-section">
+                <h2 class="staff-title">AI Leadership Team</h2>
+                <p class="staff-subtitle">
+                    Meet the Triangle Defense AI leadership team - revolutionary coaching intelligence powered by advanced artificial intelligence. Our digital executive roster combines NFL experience, technological innovation, and strategic vision to transform football analytics and player development through cutting-edge AI personalities.
                 </p>
-                <div class="hero-cta">
-                    <p class="revolution-text">Every week, we're building tomorrow's defensive playbook, turning offensive chaos into defensive order.</p>
-                    <p class="cta-tagline"><strong>Stop guessing. Start knowing.</strong></p>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Join the Revolution
-                    </a>
-                    <a href="#triangle-defense" class="btn-secondary">
-                        <i class="fas fa-brain"></i>
-                        Learn the System
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="staff-grid">
+                    <div class="staff-card darius-card">
+                        <div class="staff-header">
+                            <div class="staff-name">Darius Washington</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/darius-washington.png');"></div>
+                            <div class="staff-role">Head Coach (Offensive Innovation)</div>
+                            <div class="staff-description">
+                                AI-powered coaching virtuoso specializing in offensive strategy and innovation. Hyper-intelligent digital personality combining genius-level strategic thinking with emotional intelligence.
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Problem/Solution Section -->
-    <section class="problem-solution">
-        <div class="container">
-            <div class="section-grid">
-                <div class="problem-card">
-                    <div class="card-header">
-                        <h3>The Problem We Solve</h3>
+                    <div class="staff-card alexandra-card">
+                        <div class="staff-header">
+                            <div class="staff-name">Alexandra Martinez</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/alexandra-martinez.png');"></div>
+                            <div class="staff-role">Chief Administrative Officer</div>
+                            <div class="staff-description">
+                                Advanced AI organizational mastermind who transforms complex football operations into seamless systems. Digital expert in project management and executive coordination.
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p>While offensive coordinators innovate at light speed, defensive coaching remains stuck in the past. Traditional "see ball, hit ball" strategies leave defenses vulnerable to modern offensive schemes.</p>
-                        <ul class="problem-list">
-                            <li><i class="fas fa-times"></i> Reactive instead of predictive</li>
-                            <li><i class="fas fa-times"></i> Guesswork over mathematical certainty</li>
-                            <li><i class="fas fa-times"></i> Traditional X's and O's thinking</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="solution-card">
-                    <div class="card-header">
-                        <h3>Our Solution: The 5-3-1 Triangle Defense</h3>
-                    </div>
-                    <div class="card-content">
-                        <p>A revolutionary system that combines spatial geometry with artificial intelligence to predict and counter offensive strategies before they unfold.</p>
-                        <ul class="solution-list">
-                            <li><i class="fas fa-check"></i> Triangulates off the "middle of five" eligible receivers</li>
-                            <li><i class="fas fa-check"></i> Combines man and zone principles in innovative framework</li>
-                            <li><i class="fas fa-check"></i> Adapts dynamically to offensive alignments</li>
-                            <li><i class="fas fa-check"></i> Uses AI to predict and exploit offensive tendencies</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Triangle Defense Section -->
-    <section id="triangle-defense" class="triangle-defense">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why We're Different</h2>
-                <p>While others draw X's and O's, we're processing thousands of data points to predict offensive tendencies. Our Configuration, Location, Situation (CLS) analysis doesn't just react to offenses – it anticipates them.</p>
-            </div>
-            
-            <div class="cls-framework">
-                <div class="cls-card">
-                    <div class="cls-icon">
-                        <i class="fas fa-sitemap"></i>
+                    <div class="staff-card victoria-card">
+                        <div class="staff-header">
+                            <div class="staff-name">Victoria Castellanos</div>
+                        </div>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/victoria-castellanos.png');"></div>
+                            <div class="staff-role">Chief Legal Officer</div>
+                            <div class="staff-description">
+                                Elite AI legal strategist protecting Triangle Defense intellectual property and ensuring compliance across all football operations through advanced artificial intelligence.
+                            </div>
+                        </div>
                     </div>
-                    <h3>Configuration</h3>
-                    <p>How the offense aligns and organizes their eligible receivers. We identify patterns in formation tendencies that reveal offensive intent before the snap.</p>
-                </div>
-                
-                <div class="cls-card">
-                    <div class="cls-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3>Location</h3>
-                    <p>Field position, hash marks, and spatial relationships that dictate optimal defensive positioning. Geography is destiny in football defense.</p>
-                </div>
-                
-                <div class="cls-card">
-                    <div class="cls-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Situation</h3>
-                    <p>Down, distance, time, and score create predictable offensive patterns. We've mathematically modeled these tendencies for maximum defensive advantage.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Publications Section -->
-    <section id="publications" class="publications">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Flagship Publications</h2>
-                <p>What happens when you combine Artificial Intelligence with decades of high-level football experience? You get AnalyzeMyTeam Insider – the only football analysis platform that decodes offensive strategies before they unfold.</p>
-            </div>
-            
-            <div class="publications-grid">
-                <div class="publication-card">
-                    <div class="publication-header">
-                        <div class="publication-icon">
-                            <i class="fas fa-graduation-cap"></i>
+                    <div class="staff-card marcus-card">
+                        <div class="staff-header">
+                            <div class="staff-name">Marcus Sterling</div>
                         </div>
-                        <div class="publication-info">
-                            <h3>The MO Report</h3>
-                            <span class="publication-type">Weekly College Football Analysis</span>
+                        <div class="staff-content">
+                            <div class="staff-image" style="background-image: url('assets/marcus-sterling.png');"></div>
+                            <div class="staff-role">General Manager</div>
+                            <div class="staff-description">
+                                AI-powered executive architect building championship organizations through strategic personnel decisions and innovative football analytics integration.
+                            </div>
                         </div>
                     </div>
-                    <p>Highlighting defensive excellence, formation breakdowns, and emerging trends in the collegiate game. Deep dive analysis that transforms how you see college football defense.</p>
-                    <div class="publication-tags">
-                        <span class="tag">Formation Analysis</span>
-                        <span class="tag">Defensive Excellence</span>
-                        <span class="tag">Emerging Trends</span>
-                    </div>
-                    <a href="#contact" class="publication-cta">Subscribe Now</a>
-                </div>
-                
-                <div class="publication-card featured">
-                    <div class="featured-badge">Most Popular</div>
-                    <div class="publication-header">
-                        <div class="publication-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="publication-info">
-                            <h3>The NFL Edge</h3>
-                            <span class="publication-type">Professional Football Intelligence</span>
-                        </div>
-                    </div>
-                    <p>Focusing on NFL defensive innovations, strategic analysis, and global game development. Professional-level insights that give you the competitive edge.</p>
-                    <div class="publication-tags">
-                        <span class="tag">NFL Innovations</span>
-                        <span class="tag">Strategic Analysis</span>
-                        <span class="tag">Global Development</span>
-                    </div>
-                    <a href="#contact" class="publication-cta">Subscribe Now</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Denauld Section -->
-    <section id="about" class="about-denauld">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="section-header">
-                        <h2>The Mind Behind the Method</h2>
-                        <h3>Denauld Brown</h3>
-                        <p class="subtitle">Elite Experience Meets AI Innovation</p>
-                    </div>
-                    
-                    <p class="bio-description">
-                        Denauld Brown brings elite-level experience to defensive strategy, combining championship football knowledge with cutting-edge artificial intelligence to revolutionize how defense is taught and executed.
-                    </p>
-                    
-                    <div class="credentials">
-                        <div class="credential">
-                            <i class="fas fa-medal"></i>
-                            <span>All-American at Kutztown University</span>
-                        </div>
-                        <div class="credential">
-                            <i class="fas fa-trophy"></i>
-                            <span>NFL and NFL Europe Experience (World Bowl Champion)</span>
-                        </div>
-                        <div class="credential">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                            <span>Division I Defensive Coordinator</span>
-                        </div>
-                        <div class="credential">
-                            <i class="fas fa-robot"></i>
-                            <span>AI and Analytics Integration Specialist</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="about-visual">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">5-3-1</span>
-                            <span class="stat-label">Triangle System</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">NFL</span>
-                            <span class="stat-label">Champion</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">D1</span>
-                            <span class="stat-label">Coordinator</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">AI</span>
-                            <span class="stat-label">Pioneer</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Are You Ready to Stop Guessing and Start Knowing?</h2>
-                <p class="cta-description">
-                    Join the defensive revolution that's rewriting football's future. Transform your defensive philosophy with the mathematical precision of the 5-3-1 Triangle System.
+        <!-- MODULES SECTION -->
+        <section class="content-section modules-section" id="modulesSection">
+            <div class="modules-header">
+                <h2 class="modules-title">Platform Modules</h2>
+                <p class="modules-subtitle">
+                    Revolutionary coaching intelligence modules designed to transform every aspect of your football program. From executive decision-making to player development, our AI-powered ecosystem covers it all.
                 </p>
-                <div class="cta-stats">
-                    <div class="cta-stat">
-                        <span class="stat-number">1000+</span>
-                        <span class="stat-label">Data Points Per Play</span>
-                    </div>
-                    <div class="cta-stat">
-                        <span class="stat-number">94%</span>
-                        <span class="stat-label">Prediction Accuracy</span>
-                    </div>
-                    <div class="cta-stat">
-                        <span class="stat-number">5-3-1</span>
-                        <span class="stat-label">Revolutionary System</span>
-                    </div>
-                </div>
-                <div class="cta-buttons">
-                    <a href="mailto:contact@analyzemeateam.com" class="btn-primary large">
-                        <i class="fas fa-rocket"></i>
-                        Join the Revolution
-                    </a>
-                    <a href="#publications" class="btn-secondary large">
-                        <i class="fas fa-book"></i>
-                        Explore Publications
-                    </a>
-                </div>
-                <div class="contact-info">
-                    <p>Ready to transform your defense? <strong>contact@analyzemeateam.com</strong></p>
-                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="footer-logo">
-                        <span class="logo-text">AnalyzeMyTeam</span>
+            <div class="modules-grid">
+                <!-- Executive Suite -->
+                <div class="module-card executive-suite">
+                    <div class="module-header">
+                        <div class="module-name">Executive Suite</div>
                     </div>
-                    <p class="footer-description">
-                        The Algorithm of Defense. Revolutionary 5-3-1 Triangle System that decodes mathematical patterns hiding in plain sight, turning offensive chaos into defensive order.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Owner's, GM's, Presidents and AD's can lead by example with the Executive Suite. Give your organization a digital boost to maximize your personnel decisions and optimize your day to day operations with deep insight and strategic advantage.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Publications</h4>
-                        <ul>
-                            <li><a href="#publications">The MO Report</a></li>
-                            <li><a href="#publications">The NFL Edge</a></li>
-                            <li><a href="blog.html">Weekly Analysis</a></li>
-                            <li><a href="#">Defensive Insights</a></li>
-                        </ul>
+
+                <!-- Dynamic Fabricator -->
+                <div class="module-card dynamic-fabricator">
+                    <div class="module-header">
+                        <div class="module-name">Dynamic Fabricator</div>
                     </div>
-                    
-                    <div class="footer-column">
-                        <h4>Triangle Defense</h4>
-                        <ul>
-                            <li><a href="#triangle-defense">5-3-1 System</a></li>
-                            <li><a href="#">CLS Analysis</a></li>
-                            <li><a href="#">Methodology</a></li>
-                            <li><a href="#">Implementation</a></li>
-                        </ul>
+                    <div class="module-content">
+                        <div class="module-description">
+                            The Dynamic Fabricator is a time saver! It converts video into digital data that can be stored, analyzed and studied for greater efficiency in game planning, practice preparation, game day execution and comprehensive self-evaluation.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
                     </div>
-                    
-                    <div class="footer-column">
-                        <h4>About</h4>
-                        <ul>
-                            <li><a href="#about">Denauld Brown</a></li>
-                            <li><a href="#">Our Philosophy</a></li>
-                            <li><a href="#">The Revolution</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
+                </div>
+
+                <!-- Game Changer -->
+                <div class="module-card game-changer">
+                    <div class="module-header">
+                        <div class="module-name">Game Changer</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Video editing made simple. Drag and drop video clips into play sequences. Compare practice clips with game clips. Focus on teaching from the video with integrated digital data rather than complex data entry.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEL AI -->
+                <div class="module-card mel-ai">
+                    <div class="module-header">
+                        <div class="module-name">M.E.L.</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Meet MEL the AI behind the AnalyzeMyTeam ecosystem. Ask MEL how it can help, and it will get right to task. From game plan preparation to salary cap analysis to play call suggestions and opponent simulations. MEL does it all.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="module-card q3-module">
+                    <div class="module-header">
+                        <div class="module-name">Q3</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Quarterback focused tool for deeper insight and learning for the most important position in sports. Advanced analytics and performance tracking designed specifically for quarterback development and tactical decision-making processes.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Predictor -->
+                <div class="module-card dynamic-predictor">
+                    <div class="module-header">
+                        <div class="module-name">Dynamic Predictor</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Real-time analytical insights during live gameplay. The Dynamic Predictor gives you instantaneous data analysis and predictive modeling to make strategic decisions as the game unfolds on the field.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power Playbooks -->
+                <div class="module-card power-playbooks">
+                    <div class="module-header">
+                        <div class="module-name">Power Playbooks</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Tactical sports are a complex narrative of architectural scheme, massive amounts of data, and detailed analysis combined with meticulous and clever scheme designs. Use data to create and simulate complex concepts in a mobile friendly environment.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMT Pro Scout -->
+                <div class="module-card amt-scout">
+                    <div class="module-header">
+                        <div class="module-name">AMT Pro Scout</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            AMT Pro Scout is a forecasting and projection-based player scouting and personnel solution. MEL is using massive amounts of analyzable data including scheme fit analysis to help your scouting department make the right decisions.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMT Recruit -->
+                <div class="module-card amt-recruit">
+                    <div class="module-header">
+                        <div class="module-name">AMT Recruit</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            AMT Recruit is a unique recruiting platform that optimizes the process of projecting players accurately. Using synchronized data points to make the projection successful for all parties involved. The evolution of student athlete is upon us.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMT Strength -->
+                <div class="module-card amt-strength">
+                    <div class="module-header">
+                        <div class="module-name">AMT Strength</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Track player data from the weight room to optimize performance on the playing field. Record athletes in the weight room for technique evaluation and teaching. AMT Strength & Conditioning brings technology innovation to traditional strength training methods.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMT Medicine -->
+                <div class="module-card amt-medicine">
+                    <div class="module-header">
+                        <div class="module-name">AMT Medicine</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            Maximize player performance with AMT Sports Medicine. MEL will pull video clips for trainers and team doctors to study injuries and optimize recovery protocols. Advanced injury prevention through comprehensive data analysis and medical integration.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AMT Academics -->
+                <div class="module-card amt-academics">
+                    <div class="module-header">
+                        <div class="module-name">AMT Academics</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="module-description">
+                            The evolution of student athlete is upon us. From freshman English to senior seminar, track student data all the way to graduation with comprehensive scheduling, progress reports and location tracking. Academic excellence meets athletic performance.
+                        </div>
+                        <div class="module-action">
+                            <span class="learn-more">Learn More</span>
+                            <span class="arrow-icon">→</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+    </div>
+
+    <script>
+        // GLOBAL VARIABLES
+        let currentSection = 'intro';
+        let introTimer;
+        let countdown = 7;
+
+        // INITIALIZE WEBSITE
+        window.addEventListener('load', () => {
+            console.log('AnalyzeMyTeam Unified Website Loaded');
+            startIntroTimer();
+        });
+
+        // INTRO TIMER FUNCTION
+        function startIntroTimer() {
+            const countdownElement = document.getElementById('countdown');
             
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    <p>&copy; 2024 AnalyzeMyTeam. All rights reserved. 5-3-1 Triangle Defense methodology by Denauld Brown.</p>
-                </div>
-                <div class="footer-legal">
-                    <a href="#">Terms</a>
-                    <a href="#">Privacy</a>
-                    <a href="#contact">Join Revolution</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+            introTimer = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(introTimer);
+                    skipIntro();
+                }
+            }, 1000);
+        }
 
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
+        // SKIP INTRO FUNCTION
+        function skipIntro() {
+            clearInterval(introTimer);
+            showSection('portal');
+            document.getElementById('masterNav').classList.add('visible');
+        }
+
+        // MAIN NAVIGATION FUNCTION
+        function showSection(sectionName) {
+            // Remove active class from all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active', 'prev');
+            });
+
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show new section
+            const targetSection = document.getElementById(sectionName + 'Section');
+            if (targetSection) {
+                targetSection.classList.add('active');
+                
+                // Update navigation active state
+                if (sectionName === 'portal') {
+                    document.querySelector('.nav-link').classList.add('active');
+                } else if (sectionName === 'modules') {
+                    document.querySelector('[onclick="showSection(\'modules\')"]').classList.add('active');
+                }
+                
+                currentSection = sectionName;
+                console.log(`Navigated to: ${sectionName}`);
+            }
+        }
+
+        // LOGIN FUNCTIONS
+        function showLogin() {
+            // Simulate login modal (simplified for demo)
+            const userType = prompt('Select User Type:\n1. Head Coach\n2. Executive\n3. Analyst\n4. Coordinator\n5. Guest\n\nEnter number (1-5):');
+            const username = prompt('Enter username:');
+            
+            if (userType && username) {
+                simulateLogin(username, getUserType(userType));
+            }
+        }
+
+        function getUserType(number) {
+            const types = {
+                '1': 'head-coach',
+                '2': 'executive', 
+                '3': 'analyst',
+                '4': 'coordinator',
+                '5': 'guest'
+            };
+            return types[number] || 'guest';
+        }
+
+        function simulateLogin(username, userType) {
+            // Hide login button, show user info
+            document.querySelector('.login-button').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            
+            // Update user info
+            document.getElementById('userName').textContent = username;
+            document.getElementById('userAvatar').textContent = username.substring(0, 2).toUpperCase();
+            
+            // Set avatar color based on user type
+            const avatar = document.getElementById('userAvatar');
+            switch(userType) {
+                case 'head-coach':
+                    avatar.style.background = 'linear-gradient(135deg, #e2021a 0%, #ff1744 100%)';
+                    break;
+                case 'executive':
+                    avatar.style.background = 'linear-gradient(135deg, #4e5064 0%, #5c5b66 100%)';
+                    break;
+                case 'analyst':
+                    avatar.style.background = 'linear-gradient(135deg, #15151a 0%, #2a2a2a 100%)';
+                    break;
+                case 'coordinator':
+                    avatar.style.background = 'linear-gradient(135deg, #818284 0%, #a1a1a1 100%)';
+                    break;
+                default:
+                    avatar.style.background = 'linear-gradient(135deg, #666666 0%, #888888 100%)';
+            }
+
+            console.log(`User logged in: ${username} (${userType})`);
+        }
+
+        function logout() {
+            document.querySelector('.login-button').style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            console.log('User logged out');
+        }
+
+        // KEYBOARD NAVIGATION
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                    if (currentSection === 'intro') skipIntro();
+                    else if (currentSection === 'portal') showSection('modules');
+                    break;
+                case 'ArrowLeft':
+                    if (currentSection === 'modules') showSection('portal');
+                    break;
+                case 'Enter':
+                    if (currentSection === 'intro') skipIntro();
+                    else if (currentSection === 'portal') showSection('modules');
+                    break;
+                case 'Escape':
+                    if (currentSection !== 'intro') showSection('portal');
+                    break;
+            }
+        });
+
+        // SMOOTH SCROLLING
+        document.documentElement.style.scrollBehavior = 'smooth';
+
+        // SCROLL EFFECTS
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('masterNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // MODULE CLICK HANDLERS
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const moduleName = this.querySelector('.module-name').textContent;
+                console.log(`Module clicked: ${moduleName}`);
+                
+                // Future: Navigate to module detail page
+                alert(`${moduleName} module selected. Full functionality coming soon!`);
+            });
+        });
+
+        // STAFF CLICK HANDLERS
+        document.querySelectorAll('.staff-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const staffName = this.querySelector('.staff-name').textContent;
+                console.log(`Staff member clicked: ${staffName}`);
+                
+                // Future: Show staff detail modal or page
+                alert(`${staffName} profile selected. Full AI interaction coming soon!`);
+            });
+        });
+
+        // PERFORMANCE MONITORING
+        console.log('Website Performance: Loaded in', performance.now(), 'ms');
+    </script>
 </body>
 </html>
