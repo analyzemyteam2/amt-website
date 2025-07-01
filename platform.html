@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMT Platform Entry - Module Selection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #1a181a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a181a 0%, #15151a 50%, #5c5b66 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease-out;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Animated Triangle Logo */
+        .loading-triangle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+        }
+
+        .triangle-outer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid #e2021a;
+            border-radius: 10px;
+            transform: rotate(45deg);
+            animation: triangleRotate 3s linear infinite;
+        }
+
+        .triangle-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60%;
+            height: 60%;
+            border: 2px solid #d4db69;
+            border-radius: 8px;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            animation: triangleRotateReverse 2s linear infinite;
+        }
+
+        @keyframes triangleRotate {
+            0% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(225deg) scale(1.1); }
+            100% { transform: rotate(405deg) scale(1); }
+        }
+
+        @keyframes triangleRotateReverse {
+            0% { transform: translate(-50%, -50%) rotate(-45deg); }
+            100% { transform: translate(-50%, -50%) rotate(-405deg); }
+        }
+
+        /* Loading Text */
+        .loading-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #e2021a, #d4db69);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .loading-progress {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #e2021a, #d4db69);
+            width: 0%;
+            animation: progressLoad 3s ease-out forwards;
+        }
+
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .loading-status {
+            font-size: 0.9rem;
+            color: #a1a1a1;
+            animation: statusChange 3s steps(6) forwards;
+        }
+
+        /* Platform Dashboard */
+        .platform-dashboard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a181a 0%, #15151a 50%, #5c5b66 100%);
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1s ease-out;
+            overflow-y: auto;
+        }
+
+        .platform-dashboard.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            border-bottom: 1px solid rgba(212, 219, 105, 0.2);
+        }
+
+        .dashboard-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #e2021a, #d4db69);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.2rem;
+            color: #a1a1a1;
+            margin-bottom: 2rem;
+        }
+
+        /* Module Grid */
+        .modules-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 1200px) {
+            .modules-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .module-card {
+            background: rgba(26, 24, 26, 0.8);
+            border: 1px solid rgba(212, 219, 105, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Consistent hover effects for all modules */
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: #d4db69;
+            box-shadow: 0 20px 40px rgba(212, 219, 105, 0.2);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 219, 105, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .module-card:hover::before {
+            left: 100%;
+        }
+
+        .module-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #e2021a, #d4db69);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .module-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+        }
+
+        .module-description {
+            color: #a1a1a1;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: rgba(212, 219, 105, 0.2);
+            color: #d4db69;
+        }
+
+        .status-coming-soon {
+            background: rgba(226, 2, 26, 0.2);
+            color: #e2021a;
+        }
+
+        .status-beta {
+            background: rgba(78, 80, 100, 0.2);
+            color: #4e5064;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(26, 24, 26, 0.9);
+            border: 1px solid rgba(212, 219, 105, 0.3);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-button:hover {
+            background: rgba(212, 219, 105, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            .modules-container {
+                padding: 2rem 1rem;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .module-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-title {
+                font-size: 1.5rem;
+            }
+            
+            .dashboard-subtitle {
+                font-size: 1rem;
+            }
+            
+            .module-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-triangle">
+            <div class="triangle-outer"></div>
+            <div class="triangle-inner"></div>
+        </div>
+        <div class="loading-text">INITIALIZING PLATFORM</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loading-status" id="loadingStatus">Connecting to AI systems...</div>
+    </div>
+
+    <!-- Platform Dashboard -->
+    <div class="platform-dashboard" id="platformDashboard">
+        <a href="index.html" class="back-button">← Back to Homepage</a>
+        
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">AMT PLATFORM</h1>
+            <p class="dashboard-subtitle">Access 12 comprehensive modules for complete football intelligence and performance management</p>
+        </div>
+
+        <div class="modules-container">
+            <div class="modules-grid">
+                <!-- Row 1: Executive & Core Analysis -->
+                <div class="module-card module-red" onclick="enterModule('executive-suite')">
+                    <div class="module-icon">👑</div>
+                    <h3 class="module-title">EXECUTIVE SUITE</h3>
+                    <p class="module-description">Owner's, GM's, Presidents and AD's can lead by example with the Executive Suite. Give your organization a digital boost to maximize your personnel decisions and optimize your day to day operations with deep insight and strategic advantage.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('dynamic-fabricator')">
+                    <div class="module-icon">🎥</div>
+                    <h3 class="module-title">DYNAMIC FABRICATOR</h3>
+                    <p class="module-description">The Dynamic Fabricator is a time saver! It converts video into digital data that can be stored, analyzed and studied for greater efficiency in game planning, practice preparation, game day execution and comprehensive self-evaluation.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('game-changer')">
+                    <div class="module-icon">🎬</div>
+                    <h3 class="module-title">GAME CHANGER</h3>
+                    <p class="module-description">Video editing made simple. Drag and drop video clips into play sequences. Compare practice clips with game clips. Focus on teaching from the video with integrated digital data rather than complex data entry.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('mel-intelligence')">
+                    <div class="module-icon">🧠</div>
+                    <h3 class="module-title">M.E.L.</h3>
+                    <p class="module-description">Meet MEL the AI behind the AnalyzeMyTeam ecosystem. Ask MEL how it can help, and it will get right to task. From game plan preparation to salary cap analysis to play call suggestions and opponent simulations. MEL does it all.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <!-- Row 2: Analytics & Performance -->
+                <div class="module-card" onclick="enterModule('q3')">
+                    <div class="module-icon">🏈</div>
+                    <h3 class="module-title">Q3</h3>
+                    <p class="module-description">Quarterback focused tool for deeper insight and learning for the most important position in sports. Advanced analytics and performance tracking designed specifically for quarterback development and tactical decision-making processes.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('dynamic-predictor')">
+                    <div class="module-icon">🔮</div>
+                    <h3 class="module-title">DYNAMIC PREDICTOR</h3>
+                    <p class="module-description">Real-time analytical insights during live gameplay. The Dynamic Predictor gives you instantaneous data analysis and predictive modeling to make strategic decisions as the game unfolds on the field.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('power-playbooks')">
+                    <div class="module-icon">📚</div>
+                    <h3 class="module-title">POWER PLAYBOOKS</h3>
+                    <p class="module-description">Tactical sports are a complex narrative of architectural scheme, massive amounts of data, and detailed analysis, combined with instructive and clever scheme designs. Use data to create and simulate complex concepts in a mobile friendly environment.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card module-lime" onclick="enterModule('amt-pro-scout')">
+                    <div class="module-icon">🎯</div>
+                    <h3 class="module-title">AMT PRO SCOUT</h3>
+                    <p class="module-description">AMT Pro Scout is a forecasting and projection-based player scouting and personnel solution. MEL is using massive amounts of analyzable data including scheme fit analysis to help your scouting department make the right decisions.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <!-- Row 3: Performance & Development -->
+                <div class="module-card module-red" onclick="enterModule('amt-recruit')">
+                    <div class="module-icon">🌟</div>
+                    <h3 class="module-title">AMT RECRUIT</h3>
+                    <p class="module-description">AMT Recruit is a unique recruiting platform that optimizes the process of projecting players accurately. Using synchronized data points to make the projection successful for all parties involved. The evolution of student athlete is upon us.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('amt-strength')">
+                    <div class="module-icon">💪</div>
+                    <h3 class="module-title">AMT STRENGTH</h3>
+                    <p class="module-description">Track player data from the weight room to optimize performance on the playing field. Record athletes in the weight room for technical evaluation and teaching. AMT Strength & Conditioning brings technology innovation to traditional strength training methods.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('amt-medicine')">
+                    <div class="module-icon">⚕️</div>
+                    <h3 class="module-title">AMT MEDICINE</h3>
+                    <p class="module-description">Maximize player performance with AMT Sports Medicine. MEL will pull video clips for trainers and team doctors to study injuries and optimize recovery protocols. Advanced injury prevention through comprehensive data analysis and medical integration.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+
+                <div class="module-card" onclick="enterModule('amt-academics')">
+                    <div class="module-icon">📚</div>
+                    <h3 class="module-title">AMT ACADEMICS</h3>
+                    <p class="module-description">The evolution of student athlete is upon us. From freshman English to senior seminar, track student data all the way to graduation with comprehensive scheduling, progress reports and location tracking. Academic excellence meets athletic performance.</p>
+                    <span class="module-status status-active">Active</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading sequence and status messages
+        const loadingMessages = [
+            "Connecting to AI systems...",
+            "Loading Triangle Defense protocols...",
+            "Initializing coaching intelligence...",
+            "Synchronizing formation database...",
+            "Activating M.E.L. coordination...",
+            "Platform ready for access..."
+        ];
+
+        let messageIndex = 0;
+        const statusElement = document.getElementById('loadingStatus');
+
+        // Update loading messages
+        const messageInterval = setInterval(() => {
+            if (messageIndex < loadingMessages.length - 1) {
+                messageIndex++;
+                statusElement.textContent = loadingMessages[messageIndex];
+            } else {
+                clearInterval(messageInterval);
+                setTimeout(showPlatform, 500);
+            }
+        }, 500);
+
+        function showPlatform() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const platformDashboard = document.getElementById('platformDashboard');
+            
+            loadingScreen.classList.add('hidden');
+            
+            setTimeout(() => {
+                platformDashboard.classList.add('active');
+            }, 500);
+        }
+
+        function enterModule(moduleId) {
+            // Add visual feedback
+            event.target.closest('.module-card').style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                // Here you would redirect to the specific module
+                console.log(`Entering module: ${moduleId}`);
+                
+                // Example routing based on module
+                switch(moduleId) {
+                    case 'executive-suite':
+                        window.location.href = 'executive-suite.html';
+                        break;
+                    case 'dynamic-fabricator':
+                        window.location.href = 'dynamic-fabricator.html';
+                        break;
+                    case 'game-changer':
+                        window.location.href = 'game-changer.html';
+                        break;
+                    case 'mel-intelligence':
+                        window.location.href = 'mel-intelligence.html';
+                        break;
+                    case 'q3':
+                        window.location.href = 'q3.html';
+                        break;
+                    case 'dynamic-predictor':
+                        window.location.href = 'dynamic-predictor.html';
+                        break;
+                    case 'power-playbooks':
+                        window.location.href = 'power-playbooks.html';
+                        break;
+                    case 'amt-pro-scout':
+                        window.location.href = 'amt-pro-scout.html';
+                        break;
+                    case 'amt-recruit':
+                        window.location.href = 'amt-recruit.html';
+                        break;
+                    case 'amt-strength':
+                        window.location.href = 'amt-strength.html';
+                        break;
+                    case 'amt-medicine':
+                        window.location.href = 'amt-medicine.html';
+                        break;
+                    case 'amt-academics':
+                        window.location.href = 'amt-academics.html';
+                        break;
+                    default:
+                        alert(`${moduleId} module will be available soon!`);
+                }
+            }, 200);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔥 AMT Platform Entry Experience Loaded - 12 Modules Ready');
+        });
+    </script>
+</body>
+</html>
