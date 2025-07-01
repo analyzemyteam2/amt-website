@@ -196,7 +196,7 @@
             transform: translateY(-50px);
         }
 
-        /* INTRO SECTION */
+        /* INTRO SECTION - PERMANENT */
         .intro-section {
             height: 100vh;
             display: flex;
@@ -205,6 +205,9 @@
             justify-content: center;
             background: radial-gradient(circle at center, #1a0a0a 0%, #000000 70%);
             position: relative;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
         }
 
         .triangle-logo {
@@ -306,6 +309,44 @@
             margin-bottom: 20px;
             opacity: 0;
             animation: fadeInUp 1s ease-out 1.5s forwards;
+            transition: all 0.5s ease;
+        }
+
+        .intro-timer.completed {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .intro-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 2s forwards;
+        }
+
+        .enter-button {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
+            opacity: 0;
+            transform: scale(0.9);
+            animation: buttonAppear 0.8s ease-out 8s forwards;
+        }
+
+        .enter-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
         }
 
         .skip-button {
@@ -319,8 +360,6 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 2s forwards;
         }
 
         .skip-button:hover {
@@ -340,10 +379,22 @@
             }
         }
 
+        @keyframes buttonAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
         /* PORTAL SECTION */
         .portal-section {
             margin-top: 70px;
             min-height: calc(100vh - 70px);
+            position: relative;
         }
 
         .video-panels {
@@ -720,20 +771,10 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #ff1744 0%, #e2021a 100%);
         }
-
-        /* Smooth Slide-Up Animation for Portal Section */
-        .portal-section {
-            transform: translateY(100vh);
-            transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .portal-section.slide-up {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
-    <!-- MASTER NAVIGATION (hidden during intro) -->
+    <!-- MASTER NAVIGATION (appears after timer) -->
     <nav class="master-nav" id="masterNav">
         <div class="nav-brand">
             <div class="nav-logo">▲</div>
@@ -741,13 +782,13 @@
         </div>
         
         <div class="nav-main">
-            <a class="nav-link active" onclick="showSection('portal')">HOME</a>
-            <a class="nav-link" onclick="showSection('portal')">ANALYSIS</a>
-            <a class="nav-link" onclick="showSection('portal')">INTEL</a>
-            <a class="nav-link" onclick="showSection('portal')">PLAYBOOK</a>
-            <a class="nav-link live" onclick="showSection('portal')">LIVE</a>
-            <a class="nav-link" onclick="showSection('portal')">DATA</a>
-            <a class="nav-link" onclick="showSection('modules')">MODULES</a>
+            <a class="nav-link" onclick="scrollToSection('intro')">HOME</a>
+            <a class="nav-link" onclick="scrollToSection('portal')">ANALYSIS</a>
+            <a class="nav-link" onclick="scrollToSection('portal')">INTEL</a>
+            <a class="nav-link" onclick="scrollToSection('portal')">PLAYBOOK</a>
+            <a class="nav-link live" onclick="scrollToSection('portal')">LIVE</a>
+            <a class="nav-link" onclick="scrollToSection('portal')">DATA</a>
+            <a class="nav-link" onclick="scrollToSection('modules')">MODULES</a>
         </div>
         
         <div class="nav-login">
@@ -763,8 +804,8 @@
     <!-- MAIN CONTENT CONTAINER -->
     <div class="main-content">
         
-        <!-- INTRO SECTION -->
-        <section class="content-section active intro-section" id="introSection">
+        <!-- INTRO SECTION - PERMANENT -->
+        <section class="intro-section" id="introSection">
             <div class="triangle-logo">
                 <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-image">
             </div>
@@ -775,8 +816,11 @@
             </h1>
             <p class="intro-subtitle">Coaching Intelligence Platform</p>
             <p class="intro-powered">Powered by the Defensive Algorithm</p>
-            <div class="intro-timer" id="introTimer">Auto-advancing in <span id="countdown">7</span> seconds</div>
-            <button class="skip-button" onclick="skipIntro()">Skip to Platform</button>
+            <div class="intro-timer" id="introTimer">Platform launching in <span id="countdown">7</span> seconds</div>
+            <div class="intro-actions">
+                <button class="enter-button" id="enterButton" onclick="enterPlatform()">Enter Platform</button>
+                <button class="skip-button" onclick="enterPlatform()">Skip Timer</button>
+            </div>
         </section>
 
         <!-- PORTAL SECTION -->
@@ -795,7 +839,7 @@
             <div class="cta-section">
                 <h2 class="cta-headline">Where Champions Are Made</h2>
                 <p class="cta-subtext">Experience the Revolutionary Triangle Defense Intelligence Platform</p>
-                <button class="cta-button" onclick="showSection('modules')">Enter AnalyzeMyTeam</button>
+                <button class="cta-button" onclick="scrollToSection('modules')">Explore Modules</button>
             </div>
 
             <!-- AI Leadership Team -->
@@ -1068,9 +1112,9 @@
 
     <script>
         // GLOBAL VARIABLES
-        let currentSection = 'intro';
         let introTimer;
         let countdown = 7;
+        let navigationVisible = false;
 
         // INITIALIZE WEBSITE
         window.addEventListener('load', () => {
@@ -1081,6 +1125,7 @@
         // INTRO TIMER FUNCTION
         function startIntroTimer() {
             const countdownElement = document.getElementById('countdown');
+            const timerElement = document.getElementById('introTimer');
             
             introTimer = setInterval(() => {
                 countdown--;
@@ -1088,57 +1133,56 @@
                 
                 if (countdown <= 0) {
                     clearInterval(introTimer);
-                    skipIntro();
+                    timerElement.classList.add('completed');
+                    showNavigation();
                 }
             }, 1000);
         }
 
-        // SKIP INTRO FUNCTION WITH SMOOTH SLIDE-UP
-        function skipIntro() {
-            clearInterval(introTimer);
-            
-            // Hide intro section
-            const introSection = document.getElementById('introSection');
-            introSection.style.transform = 'translateY(-100vh)';
-            introSection.style.opacity = '0';
-            
-            // Show navigation
-            document.getElementById('masterNav').classList.add('visible');
-            
-            // Slide up portal section smoothly from underneath
-            setTimeout(() => {
-                showSection('portal');
-                const portalSection = document.getElementById('portalSection');
-                portalSection.classList.add('slide-up');
-            }, 300);
+        // SHOW NAVIGATION FUNCTION
+        function showNavigation() {
+            if (!navigationVisible) {
+                document.getElementById('masterNav').classList.add('visible');
+                navigationVisible = true;
+                console.log('Navigation activated - Platform ready');
+            }
         }
 
-        // MAIN NAVIGATION FUNCTION
-        function showSection(sectionName) {
-            // Remove active class from all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active', 'prev');
-            });
+        // ENTER PLATFORM FUNCTION
+        function enterPlatform() {
+            clearInterval(introTimer);
+            document.getElementById('introTimer').classList.add('completed');
+            showNavigation();
+            
+            // Smooth scroll to portal section
+            setTimeout(() => {
+                scrollToSection('portal');
+            }, 500);
+        }
 
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Show new section
+        // SCROLL TO SECTION FUNCTION
+        function scrollToSection(sectionName) {
             const targetSection = document.getElementById(sectionName + 'Section');
             if (targetSection) {
-                targetSection.classList.add('active');
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
                 
-                // Update navigation active state
-                if (sectionName === 'portal') {
-                    document.querySelector('.nav-link').classList.add('active');
+                // Update active navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                if (sectionName === 'intro') {
+                    document.querySelector('[onclick="scrollToSection(\'intro\')"]').classList.add('active');
+                } else if (sectionName === 'portal') {
+                    document.querySelector('[onclick="scrollToSection(\'portal\')"]').classList.add('active');
                 } else if (sectionName === 'modules') {
-                    document.querySelector('[onclick="showSection(\'modules\')"]').classList.add('active');
+                    document.querySelector('[onclick="scrollToSection(\'modules\')"]').classList.add('active');
                 }
                 
-                currentSection = sectionName;
-                console.log(`Navigated to: ${sectionName}`);
+                console.log(`Scrolled to: ${sectionName}`);
             }
         }
 
@@ -1204,35 +1248,24 @@
         // KEYBOARD NAVIGATION
         document.addEventListener('keydown', (e) => {
             switch(e.key) {
-                case 'ArrowRight':
-                    if (currentSection === 'intro') skipIntro();
-                    else if (currentSection === 'portal') showSection('modules');
-                    break;
-                case 'ArrowLeft':
-                    if (currentSection === 'modules') showSection('portal');
-                    break;
                 case 'Enter':
-                    if (currentSection === 'intro') skipIntro();
-                    else if (currentSection === 'portal') showSection('modules');
+                    if (!navigationVisible) {
+                        enterPlatform();
+                    }
                     break;
                 case 'Escape':
-                    if (currentSection !== 'intro') showSection('portal');
+                    scrollToSection('intro');
+                    break;
+                case 'ArrowDown':
+                    if (navigationVisible) {
+                        scrollToSection('portal');
+                    }
                     break;
             }
         });
 
         // SMOOTH SCROLLING
         document.documentElement.style.scrollBehavior = 'smooth';
-
-        // SCROLL EFFECTS
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('masterNav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
 
         // MODULE CLICK HANDLERS
         document.querySelectorAll('.module-card').forEach(card => {
