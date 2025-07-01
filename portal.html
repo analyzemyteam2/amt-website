@@ -29,13 +29,14 @@
             height: 60px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            padding: 0 40px;
         }
 
         .nav-items {
@@ -69,6 +70,255 @@
             color: #e2021a;
             margin-left: 2px;
             font-size: 16px;
+        }
+
+        /* Login Button */
+        .login-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .login-button {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(226, 2, 26, 0.3);
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(226, 2, 26, 0.5);
+            background: linear-gradient(135deg, #ff1744 0%, #e2021a 100%);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .user-name {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .logout-button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .login-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .login-container {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+        }
+
+        .login-modal.active .login-container {
+            transform: translateY(0);
+        }
+
+        .login-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-close:hover {
+            color: #ffffff;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #e2021a;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 2px rgba(226, 2, 26, 0.2);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #e2021a;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-select option {
+            background: #2a2a2a;
+            color: #ffffff;
+        }
+
+        .login-submit {
+            background: linear-gradient(135deg, #e2021a 0%, #ff1744 100%);
+            border: none;
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(226, 2, 26, 0.4);
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-link, .forgot-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .demo-link:hover, .forgot-link:hover {
+            color: #e2021a;
         }
 
         /* Main Portal Container */
@@ -482,8 +732,52 @@
             text-transform: uppercase;
         }
 
-        /* Mobile Staff Responsive */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            .portal-nav {
+                padding: 0 20px;
+            }
+
+            .nav-items {
+                gap: 20px;
+                font-size: 11px;
+                flex-wrap: wrap;
+            }
+
+            .login-section {
+                gap: 10px;
+            }
+
+            .login-button {
+                padding: 6px 16px;
+                font-size: 10px;
+            }
+
+            .login-container {
+                padding: 30px;
+                margin: 20px;
+            }
+
+            .video-panels {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+                height: 80vh;
+            }
+
+            .cta-section {
+                height: 100px;
+            }
+
+            .cta-headline {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+
+            .cta-subtext {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+
             .staff-container {
                 padding: 0 20px;
             }
@@ -516,36 +810,6 @@
             .staff-name {
                 font-size: 13px;
                 letter-spacing: 0.5px;
-            }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-items {
-                gap: 20px;
-                font-size: 11px;
-                flex-wrap: wrap;
-                padding: 0 20px;
-            }
-
-            .video-panels {
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr 1fr;
-                height: 80vh;
-            }
-
-            .cta-section {
-                height: 100px;
-            }
-
-            .cta-headline {
-                font-size: 18px;
-                letter-spacing: 2px;
-            }
-
-            .cta-subtext {
-                font-size: 12px;
-                letter-spacing: 1px;
             }
 
             .publications-container {
@@ -594,9 +858,63 @@
             <a href="#" class="nav-item live">LIVE</a>
             <a href="#" class="nav-item">DATA</a>
             <a href="#" class="nav-item">OPERATIONS</a>
-            <a href="#" class="nav-item">LEADERSHIP</a>
+        </div>
+        
+        <!-- Login Section -->
+        <div class="login-section">
+            <button class="login-button" onclick="openLoginModal()">LOGIN</button>
+            
+            <!-- User Info (hidden by default) -->
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <span class="user-name" id="userName">John Doe</span>
+                <button class="logout-button" onclick="logout()">Logout</button>
+            </div>
         </div>
     </nav>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <button class="login-close" onclick="closeLoginModal()">&times;</button>
+            
+            <div class="login-header">
+                <h2 class="login-title">Platform Access</h2>
+                <p class="login-subtitle">Enter Triangle Defense Intelligence</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">User Type</label>
+                    <select class="form-select" id="userType" required>
+                        <option value="">Select Your Role</option>
+                        <option value="head-coach">Head Coach</option>
+                        <option value="executive">Executive Team</option>
+                        <option value="analyst">Performance Analyst</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="guest">Guest Access</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-input" id="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="login-submit">Access Platform</button>
+            </form>
+
+            <div class="login-options">
+                <a href="#" class="demo-link" onclick="demoLogin()">Demo Access</a>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Portal Container -->
     <div class="portal-container">
@@ -679,9 +997,7 @@
                             <div class="staff-name">Darius Washington</div>
                         </div>
                         <div class="staff-content">
-                            <div class="staff-image" style="background-image: url('assets/darius-washington.png');">
-                                
-                            </div>
+                            <div class="staff-image" style="background-image: url('assets/darius-washington.png');"></div>
                             <div class="staff-role">Head Coach (Offensive Innovation)</div>
                             <div class="staff-description">
                                 AI-powered coaching virtuoso specializing in offensive strategy and innovation. Hyper-intelligent digital personality combining genius-level strategic thinking with emotional intelligence to develop championship-caliber offensive schemes and player relationships.
@@ -695,9 +1011,7 @@
                             <div class="staff-name">Alexandra Martinez</div>
                         </div>
                         <div class="staff-content">
-                            <div class="staff-image" style="background-image: url('assets/alexandra-martinez.png');">
-                                
-                            </div>
+                            <div class="staff-image" style="background-image: url('assets/alexandra-martinez.png');"></div>
                             <div class="staff-role">Chief Administrative Officer</div>
                             <div class="staff-description">
                                 Advanced AI organizational mastermind who transforms complex football operations into seamless systems. Digital expert in project management and executive coordination delivering championship-level efficiency through artificial intelligence.
@@ -711,9 +1025,7 @@
                             <div class="staff-name">Victoria Castellanos</div>
                         </div>
                         <div class="staff-content">
-                            <div class="staff-image" style="background-image: url('assets/victoria-castellanos.png');">
-                                
-                            </div>
+                            <div class="staff-image" style="background-image: url('assets/victoria-castellanos.png');"></div>
                             <div class="staff-role">Chief Legal Officer</div>
                             <div class="staff-description">
                                 Elite AI legal strategist protecting Triangle Defense intellectual property and ensuring compliance across all football operations. Digital commanding presence with uncompromising professional standards powered by advanced artificial intelligence.
@@ -727,9 +1039,7 @@
                             <div class="staff-name">Marcus Sterling</div>
                         </div>
                         <div class="staff-content">
-                            <div class="staff-image" style="background-image: url('assets/marcus-sterling.png');">
-                                
-                            </div>
+                            <div class="staff-image" style="background-image: url('assets/marcus-sterling.png');"></div>
                             <div class="staff-role">General Manager</div>
                             <div class="staff-description">
                                 AI-powered executive architect building championship organizations through strategic personnel decisions and innovative football analytics integration. Digital former NFL linebacker turned cutting-edge artificial intelligence leader.
@@ -778,6 +1088,90 @@
     </div>
 
     <script>
+        // Login Modal Functions
+        function openLoginModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Demo Login Function
+        function demoLogin() {
+            simulateLogin('Demo User', 'guest', 'DU');
+            closeLoginModal();
+        }
+
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userType = document.getElementById('userType').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simulate authentication
+            if (username && password && userType) {
+                const initials = username.substring(0, 2).toUpperCase();
+                simulateLogin(username, userType, initials);
+                closeLoginModal();
+                
+                // Clear form
+                this.reset();
+            }
+        });
+
+        // Simulate Login Success
+        function simulateLogin(name, type, initials) {
+            // Hide login button, show user info
+            document.querySelector('.login-button').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            
+            // Update user info
+            document.getElementById('userName').textContent = name;
+            document.getElementById('userAvatar').textContent = initials;
+            
+            // Set avatar color based on user type
+            const avatar = document.getElementById('userAvatar');
+            switch(type) {
+                case 'head-coach':
+                    avatar.style.background = 'linear-gradient(135deg, #e2021a 0%, #ff1744 100%)';
+                    break;
+                case 'executive':
+                    avatar.style.background = 'linear-gradient(135deg, #4e5064 0%, #5c5b66 100%)';
+                    break;
+                case 'analyst':
+                    avatar.style.background = 'linear-gradient(135deg, #15151a 0%, #2a2a2a 100%)';
+                    break;
+                case 'coordinator':
+                    avatar.style.background = 'linear-gradient(135deg, #818284 0%, #a1a1a1 100%)';
+                    break;
+                default:
+                    avatar.style.background = 'linear-gradient(135deg, #666666 0%, #888888 100%)';
+            }
+
+            console.log(`User logged in: ${name} (${type})`);
+        }
+
+        // Logout Function
+        function logout() {
+            document.querySelector('.login-button').style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            console.log('User logged out');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLoginModal();
+            }
+        });
+
         // Staff click handler
         function openStaff(staffId) {
             console.log(`Opening AI staff member: ${staffId}`);
@@ -854,7 +1248,11 @@
                     window.location.href = 'modules.html';
                     break;
                 case 'Escape':
-                    window.location.href = 'intro.html';
+                    if (document.getElementById('loginModal').classList.contains('active')) {
+                        closeLoginModal();
+                    } else {
+                        window.location.href = 'intro.html';
+                    }
                     break;
                 case 'ArrowRight':
                     window.location.href = 'modules.html';
@@ -870,7 +1268,7 @@
 
         // Initialize portal
         window.addEventListener('load', () => {
-            console.log('Triangle Defense Portal Loaded');
+            console.log('Triangle Defense Portal with LOGIN Loaded');
             startPortalTimer();
             
             // Add entrance animation
