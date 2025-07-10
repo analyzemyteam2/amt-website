@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Wright - The Algorithm Chatbot</title>
+    <style>
+        /* AMT Chatbot Widget Styles */
+        .amt-chatbot-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Chat Bubble */
+        .amt-chat-bubble {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .amt-chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(226, 2, 26, 0.4);
+        }
+
+        .amt-chat-bubble::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/marcus-sterling.png') center/cover;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .amt-chat-bubble:hover::before {
+            opacity: 1;
+        }
+
+        .amt-chat-bubble-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: opacity 0.3s ease;
+        }
+
+        .amt-chat-bubble:hover .amt-chat-bubble-icon {
+            opacity: 0;
+        }
+
+        /* Notification Badge */
+        .amt-notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            background: #e2021a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Chat Window */
+        .amt-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 16px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .amt-chat-window.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Chat Header */
+        .amt-chat-header {
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .amt-chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .amt-chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url('assets/marcus-sterling.png') center/cover;
+            border: 2px solid white;
+        }
+
+        .amt-chat-header-text h3 {
+            margin: 0;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .amt-chat-header-text p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+        }
+
+        .amt-chat-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+        }
+
+        .amt-chat-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Chat Messages */
+        .amt-chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .amt-chat-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .amt-chat-message.bot {
+            background: #333;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .amt-chat-message.user {
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Quick Actions */
+        .amt-quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .amt-quick-action {
+            background: #444;
+            color: white;
+            border: 1px solid #555;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .amt-quick-action:hover {
+            background: #e2021a;
+            border-color: #e2021a;
+        }
+
+        /* Chat Input */
+        .amt-chat-input {
+            padding: 16px;
+            border-top: 1px solid #333;
+            background: #222;
+        }
+
+        .amt-chat-input-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .amt-chat-input-field {
+            flex: 1;
+            background: #333;
+            border: 1px solid #444;
+            border-radius: 20px;
+            padding: 10px 16px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .amt-chat-input-field:focus {
+            border-color: #e2021a;
+        }
+
+        .amt-chat-input-field::placeholder {
+            color: #888;
+        }
+
+        .amt-chat-send {
+            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .amt-chat-send:hover {
+            transform: scale(1.1);
+        }
+
+        .amt-chat-send svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+
+        /* Typing Indicator */
+        .amt-typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #333;
+            border-radius: 12px;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .amt-typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #888;
+            animation: typing 1.4s infinite;
+        }
+
+        .amt-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .amt-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: scale(1); opacity: 0.5; }
+            30% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .amt-chat-window {
+                width: 90vw;
+                height: 70vh;
+                bottom: 80px;
+                right: 5vw;
+            }
+
+            .amt-chatbot-widget {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .amt-chat-bubble {
+                width: 50px;
+                height: 50px;
+            }
+
+            .amt-chat-bubble-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Accessibility */
+        .amt-chat-window:focus-within {
+            border-color: #e2021a;
+        }
+
+        .amt-chat-message:focus {
+            outline: 2px solid #e2021a;
+            outline-offset: 2px;
+        }
+
+        /* Welcome Animation */
+        .amt-welcome-animation {
+            position: absolute;
+            top: -100px;
+            right: 0;
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: welcomeSlide 3s ease forwards;
+            border: 1px solid #333;
+        }
+
+        @keyframes welcomeSlide {
+            0% { opacity: 0; transform: translateY(10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- AMT Chatbot Widget -->
+    <div class="amt-chatbot-widget" id="amt-chatbot-widget">
+        <!-- Chat Bubble -->
+        <div class="amt-chat-bubble" id="amt-chat-bubble">
+            <svg class="amt-chat-bubble-icon" viewBox="0 0 24 24">
+                <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16Z"/>
+                <path d="M7 9H17V11H7V9Z"/>
+                <path d="M7 12H15V14H7V12Z"/>
+            </svg>
+            <div class="amt-notification-badge">1</div>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="amt-welcome-animation" id="amt-welcome-message">
+            👋 Need help with Triangle Defense? I'm Dr. Wright!
+        </div>
+
+        <!-- Chat Window -->
+        <div class="amt-chat-window" id="amt-chat-window">
+            <!-- Chat Header -->
+            <div class="amt-chat-header">
+                <div class="amt-chat-header-info">
+                    <div class="amt-chat-avatar"></div>
+                    <div class="amt-chat-header-text">
+                        <h3>Dr. James Wright</h3>
+                        <p>"The Algorithm" • Chief Data Officer</p>
+                    </div>
+                </div>
+                <button class="amt-chat-close" id="amt-chat-close">×</button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="amt-chat-messages" id="amt-chat-messages">
+                <div class="amt-chat-message bot">
+                    Welcome! I'm Dr. James Wright, your analytical guide to Triangle Defense mastery. With my MIT PhD in Data Science and Stanford Statistics background, I can help you understand our revolutionary 5-3-1 system.
+                    <div class="amt-quick-actions">
+                        <button class="amt-quick-action" data-action="triangle-defense">What is Triangle Defense?</button>
+                        <button class="amt-quick-action" data-action="pricing">View Pricing</button>
+                        <button class="amt-quick-action" data-action="demo">Request Demo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="amt-chat-input">
+                <div class="amt-chat-input-container">
+                    <input 
+                        type="text" 
+                        class="amt-chat-input-field" 
+                        id="amt-chat-input-field"
+                        placeholder="Ask me about Triangle Defense..."
+                        maxlength="500"
+                    >
+                    <button class="amt-chat-send" id="amt-chat-send">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dr. Wright Chatbot Logic
+        class AMTChatbot {
+            constructor() {
+                this.isOpen = false;
+                this.messageHistory = [];
+                this.isTyping = false;
+                this.knowledgeBase = this.initializeKnowledgeBase();
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.showWelcomeMessage();
+                this.removeBadgeAfterDelay();
+            }
+
+            setupEventListeners() {
+                const bubble = document.getElementById('amt-chat-bubble');
+                const closeBtn = document.getElementById('amt-chat-close');
+                const sendBtn = document.getElementById('amt-chat-send');
+                const inputField = document.getElementById('amt-chat-input-field');
+
+                bubble.addEventListener('click', () => this.toggleChat());
+                closeBtn.addEventListener('click', () => this.closeChat());
+                sendBtn.addEventListener('click', () => this.sendMessage());
+                inputField.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.sendMessage();
+                });
+
+                // Quick actions
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('amt-quick-action')) {
+                        this.handleQuickAction(e.target.dataset.action);
+                    }
+                });
+            }
+
+            showWelcomeMessage() {
+                setTimeout(() => {
+                    const welcomeMsg = document.getElementById('amt-welcome-message');
+                    welcomeMsg.style.display = 'block';
+                }, 2000);
+            }
+
+            removeBadgeAfterDelay() {
+                setTimeout(() => {
+                    const badge = document.querySelector('.amt-notification-badge');
+                    if (badge) badge.style.display = 'none';
+                }, 5000);
+            }
+
+            toggleChat() {
+                this.isOpen ? this.closeChat() : this.openChat();
+            }
+
+            openChat() {
+                const chatWindow = document.getElementById('amt-chat-window');
+                const badge = document.querySelector('.amt-notification-badge');
+                
+                chatWindow.classList.add('active');
+                this.isOpen = true;
+                
+                if (badge) badge.style.display = 'none';
+                
+                // Focus input field
+                setTimeout(() => {
+                    document.getElementById('amt-chat-input-field').focus();
+                }, 300);
+            }
+
+            closeChat() {
+                const chatWindow = document.getElementById('amt-chat-window');
+                chatWindow.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            sendMessage() {
+                const inputField = document.getElementById('amt-chat-input-field');
+                const message = inputField.value.trim();
+                
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                inputField.value = '';
+                
+                this.showTypingIndicator();
+                
+                setTimeout(() => {
+                    this.hideTypingIndicator();
+                    this.processMessage(message);
+                }, 1000 + Math.random() * 1000);
+            }
+
+            addMessage(message, type) {
+                const messagesContainer = document.getElementById('amt-chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `amt-chat-message ${type}`;
+                messageDiv.textContent = message;
+                
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                this.messageHistory.push({ message, type, timestamp: new Date() });
+            }
+
+            addBotMessageWithActions(message, actions = []) {
+                const messagesContainer = document.getElementById('amt-chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'amt-chat-message bot';
+                messageDiv.textContent = message;
+                
+                if (actions.length > 0) {
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'amt-quick-actions';
+                    
+                    actions.forEach(action => {
+                        const actionBtn = document.createElement('button');
+                        actionBtn.className = 'amt-quick-action';
+                        actionBtn.textContent = action.text;
+                        actionBtn.dataset.action = action.action;
+                        actionsDiv.appendChild(actionBtn);
+                    });
+                    
+                    messageDiv.appendChild(actionsDiv);
+                }
+                
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            showTypingIndicator() {
+                const messagesContainer = document.getElementById('amt-chat-messages');
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'amt-typing-indicator';
+                typingDiv.id = 'amt-typing-indicator';
+                
+                for (let i = 0; i < 3; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'amt-typing-dot';
+                    typingDiv.appendChild(dot);
+                }
+                
+                messagesContainer.appendChild(typingDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                this.isTyping = true;
+            }
+
+            hideTypingIndicator() {
+                const typingIndicator = document.getElementById('amt-typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+                this.isTyping = false;
+            }
+
+            processMessage(message) {
+                const response = this.generateResponse(message);
+                this.addBotMessageWithActions(response.message, response.actions);
+            }
+
+            handleQuickAction(action) {
+                const responses = {
+                    'triangle-defense': {
+                        message: "Triangle Defense is our revolutionary 5-3-1 system that triangulates off the 'middle of five' eligible receivers. Based on statistical analysis of 10,000+ plays, it improves defensive efficiency by 87% on average. The system combines spatial geometry with AI prediction to anticipate offensive moves.",
+                        actions: [
+                            { text: "How does CLS work?", action: "cls-framework" },
+                            { text: "Success rates", action: "success-rates" },
+                            { text: "View Demo", action: "demo" }
+                        ]
+                    },
+                    'pricing': {
+                        message: "Our pricing scales with your level: Youth League ($99/month), High School Elite ($499/month), College Domination ($2,999/month), and NFL Enterprise (Custom). Each tier includes Triangle Defense training, AI analysis, and ongoing support. What level are you coaching?",
+                        actions: [
+                            { text: "Youth League", action: "youth-pricing" },
+                            { text: "High School", action: "hs-pricing" },
+                            { text: "College", action: "college-pricing" },
+                            { text: "NFL/Pro", action: "nfl-pricing" }
+                        ]
+                    },
+                    'demo': {
+                        message: "I'd love to show you Triangle Defense in action! Our demo includes live formation analysis, predictive recommendations, and success rate projections. What's your email and coaching level so I can set this up?",
+                        actions: [
+                            { text: "Schedule Demo", action: "schedule-demo" },
+                            { text: "Download Case Study", action: "case-study" },
+                            { text: "Talk to Sales", action: "sales-contact" }
+                        ]
+                    }
+                };
+
+                if (responses[action]) {
+                    this.addBotMessageWithActions(responses[action].message, responses[action].actions);
+                }
+            }
+
+            generateResponse(message) {
+                const msg = message.toLowerCase();
+                
+                // Knowledge base matching
+                for (const [keywords, response] of Object.entries(this.knowledgeBase)) {
+                    if (keywords.some(keyword => msg.includes(keyword))) {
+                        return response;
+                    }
+                }
+
+                // Default response
+                return {
+                    message: "That's an excellent question! As a data scientist, I analyze every query for patterns. Could you be more specific about what aspect of Triangle Defense or AnalyzeMyTeam you'd like to explore? I can discuss methodology, pricing, success rates, or schedule a demo.",
+                    actions: [
+                        { text: "Triangle Defense Basics", action: "triangle-defense" },
+                        { text: "See Pricing", action: "pricing" },
+                        { text: "Request Demo", action: "demo" },
+                        { text: "Talk to Human", action: "human-contact" }
+                    ]
+                };
+            }
+
+            initializeKnowledgeBase() {
+                return {
+                    // Triangle Defense
+                    ['triangle defense', 'triangle', '5-3-1', 'defense system']: {
+                        message: "Triangle Defense is our proprietary 5-3-1 system that revolutionizes defensive strategy. It triangulates off the middle of five eligible receivers, combining spatial geometry with AI prediction. Statistical analysis shows 87% improvement in defensive efficiency.",
+                        actions: [
+                            { text: "CLS Framework", action: "cls-framework" },
+                            { text: "Success Data", action: "success-rates" },
+                            { text: "See Demo", action: "demo" }
+                        ]
+                    },
+                    
+                    // Pricing
+                    ['price', 'cost', 'pricing', 'how much', 'expensive']: {
+                        message: "Our pricing is designed for every level: Youth League ($99/month), High School Elite ($499/month), College Domination ($2,999/month), NFL Enterprise (Custom). Each tier includes comprehensive training, AI analysis, and ongoing support.",
+                        actions: [
+                            { text: "Youth Details", action: "youth-pricing" },
+                            { text: "High School", action: "hs-pricing" },
+                            { text: "College", action: "college-pricing" },
+                            { text: "Enterprise", action: "nfl-pricing" }
+                        ]
+                    },
+                    
+                    // Success rates
+                    ['success', 'results', 'wins', 'improvement', 'statistics']: {
+                        message: "Our data speaks volumes: 87% average win rate improvement, 312% increase in strategic efficiency, 94% client satisfaction. We've helped teams win 50+ championships across all levels from youth to professional.",
+                        actions: [
+                            { text: "Case Studies", action: "case-studies" },
+                            { text: "Client Results", action: "client-results" },
+                            { text: "ROI Calculator", action: "roi-calculator" }
+                        ]
+                    },
+                    
+                    // AI and Technology
+                    ['ai', 'artificial intelligence', 'technology', 'algorithm', 'data']: {
+                        message: "Our AI processes 1M+ data points per play, providing 98.7% accuracy in formation prediction with 0.3-second response times. We use machine learning to identify patterns invisible to traditional analysis.",
+                        actions: [
+                            { text: "AI Capabilities", action: "ai-capabilities" },
+                            { text: "Tech Stack", action: "tech-stack" },
+                            { text: "Innovation", action: "innovation" }
+                        ]
+                    },
+                    
+                    // Founder/Company
+                    ['denauld', 'founder', 'brown', 'company', 'team']: {
+                        message: "AnalyzeMyTeam was founded by Denauld Brown, an All-American at Kutztown University with NFL/NFL Europe experience and Division I defensive coordinator background. Our team includes 25 championship professionals.",
+                        actions: [
+                            { text: "Meet the Team", action: "team" },
+                            { text: "Denauld's Story", action: "founder-story" },
+                            { text: "Company History", action: "history" }
+                        ]
+                    },
+                    
+                    // Demo and contact
+                    ['demo', 'demonstration', 'try', 'test', 'show me']: {
+                        message: "I'd love to show you Triangle Defense in action! Our demo includes live formation analysis, predictive recommendations, and success rate projections. What's your email and coaching level?",
+                        actions: [
+                            { text: "Schedule Demo", action: "schedule-demo" },
+                            { text: "Download Materials", action: "materials" },
+                            { text: "Contact Sales", action: "contact-sales" }
+                        ]
+                    }
+                };
+            }
+        }
+
+        // Initialize chatbot when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new AMTChatbot();
+        });
+
+        // Auto-hide welcome message after page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const welcomeMsg = document.getElementById('amt-welcome-message');
+                if (welcomeMsg) {
+                    welcomeMsg.style.display = 'none';
+                }
+            }, 8000);
+        });
+    </script>
+</body>
+</html>
