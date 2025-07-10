@@ -841,7 +841,7 @@
         </section>
     </main>
 
-    <!-- Dr. Wright Chatbot Widget -->
+    <!-- Dr. Wright Enhanced Chatbot Widget -->
     <div class="amt-chatbot-widget" id="amt-chatbot-widget">
         <!-- Chat Bubble -->
         <div class="amt-chat-bubble" id="amt-chat-bubble">
@@ -871,11 +871,12 @@
             <!-- Chat Messages -->
             <div class="amt-chat-messages" id="amt-chat-messages">
                 <div class="amt-chat-message bot">
-                    Welcome! I'm Dr. James Wright, your analytical guide to Triangle Defense mastery. With my MIT PhD in Data Science and Stanford Statistics background, I can help you understand our revolutionary 5-3-1 system.
+                    Greetings! I'm Dr. James Wright - MIT calls me "The Algorithm" for good reason. I've processed over 1 million defensive plays to perfect our Triangle Defense methodology. Think of me as your personal data scientist who happens to revolutionize football strategy.
                     <div class="amt-quick-actions">
-                        <button class="amt-quick-action" data-action="triangle-defense">What is Triangle Defense?</button>
-                        <button class="amt-quick-action" data-action="pricing">View Pricing</button>
-                        <button class="amt-quick-action" data-action="demo">Request Demo</button>
+                        <button class="amt-quick-action" data-action="algorithm-power">🧠 Show me the algorithm</button>
+                        <button class="amt-quick-action" data-action="triangle-demo">⚡ Triangle Defense demo</button>
+                        <button class="amt-quick-action" data-action="success-data">📊 Championship data</button>
+                        <button class="amt-quick-action" data-action="ai-team">🤖 Meet our AI team</button>
                     </div>
                 </div>
             </div>
@@ -912,7 +913,7 @@
             });
         }
 
-        // Dr. Wright Chatbot Logic
+        // Enhanced Dr. Wright Chatbot Logic
         class AMTChatbot {
             constructor() {
                 this.isOpen = false;
@@ -1064,29 +1065,57 @@
 
             handleQuickAction(action) {
                 const responses = {
-                    'triangle-defense': {
-                        message: "Triangle Defense is our revolutionary 5-3-1 system that triangulates off the 'middle of five' eligible receivers. Based on statistical analysis of 10,000+ plays, it improves defensive efficiency by 87% on average. The system combines spatial geometry with AI prediction to anticipate offensive moves.",
+                    'algorithm-power': {
+                        message: "Here's what happens behind the scenes: I process 1M+ data points per play through machine learning models that predict offensive tendencies with 98.7% accuracy. Our algorithm analyzes receiver spacing, formation history, and situational patterns to give you the defensive call before the offense knows what they're running.",
                         actions: [
-                            { text: "How does CLS work?", action: "cls-framework" },
-                            { text: "Success rates", action: "success-rates" },
-                            { text: "View Demo", action: "demo" }
+                            { text: "🔍 See live prediction", action: "live-prediction" },
+                            { text: "⚙️ How CLS works", action: "cls-framework" },
+                            { text: "📈 Accuracy metrics", action: "accuracy-data" },
+                            { text: "💡 Schedule deep dive", action: "technical-demo" }
+                        ]
+                    },
+                    'triangle-demo': {
+                        message: "Picture this: Offense shows trips right, 2x1 formation, 3rd & 7. My algorithm instantly calculates: 73% probability of slant concept to the trips side. Triangle Defense triangulates off the #3 receiver, rotating our Mike linebacker to the calculated hot zone. Result? Interception. That's the power of geometry meeting AI.",
+                        actions: [
+                            { text: "🎯 See more scenarios", action: "more-scenarios" },
+                            { text: "🏆 Championship results", action: "success-data" },
+                            { text: "⚡ Live platform demo", action: "platform-demo" },
+                            { text: "💰 Investment options", action: "pricing-tiers" }
+                        ]
+                    },
+                    'success-data': {
+                        message: "The numbers don't lie: 50+ championships, 87% win rate improvement, 312% defensive efficiency increase. Our clients go from reactive to predictive. From guessing to knowing. From good to championship-level. Last season alone, teams using Triangle Defense had 2.3x more turnovers than league average.",
+                        actions: [
+                            { text: "📊 Full analytics report", action: "analytics-report" },
+                            { text: "🏆 Case studies", action: "case-studies" },
+                            { text: "🎯 ROI calculator", action: "roi-calculator" },
+                            { text: "📞 Talk to champions", action: "testimonials" }
+                        ]
+                    },
+                    'ai-team': {
+                        message: "You're entering a world of 25 championship professionals powered by AI. Meet M.E.L. (our master coordinator), Marcus Sterling (recruiting genius), and our entire intelligence network. Each AI specialist handles their domain - from game planning to player development. Think of it as having the greatest coaching minds in history, available 24/7.",
+                        actions: [
+                            { text: "👥 Meet the full team", action: "leadership-tour" },
+                            { text: "🤖 M.E.L. capabilities", action: "mel-demo" },
+                            { text: "🎓 AI coaching evolution", action: "ai-evolution" },
+                            { text: "🚀 Join the revolution", action: "get-started" }
+                        ]
+                    },
+                    'triangle-defense': {
+                        message: "Triangle Defense is our proprietary 5-3-1 system that revolutionizes defensive strategy. It triangulates off the middle of five eligible receivers, combining spatial geometry with AI prediction. Statistical analysis shows 87% improvement in defensive efficiency.",
+                        actions: [
+                            { text: "CLS Framework", action: "cls-framework" },
+                            { text: "Success Data", action: "success-rates" },
+                            { text: "See Demo", action: "demo" }
                         ]
                     },
                     'pricing': {
-                        message: "Our pricing scales with your level: Youth League ($99/month), High School Elite ($499/month), College Domination ($2,999/month), and NFL Enterprise (Custom). Each tier includes Triangle Defense training, AI analysis, and ongoing support. What level are you coaching?",
+                        message: "Our pricing scales with your level: Youth League ($99/month), High School Elite ($499/month), College Domination ($2,999/month), and NFL Enterprise (Custom). Each tier includes comprehensive training, AI analysis, and ongoing support.",
                         actions: [
-                            { text: "Youth League", action: "youth-pricing" },
+                            { text: "Youth Details", action: "youth-pricing" },
                             { text: "High School", action: "hs-pricing" },
                             { text: "College", action: "college-pricing" },
-                            { text: "NFL/Pro", action: "nfl-pricing" }
-                        ]
-                    },
-                    'demo': {
-                        message: "I'd love to show you Triangle Defense in action! Our demo includes live formation analysis, predictive recommendations, and success rate projections. What's your email and coaching level so I can set this up?",
-                        actions: [
-                            { text: "Schedule Demo", action: "schedule-demo" },
-                            { text: "Download Case Study", action: "case-study" },
-                            { text: "Talk to Sales", action: "sales-contact" }
+                            { text: "Enterprise", action: "nfl-pricing" }
                         ]
                     }
                 };
@@ -1106,53 +1135,73 @@
                 }
 
                 return {
-                    message: "That's an excellent question! As a data scientist, I analyze every query for patterns. Could you be more specific about what aspect of Triangle Defense or AnalyzeMyTeam you'd like to explore? I can discuss methodology, pricing, success rates, or schedule a demo.",
+                    message: "Fascinating query! As a data scientist, I approach every question systematically. Your inquiry suggests interest in advanced defensive strategy - exactly my specialty. I've analyzed millions of coaching scenarios to perfect Triangle Defense. What specific aspect of revolutionary defensive intelligence intrigues you most?",
                     actions: [
-                        { text: "Triangle Defense Basics", action: "triangle-defense" },
-                        { text: "See Pricing", action: "pricing" },
-                        { text: "Request Demo", action: "demo" },
-                        { text: "Talk to Human", action: "human-contact" }
+                        { text: "🧠 The Algorithm power", action: "algorithm-power" },
+                        { text: "⚡ Triangle Defense demo", action: "triangle-demo" },
+                        { text: "📊 Championship data", action: "success-data" },
+                        { text: "💬 Talk to human expert", action: "human-contact" }
                     ]
                 };
             }
 
             initializeKnowledgeBase() {
                 return {
-                    ['triangle defense', 'triangle', '5-3-1', 'defense system']: {
-                        message: "Triangle Defense is our proprietary 5-3-1 system that revolutionizes defensive strategy. It triangulates off the middle of five eligible receivers, combining spatial geometry with AI prediction. Statistical analysis shows 87% improvement in defensive efficiency.",
+                    ['triangle defense', 'triangle', '5-3-1', 'defense system', 'methodology']: {
+                        message: "Triangle Defense isn't just a system - it's a paradigm shift. We've mathematically solved football defense by triangulating off the middle of five eligible receivers. My algorithms process spatial relationships, down-distance patterns, and formation tendencies to predict plays with 98.7% accuracy. Think Moneyball, but for defense.",
                         actions: [
-                            { text: "CLS Framework", action: "cls-framework" },
-                            { text: "Success Data", action: "success-rates" },
-                            { text: "See Demo", action: "demo" }
+                            { text: "🧮 See the math", action: "mathematical-proof" },
+                            { text: "⚡ Live prediction demo", action: "prediction-demo" },
+                            { text: "🏆 Championship results", action: "success-data" },
+                            { text: "🚀 Start implementation", action: "get-started" }
                         ]
                     },
-                    ['price', 'cost', 'pricing', 'how much', 'expensive']: {
-                        message: "Our pricing is designed for every level: Youth League ($99/month), High School Elite ($499/month), College Domination ($2,999/month), NFL Enterprise (Custom). Each tier includes comprehensive training, AI analysis, and ongoing support.",
+                    ['price', 'cost', 'pricing', 'how much', 'expensive', 'investment']: {
+                        message: "Investment in intelligence scales with ambition: Youth League ($99/month) gets you foundational Triangle Defense. High School Elite ($499/month) adds predictive analytics. College Domination ($2,999/month) includes full AI coaching staff. NFL Enterprise (Custom) gets everything plus dedicated data scientists. ROI typically exceeds 500% in first season.",
                         actions: [
-                            { text: "Youth Details", action: "youth-pricing" },
-                            { text: "High School", action: "hs-pricing" },
-                            { text: "College", action: "college-pricing" },
-                            { text: "Enterprise", action: "nfl-pricing" }
+                            { text: "📊 ROI calculator", action: "roi-calculator" },
+                            { text: "🎯 Find my tier", action: "tier-assessment" },
+                            { text: "💰 Financing options", action: "financing" },
+                            { text: "🤝 Schedule consultation", action: "consultation" }
                         ]
                     },
-                    ['success', 'results', 'wins', 'improvement', 'statistics']: {
-                        message: "Our data speaks volumes: 87% average win rate improvement, 312% increase in strategic efficiency, 94% client satisfaction. We've helped teams win 50+ championships across all levels from youth to professional.",
+                    ['success', 'results', 'wins', 'improvement', 'statistics', 'data', 'championships']: {
+                        message: "Let me share the statistical reality: Our clients average 87% win improvement, 312% defensive efficiency increase, and 2.3x more turnovers than industry standard. We've engineered 50+ championships across all levels. The data doesn't lie - when you know what's coming, you win.",
                         actions: [
-                            { text: "Case Studies", action: "case-studies" },
-                            { text: "Client Results", action: "client-results" },
-                            { text: "ROI Calculator", action: "roi-calculator" }
+                            { text: "📈 Deep analytics report", action: "analytics-report" },
+                            { text: "🏆 Championship case studies", action: "case-studies" },
+                            { text: "📞 Talk to champions", action: "testimonials" },
+                            { text: "🎯 Predict my results", action: "results-predictor" }
+                        ]
+                    },
+                    ['ai', 'artificial intelligence', 'algorithm', 'technology', 'innovation']: {
+                        message: "You're witnessing the evolution of coaching intelligence. Our AI processes 1M+ data points per play, recognizes patterns humans miss, and predicts outcomes with MIT-level precision. This isn't just technology - it's the future of football strategy, available today.",
+                        actions: [
+                            { text: "🤖 Meet AI coaching staff", action: "ai-team" },
+                            { text: "⚙️ Algorithm deep dive", action: "algorithm-explanation" },
+                            { text: "🔬 Research pipeline", action: "research-pipeline" },
+                            { text: "🚀 Join the future", action: "get-started" }
+                        ]
+                    },
+                    ['demo', 'demonstration', 'show me', 'see it', 'example']: {
+                        message: "Demonstrations are where minds get blown. Picture real-time play prediction, formation analysis, and strategic recommendations flowing to your sideline. I can show you live Triangle Defense in action, complete with probability matrices and outcome predictions. Ready to see the future?",
+                        actions: [
+                            { text: "🎬 Watch live demo", action: "live-demo" },
+                            { text: "📱 Platform walkthrough", action: "platform-tour" },
+                            { text: "📞 Personal demo session", action: "personal-demo" },
+                            { text: "🎯 Custom scenario analysis", action: "scenario-analysis" }
                         ]
                     }
                 };
             }
         }
 
-        // Initialize chatbot when DOM is loaded
+        // Initialize enhanced chatbot when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             new AMTChatbot();
         });
 
-        console.log('AnalyzeMyTeam Platform Loaded - Clean Design with Dr. Wright Chatbot');
+        console.log('AnalyzeMyTeam Platform Loaded - Enhanced Dr. Wright Chatbot v.2');
     </script>
 </body>
 </html>
