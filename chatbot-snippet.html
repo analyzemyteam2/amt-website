@@ -1,0 +1,79 @@
+<!-- AMT Chatbot Activation Snippet -->
+<!-- Add this code before the closing </body> tag on any page where you want the chatbot -->
+
+<!-- Chatbot Integration Script -->
+<script src="chatbot-integration.js"></script>
+
+<!-- Alternative: Direct Integration (if you prefer not to use the separate JS file) -->
+<!-- Uncomment the section below if you want to use direct integration instead -->
+<!--
+<script>
+// Direct Chatbot Integration - Alternative Method
+(function() {
+    'use strict';
+    
+    // Load chatbot after 2 seconds
+    setTimeout(function() {
+        // Prevent duplicate loading
+        if (document.getElementById('amt-chatbot-widget')) return;
+        
+        // Fetch and load chatbot widget
+        fetch('chatbot-widget.html')
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Extract and add styles
+                const styles = doc.querySelector('style');
+                if (styles && !document.querySelector('#amt-chatbot-styles')) {
+                    styles.id = 'amt-chatbot-styles';
+                    document.head.appendChild(styles);
+                }
+                
+                // Extract and add widget
+                const widget = doc.querySelector('.amt-chatbot-widget');
+                if (widget) {
+                    document.body.appendChild(widget);
+                }
+                
+                // Extract and execute scripts
+                const scripts = doc.querySelector('script');
+                if (scripts) {
+                    const scriptElement = document.createElement('script');
+                    scriptElement.textContent = scripts.textContent;
+                    document.body.appendChild(scriptElement);
+                }
+            })
+            .catch(error => {
+                console.error('Failed to load AMT Chatbot:', error);
+            });
+    }, 2000);
+})();
+</script>
+-->
+
+<!-- 
+USAGE INSTRUCTIONS:
+1. Copy the script tag above: <script src="chatbot-integration.js"></script>
+2. Add it before the closing </body> tag on any page
+3. The chatbot will automatically load after 2 seconds
+4. Dr. Wright will appear in the bottom-right corner
+
+PAGES TO UPDATE:
+- index.html (main page)
+- leadership.html (AI team page)
+- triangle.html (Triangle Defense page)
+- enterprise.html (enterprise solutions)
+- pricing.html (pricing tiers)
+- innovation.html (innovation page)
+- domination.html (championship results)
+- mel.html (M.E.L. page)
+- platform.html (platform dashboard)
+
+EXAMPLE:
+Add this right before </body>:
+    <script src="chatbot-integration.js"></script>
+</body>
+</html>
+-->
