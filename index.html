@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnalyzeMyTeam - Coaching Intelligence Platform</title>
-    <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology">
-    
+    <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology, predictive analytics, and championship-winning strategies for football teams at all levels.">
+    <meta name="keywords" content="football coaching, defensive strategy, AI analytics, Triangle Defense, coaching intelligence, sports analytics">
+    <meta name="author" content="AnalyzeMyTeam">
+    <link rel="canonical" href="https://analyzemyteam.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-dark: #1a181a;
+            --secondary-dark: #15151a;
+            --tertiary-dark: #5c5b66;
+            --accent-dark: #4e5064;
+            --accent-red: #e2021a;
+            --accent-lime: #d4db69;
+            --text-white: #ffffff;
+            --text-gray: #cccccc;
+            --text-dark-gray: #999999;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,128 +32,55 @@
         }
 
         body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
-            background: #000000;
-            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--tertiary-dark) 100%);
+            color: var(--text-white);
+            min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Particle Background System */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(226, 2, 26, 0.1) 0%, rgba(212, 219, 105, 0.05) 100%);
-            border-radius: 50%;
-            animation: particleFloat 25s linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Navigation System */
-        .main-nav {
+        /* Navigation */
+        .navigation {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(26, 24, 26, 0.95);
             backdrop-filter: blur(10px);
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
             z-index: 1000;
-            border-bottom: 1px solid rgba(226, 2, 26, 0.2);
-            transition: all 0.3s ease;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .nav-brand {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            padding: 0 2rem;
         }
 
-        .nav-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .logo {
+            font-size: 1.5rem;
             font-weight: 800;
-            font-size: 16px;
-            color: #000000;
-            animation: logoFloat 3s ease-in-out infinite;
+            color: var(--text-white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-        }
-
-        .nav-brand-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .amt-letter {
-            display: inline-block;
-            text-shadow: 0 0 10px currentColor;
-        }
-
-        .amt-letter.a-letter {
-            color: #e2021a;
-            text-shadow: 0 0 15px #e2021a;
-        }
-
-        .amt-letter.m-letter {
-            color: #d4db69;
-            text-shadow: 0 0 15px #d4db69;
-        }
-
-        .amt-letter.t-letter {
-            color: #a1a1a1;
-            text-shadow: 0 0 15px #a1a1a1;
-        }
-
-        .amt-letter.regular {
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            fill: var(--accent-red);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 0.5rem;
+            gap: 2rem;
             align-items: center;
         }
 
@@ -144,460 +89,392 @@
         }
 
         .nav-link {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-white);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            padding: 1rem 1.5rem;
-            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             transition: all 0.3s ease;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-link:hover {
-            color: #d4db69;
-            background: rgba(212, 219, 105, 0.1);
+            background: rgba(226, 2, 26, 0.1);
+            color: var(--accent-red);
+            transform: translateY(-2px);
         }
 
-        .nav-link.active {
-            color: #d4db69;
-        }
-
-        /* Dropdown Styles */
-        .nav-dropdown {
+        /* Dropdown Navigation */
+        .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(21, 21, 26, 0.98);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 219, 105, 0.2);
+            background: rgba(26, 24, 26, 0.98);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
-            min-width: 350px;
-            padding: 1rem 0;
+            padding: 1rem;
+            min-width: 280px;
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .nav-item:hover .nav-dropdown {
+        .nav-item:hover .dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
 
-        .dropdown-item {
-            display: block;
-            padding: 1rem 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+        .dropdown-section {
+            margin-bottom: 1.5rem;
         }
 
-        .dropdown-item:hover {
-            background: rgba(212, 219, 105, 0.1);
-            border-left-color: #d4db69;
-            color: #ffffff;
+        .dropdown-section:last-child {
+            margin-bottom: 0;
         }
 
         .dropdown-title {
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            color: #d4db69;
-            margin-bottom: 0.3rem;
+            color: var(--accent-red);
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .dropdown-subtitle {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.4;
-            text-transform: none;
             letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
         }
 
-        /* Login Button */
-        .nav-login-btn {
-            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
-            color: #000000;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
+        .dropdown-link {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            margin-left: 1rem;
+            border-radius: 6px;
+            padding-left: 0.5rem;
         }
 
-        .nav-login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(226, 2, 26, 0.4);
+        .dropdown-link:hover {
+            color: var(--text-white);
+            background: rgba(226, 2, 26, 0.1);
+            transform: translateX(5px);
         }
 
-        /* Main Content Container */
-        .main-content {
-            position: relative;
-            z-index: 10;
+        .dropdown-description {
+            font-size: 0.8rem;
+            color: var(--text-dark-gray);
+            margin-top: 0.25rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 24, 26, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100vh);
+                transition: transform 0.3s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-nav-toggle {
+                display: flex;
+            }
+
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+                border: none;
+                padding: 0;
+                margin-top: 1rem;
+            }
         }
 
         /* Hero Section */
-        .hero-section {
-            height: 100vh;
+        .hero {
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, rgba(26, 24, 26, 0.8) 0%, rgba(0, 0, 0, 0.9) 70%);
-        }
-
-        .triangle-logo {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 2rem;
-            animation: triangleFloat 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.6));
-        }
-
-        @keyframes triangleFloat {
-            0%, 100% { 
-                transform: translateY(0px) scale(1);
-                filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.6));
-            }
-            50% { 
-                transform: translateY(-15px) scale(1.02);
-                filter: drop-shadow(0 0 40px rgba(226, 2, 26, 0.8));
-            }
-        }
-
-        /* Triangle SVG Placeholder */
-        .triangle-placeholder {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 2rem;
-            animation: triangleFloat 4s ease-in-out infinite;
-        }
-
-        .triangle-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 30px rgba(226, 2, 26, 0.6));
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.5s forwards;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.8s forwards;
-        }
-
-        .hero-tagline {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-style: italic;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.1s forwards;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 1.4s forwards;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
-            color: #000000;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 30px rgba(226, 2, 26, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(226, 2, 26, 0.5);
-            filter: brightness(1.1);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #d4db69;
-            border: 2px solid #d4db69;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.4s ease;
-        }
-
-        .btn-secondary:hover {
-            background: #d4db69;
-            color: #000000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(212, 219, 105, 0.3);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        /* Feature Grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(26, 24, 26, 0.6);
-            border: 1px solid rgba(226, 2, 26, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
+            padding: 8rem 2rem 4rem;
             position: relative;
             overflow: hidden;
         }
 
-        .feature-card::before {
-            content: '';
+        .hero-background {
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .hero-particles {
+            position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 219, 105, 0.1), transparent);
-            transition: left 0.5s ease;
+            overflow: hidden;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(212, 219, 105, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(226, 2, 26, 0.5);
+            animation: float 6s infinite ease-in-out;
         }
 
-        .feature-card:hover::before {
-            left: 100%;
+        .particle:nth-child(even) {
+            background: rgba(212, 219, 105, 0.3);
+            animation-delay: -3s;
         }
 
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #e2021a 0%, #d4db69 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.5rem;
-            color: #000000;
-            font-weight: 700;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            margin-bottom: 2rem;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        .triangle-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+            animation: triangleFloat 4s ease-in-out infinite;
+        }
+
+        .triangle-logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px rgba(226, 2, 26, 0.5));
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(226, 2, 26, 0.5)); }
+            100% { filter: drop-shadow(0 0 40px rgba(226, 2, 26, 0.8)); }
+        }
+
+        @keyframes triangleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
             margin-bottom: 1rem;
-            color: #d4db69;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
 
-        .feature-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            font-size: 0.95rem;
+        .hero-title .letter-a {
+            color: var(--accent-red);
+            text-shadow: 0 0 20px rgba(226, 2, 26, 0.5);
         }
 
-        /* Quick Access Grid */
+        .hero-title .letter-m {
+            color: var(--accent-lime);
+            text-shadow: 0 0 20px rgba(212, 219, 105, 0.5);
+        }
+
+        .hero-title .letter-t {
+            color: var(--text-gray);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+            text-align: justify;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            color: var(--text-dark-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: justify;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-red) 0%, #ff1a2e 100%);
+            color: var(--text-white);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-white);
+            padding: 1rem 2rem;
+            border: 2px solid var(--accent-lime);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-lime);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 219, 105, 0.3);
+        }
+
+        /* Quick Access Cards */
         .quick-access {
-            padding: 3rem 2rem;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(21, 21, 26, 0.8) 0%, rgba(78, 80, 100, 0.8) 100%);
+        }
+
+        .quick-access-container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .quick-access-title {
-            font-size: 2.2rem;
             text-align: center;
-            color: #d4db69;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-white);
         }
 
-        .quick-grid {
+        .quick-access-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .quick-card {
-            background: rgba(26, 24, 26, 0.6);
-            border: 1px solid rgba(226, 2, 26, 0.2);
-            border-radius: 15px;
+        .quick-access-card {
+            background: rgba(26, 24, 26, 0.8);
             padding: 2rem;
-            text-align: center;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            text-align: center;
             text-decoration: none;
-            color: inherit;
+            color: var(--text-white);
+            backdrop-filter: blur(10px);
         }
 
-        .quick-card:hover {
+        .quick-access-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(212, 219, 105, 0.5);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 30px rgba(226, 2, 26, 0.2);
         }
 
-        .quick-card-title {
-            font-size: 1.2rem;
-            color: #d4db69;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .quick-access-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            color: var(--accent-red);
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(226, 2, 26, 0.1);
+            animation: iconPulse 2s infinite;
         }
 
-        .quick-card-description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .quick-access-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-red);
+        }
+
+        .quick-access-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            text-align: justify;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(0, 0, 0, 0.98);
-                flex-direction: column;
-                padding: 1rem;
-                border-top: 1px solid rgba(212, 219, 105, 0.2);
-            }
-
-            .nav-links.mobile-active {
-                display: flex;
-            }
-
-            .nav-item {
-                width: 100%;
-            }
-
-            .nav-dropdown {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                border: none;
-                background: rgba(26, 24, 26, 0.5);
-                margin-top: 0.5rem;
-                display: none;
-            }
-
-            .nav-item:hover .nav-dropdown {
-                display: block;
-            }
-
-            .mobile-toggle {
-                display: flex;
-                flex-direction: column;
-                cursor: pointer;
-                padding: 0.5rem;
-            }
-
-            .mobile-toggle span {
-                width: 25px;
-                height: 3px;
-                background: #ffffff;
-                margin: 3px 0;
-                transition: all 0.3s ease;
-            }
-
             .hero-title {
                 font-size: 2.5rem;
-                letter-spacing: 3px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
             }
 
             .hero-actions {
@@ -605,338 +482,469 @@
                 align-items: center;
             }
 
-            .content-section {
-                padding: 3rem 1rem;
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
             }
 
-            .feature-grid,
-            .quick-grid {
+            .quick-access-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .mobile-toggle {
-            display: none;
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(226, 2, 26, 0.3);
+            border-top: 3px solid var(--accent-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Scroll Reveal Animation */
-        .reveal {
+        [data-reveal] {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
             transition: all 0.8s ease;
         }
 
-        .reveal.active {
+        [data-reveal].revealed {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Particle Background -->
-    <div class="particles" id="particles"></div>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-brand">
-            <div class="nav-logo">▲</div>
-            <div class="nav-brand-text">
-                <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                    <path d="M2 17L12 22L22 17"/>
+                    <path d="M2 12L12 17L22 12"/>
+                </svg>
+                AMT
+            </a>
+            
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        REVOLUTION
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Platform Overview</div>
+                            <a href="platform.html" class="dropdown-link">
+                                Platform Dashboard
+                                <div class="dropdown-description">Access all 12 specialized modules</div>
+                            </a>
+                            <a href="leadership.html" class="dropdown-link">
+                                AI Leadership Team
+                                <div class="dropdown-description">Meet our championship professionals</div>
+                            </a>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Innovation</div>
+                            <a href="innovation.html" class="dropdown-link">
+                                Research & Development
+                                <div class="dropdown-description">Technology 5 years ahead</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        TRIANGLE
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Methodology</div>
+                            <a href="triangle.html" class="dropdown-link">
+                                5-3-1 System
+                                <div class="dropdown-description">Revolutionary Triangle Defense</div>
+                            </a>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Framework</div>
+                            <a href="triangle.html#cls" class="dropdown-link">
+                                CLS Analysis
+                                <div class="dropdown-description">Configuration, Location, Situation</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        INTELLIGENCE
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">AI Systems</div>
+                            <a href="mel.html" class="dropdown-link">
+                                M.E.L. Engine
+                                <div class="dropdown-description">Master Intelligence coordination</div>
+                            </a>
+                            <a href="modules.html" class="dropdown-link">
+                                Platform Modules
+                                <div class="dropdown-description">12 specialized AI modules</div>
+                            </a>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Analytics</div>
+                            <a href="innovation.html#analytics" class="dropdown-link">
+                                Predictive Analytics
+                                <div class="dropdown-description">Formation tendency prediction</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        ENTERPRISE
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Solutions</div>
+                            <a href="enterprise.html" class="dropdown-link">
+                                NFL Enterprise
+                                <div class="dropdown-description">Professional franchise solutions</div>
+                            </a>
+                            <a href="enterprise.html#college" class="dropdown-link">
+                                College Programs
+                                <div class="dropdown-description">University athletic departments</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        DOMINATION
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Proven Results</div>
+                            <a href="domination.html" class="dropdown-link">
+                                Success Metrics
+                                <div class="dropdown-description">87% win rate improvement</div>
+                            </a>
+                            <a href="domination.html#championships" class="dropdown-link">
+                                Championship Stories
+                                <div class="dropdown-description">50+ championships won</div>
+                            </a>
+                        </div>
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">ROI Analysis</div>
+                            <a href="domination.html#calculator" class="dropdown-link">
+                                ROI Calculator
+                                <div class="dropdown-description">Calculate your investment return</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        INNOVATION
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Technology</div>
+                            <a href="innovation.html" class="dropdown-link">
+                                Computer Vision
+                                <div class="dropdown-description">Real-time formation recognition</div>
+                            </a>
+                            <a href="innovation.html#roadmap" class="dropdown-link">
+                                Future Roadmap
+                                <div class="dropdown-description">2024-2027+ innovation timeline</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        PRICING
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown">
+                        <div class="dropdown-section">
+                            <div class="dropdown-title">Investment Tiers</div>
+                            <a href="pricing.html" class="dropdown-link">
+                                All Pricing Tiers
+                                <div class="dropdown-description">Youth to NFL enterprise</div>
+                            </a>
+                            <a href="pricing.html#college" class="dropdown-link">
+                                College Domination
+                                <div class="dropdown-description">$2,999/month - Most Popular</div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="mobile-nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </div>
-        <ul class="nav-links">
-            <li class="nav-item">
-                <a href="leadership.html" class="nav-link">REVOLUTION</a>
-                <div class="nav-dropdown">
-                    <a href="leadership.html" class="dropdown-item">
-                        <div class="dropdown-title">Leadership Showcase</div>
-                        <div class="dropdown-subtitle">Meet Darius, M.E.L., Marcus & the championship team</div>
-                    </a>
-                    <a href="platform.html" class="dropdown-item">
-                        <div class="dropdown-title">Platform Overview</div>
-                        <div class="dropdown-subtitle">Complete AMT ecosystem revolution</div>
-                    </a>
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">AI Coaching Evolution</div>
-                        <div class="dropdown-subtitle">25 championship professionals powered by AI</div>
-                    </a>
-                    <a href="enterprise.html" class="dropdown-item">
-                        <div class="dropdown-title">Live Demo Request</div>
-                        <div class="dropdown-subtitle">Experience the revolution firsthand</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="triangle.html" class="nav-link">TRIANGLE</a>
-                <div class="nav-dropdown">
-                    <a href="triangle.html" class="dropdown-item">
-                        <div class="dropdown-title">Triangle Methodology</div>
-                        <div class="dropdown-subtitle">Revolutionary defensive system</div>
-                    </a>
-                    <a href="triangle.html" class="dropdown-item">
-                        <div class="dropdown-title">Formation Recognition</div>
-                        <div class="dropdown-subtitle">Advanced pattern analysis</div>
-                    </a>
-                    <a href="triangle.html" class="dropdown-item">
-                        <div class="dropdown-title">Geometric Principles</div>
-                        <div class="dropdown-subtitle">Where geometry meets football</div>
-                    </a>
-                    <a href="triangle.html" class="dropdown-item">
-                        <div class="dropdown-title">Learn More</div>
-                        <div class="dropdown-subtitle">Discover Triangle Defense concepts</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="mel.html" class="nav-link">INTELLIGENCE</a>
-                <div class="nav-dropdown">
-                    <a href="mel.html" class="dropdown-item">
-                        <div class="dropdown-title">M.E.L. Master Coordinator</div>
-                        <div class="dropdown-subtitle">The AI brain orchestrating all intelligence</div>
-                    </a>
-                    <a href="leadership.html" class="dropdown-item">
-                        <div class="dropdown-title">AI Leadership Team</div>
-                        <div class="dropdown-subtitle">Complete coaching intelligence staff</div>
-                    </a>
-                    <a href="modules.html" class="dropdown-item">
-                        <div class="dropdown-title">Intelligence Modules</div>
-                        <div class="dropdown-subtitle">Specialized AI coaching modules</div>
-                    </a>
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">Technology Pipeline</div>
-                        <div class="dropdown-subtitle">Advanced AI and analytics systems</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="enterprise.html" class="nav-link">ENTERPRISE</a>
-                <div class="nav-dropdown">
-                    <a href="enterprise.html" class="dropdown-item">
-                        <div class="dropdown-title">NFL Solutions</div>
-                        <div class="dropdown-subtitle">Professional franchise technology</div>
-                    </a>
-                    <a href="enterprise.html" class="dropdown-item">
-                        <div class="dropdown-title">College Programs</div>
-                        <div class="dropdown-subtitle">Championship recruiting and development</div>
-                    </a>
-                    <a href="enterprise.html" class="dropdown-item">
-                        <div class="dropdown-title">Strategic Partnerships</div>
-                        <div class="dropdown-subtitle">Technology and education collaborations</div>
-                    </a>
-                    <a href="enterprise.html" class="dropdown-item">
-                        <div class="dropdown-title">Enterprise Demo</div>
-                        <div class="dropdown-subtitle">Private consultation for organizations</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="domination.html" class="nav-link">DOMINATION</a>
-                <div class="nav-dropdown">
-                    <a href="domination.html" class="dropdown-item">
-                        <div class="dropdown-title">Success Metrics</div>
-                        <div class="dropdown-subtitle">Proven performance improvements</div>
-                    </a>
-                    <a href="domination.html" class="dropdown-item">
-                        <div class="dropdown-title">Championship Stories</div>
-                        <div class="dropdown-subtitle">Teams that won with AMT advantage</div>
-                    </a>
-                    <a href="domination.html" class="dropdown-item">
-                        <div class="dropdown-title">ROI Calculator</div>
-                        <div class="dropdown-subtitle">Measure your competitive advantage</div>
-                    </a>
-                    <a href="domination.html" class="dropdown-item">
-                        <div class="dropdown-title">Case Studies</div>
-                        <div class="dropdown-subtitle">Deep dives into AMT victories</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="innovation.html" class="nav-link">INNOVATION</a>
-                <div class="nav-dropdown">
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">Research & Development</div>
-                        <div class="dropdown-subtitle">Technology years ahead</div>
-                    </a>
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">Computer Vision Pipeline</div>
-                        <div class="dropdown-subtitle">Advanced analysis systems</div>
-                    </a>
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">Predictive Analytics</div>
-                        <div class="dropdown-subtitle">Formation tendency prediction</div>
-                    </a>
-                    <a href="innovation.html" class="dropdown-item">
-                        <div class="dropdown-title">Future Roadmap</div>
-                        <div class="dropdown-subtitle">What's coming next in football AI</div>
-                    </a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a href="pricing.html" class="nav-link">PRICING</a>
-                <div class="nav-dropdown">
-                    <a href="pricing.html" class="dropdown-item">
-                        <div class="dropdown-title">Youth League Starter</div>
-                        <div class="dropdown-subtitle">$99/month - Professional intelligence for every level</div>
-                    </a>
-                    <a href="pricing.html" class="dropdown-item">
-                        <div class="dropdown-title">High School Elite</div>
-                        <div class="dropdown-subtitle">$499/month - Championship development programs</div>
-                    </a>
-                    <a href="pricing.html" class="dropdown-item">
-                        <div class="dropdown-title">College Domination</div>
-                        <div class="dropdown-subtitle">$2,999/month - Recruiting and game-day advantage</div>
-                    </a>
-                    <a href="pricing.html" class="dropdown-item">
-                        <div class="dropdown-title">NFL Enterprise</div>
-                        <div class="dropdown-subtitle">Custom pricing - Championship technology</div>
-                    </a>
-                </div>
-            </li>
-        </ul>
-        <button class="nav-login-btn" onclick="showLoginDropdown()">LOGIN</button>
-        <div class="mobile-toggle" onclick="toggleMobileNav()">
-            <span></span>
-            <span></span>
-            <span></span>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section id="home" class="hero-section">
-            <!-- Triangle Logo (use PNG if available, SVG fallback) -->
-            <img src="assets/triangle-defense-logo.png" alt="Triangle Defense Logo" class="triangle-logo" 
-                 onerror="this.style.display='none'; document.getElementById('triangle-fallback').style.display='block';">
-            
-            <!-- SVG Fallback -->
-            <div id="triangle-fallback" class="triangle-placeholder" style="display: none;">
-                <svg class="triangle-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="triangleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#e2021a;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#d4db69;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <polygon points="100,20 180,160 20,160" fill="url(#triangleGrad)" stroke="none"/>
-                </svg>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="hero-particles">
+                <!-- Particles will be generated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-logo">
+                <div class="triangle-logo">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer Triangle -->
+                        <path d="M100 20 L170 160 L30 160 Z" 
+                              fill="none" 
+                              stroke="#e2021a" 
+                              stroke-width="3"
+                              filter="url(#glow)"/>
+                        
+                        <!-- Inner Triangle -->
+                        <path d="M100 50 L140 130 L60 130 Z" 
+                              fill="rgba(212, 219, 105, 0.3)"
+                              stroke="#d4db69" 
+                              stroke-width="2"/>
+                        
+                        <!-- Center Point -->
+                        <circle cx="100" cy="100" r="4" fill="#ffffff"/>
+                        
+                        <!-- Glow Effect -->
+                        <defs>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                    </svg>
+                </div>
             </div>
             
             <h1 class="hero-title">
-                <span class="amt-letter a-letter">A</span><span class="amt-letter regular">n</span><span class="amt-letter regular">a</span><span class="amt-letter regular">l</span><span class="amt-letter regular">y</span><span class="amt-letter regular">z</span><span class="amt-letter regular">e</span><span class="amt-letter m-letter">M</span><span class="amt-letter regular">y</span><span class="amt-letter t-letter">T</span><span class="amt-letter regular">e</span><span class="amt-letter regular">a</span><span class="amt-letter regular">m</span>
+                <span class="letter-a">A</span>NALYZE<span class="letter-m">M</span>Y<span class="letter-t">T</span>EAM
             </h1>
-            <p class="hero-subtitle">Coaching Intelligence Platform</p>
-            <p class="hero-tagline">Powered by the Defensive Algorithm</p>
+            
+            <p class="hero-subtitle">
+                Coaching Intelligence Platform
+            </p>
+            
+            <p class="hero-tagline">
+                Powered by the Defensive Algorithm
+            </p>
+            
             <div class="hero-actions">
                 <a href="platform.html" class="btn-primary">Enter Platform</a>
                 <a href="leadership.html" class="btn-secondary">Meet Our AI Leaders</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Platform Overview Section -->
-        <section id="platform" class="content-section reveal">
-            <h2 class="section-title">Revolutionary Platform</h2>
-            <p class="section-subtitle">
-                Experience the future of coaching intelligence with our AI-powered Triangle Defense methodology
-            </p>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 class="feature-title">AI Leadership Team</h3>
-                    <p class="feature-description">
-                        Meet our revolutionary AI coaching staff powered by advanced artificial intelligence and proven football expertise.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Triangle Defense</h3>
-                    <p class="feature-description">
-                        Our proprietary defensive methodology combines traditional football wisdom with cutting-edge analytics.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Real-Time Analytics</h3>
-                    <p class="feature-description">
-                        Advanced data processing and predictive modeling for strategic decision-making during live gameplay.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quick Access Section -->
-        <section class="quick-access reveal">
-            <h2 class="quick-access-title">Explore the Platform</h2>
-            <div class="quick-grid">
-                <a href="triangle.html" class="quick-card">
-                    <h3 class="quick-card-title">Triangle Defense</h3>
-                    <p class="quick-card-description">Revolutionary defensive methodology</p>
+    <!-- Quick Access Cards -->
+    <section class="quick-access" data-reveal>
+        <div class="quick-access-container">
+            <h2 class="quick-access-title">Championship Intelligence</h2>
+            
+            <div class="quick-access-grid">
+                <a href="triangle.html" class="quick-access-card">
+                    <div class="quick-access-icon">
+                        <i class="fas fa-draw-polygon"></i>
+                    </div>
+                    <h3>Triangle Defense</h3>
+                    <p>Revolutionary 5-3-1 system that triangulates off the middle of five eligible receivers, combining spatial geometry with AI prediction to anticipate offensive moves.</p>
                 </a>
-                <a href="mel.html" class="quick-card">
-                    <h3 class="quick-card-title">M.E.L. AI</h3>
-                    <p class="quick-card-description">Master intelligence engine</p>
+                
+                <a href="mel.html" class="quick-access-card">
+                    <div class="quick-access-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>M.E.L. Intelligence</h3>
+                    <p>Master Intelligence Engine providing game plan preparation, salary cap analysis, play call suggestions, and comprehensive opponent simulations.</p>
                 </a>
-                <a href="innovation.html" class="quick-card">
-                    <h3 class="quick-card-title">Innovation</h3>
-                    <p class="quick-card-description">Cutting-edge technology</p>
+                
+                <a href="innovation.html" class="quick-access-card">
+                    <div class="quick-access-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Innovation Pipeline</h3>
+                    <p>Cutting-edge research combining computer vision, predictive analytics, and AI integration to stay 5 years ahead of the competition.</p>
                 </a>
-                <a href="domination.html" class="quick-card">
-                    <h3 class="quick-card-title">Championship Results</h3>
-                    <p class="quick-card-description">Proven success metrics</p>
+                
+                <a href="domination.html" class="quick-access-card">
+                    <div class="quick-access-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Championship Results</h3>
+                    <p>87% win rate improvement, 50+ championships won, and 312% increase in strategic efficiency across all coaching levels.</p>
                 </a>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <script>
-        // Particle System
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.width = particle.style.height = Math.random() * 8 + 3 + 'px';
-            particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            
-            document.getElementById('particles').appendChild(particle);
-            
+        // Loading Animation
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
             setTimeout(() => {
-                if (particle.parentNode) {
-                    particle.remove();
-                }
-            }, 25000);
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 400);
+                loadingOverlay.classList.add('hidden');
+            }, 1000);
+        });
 
         // Mobile Navigation Toggle
-        function toggleMobileNav() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('mobile-active');
-        }
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-        // Login Dropdown (placeholder)
-        function showLoginDropdown() {
-            alert('Login functionality - redirect to authentication portal');
+        mobileNavToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Particle Generation
+        function createParticles() {
+            const particleContainer = document.querySelector('.hero-particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particleContainer.appendChild(particle);
+            }
         }
 
         // Scroll Reveal Animation
         function revealOnScroll() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+            const reveals = document.querySelectorAll('[data-reveal]');
+            
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveal.getBoundingClientRect().top;
+                const revealPoint = 150;
                 
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('active');
+                if (revealTop < windowHeight - revealPoint) {
+                    reveal.classList.add('revealed');
                 }
             });
         }
 
-        window.addEventListener('scroll', revealOnScroll);
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-        console.log('AnalyzeMyTeam Platform Loaded');
+        // Navigation Background on Scroll
+        window.addEventListener('scroll', function() {
+            const navigation = document.querySelector('.navigation');
+            if (window.scrollY > 50) {
+                navigation.style.background = 'rgba(26, 24, 26, 0.98)';
+            } else {
+                navigation.style.background = 'rgba(26, 24, 26, 0.95)';
+            }
+            
+            // Reveal animation
+            revealOnScroll();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            revealOnScroll();
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Focus Management
+        document.addEventListener('focusin', function(e) {
+            if (e.target.closest('.dropdown')) {
+                e.target.closest('.nav-item').classList.add('focus');
+            }
+        });
+
+        document.addEventListener('focusout', function(e) {
+            if (!e.relatedTarget || !e.relatedTarget.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('focus');
+                });
+            }
+        });
     </script>
+
+    <!-- AMT Chatbot Integration -->
+    <script src="chatbot-integration.js"></script>
 </body>
 </html>
