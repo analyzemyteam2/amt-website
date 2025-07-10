@@ -3,734 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnalyzeMyTeam - Coaching Intelligence Platform</title>
-    <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology, predictive analytics, and championship-winning strategies for football teams at all levels.">
-    <meta name="keywords" content="football coaching, defensive strategy, AI analytics, Triangle Defense, coaching intelligence, sports analytics">
-    <meta name="author" content="AnalyzeMyTeam">
-    <link rel="canonical" href="https://analyzemyteam.com">
+    <title>AnalyzeMyTeam - The Algorithm of Defense</title>
+    <meta name="description" content="Revolutionary AI-powered coaching intelligence platform featuring Triangle Defense methodology and championship-winning strategies.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
-        :root {
-            --primary-dark: #1a181a;
-            --secondary-dark: #15151a;
-            --tertiary-dark: #5c5b66;
-            --accent-dark: #4e5064;
-            --accent-red: #e2021a;
-            --accent-lime: #d4db69;
-            --text-white: #ffffff;
-            --text-gray: #cccccc;
-            --text-dark-gray: #999999;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--tertiary-dark) 100%);
-            color: var(--text-white);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .navigation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 24, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-white);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            width: 30px;
-            height: 30px;
-            fill: var(--accent-red);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-item {
+        /* Dynamic Animations - No Emojis */
+        .triangle-logo-animated {
             position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            animation: float 4s ease-in-out infinite;
         }
 
-        .nav-link {
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-link:hover {
-            background: rgba(226, 2, 26, 0.1);
-            color: var(--accent-red);
-            transform: translateY(-2px);
-        }
-
-        /* Dropdown Navigation */
-        .dropdown {
+        .triangle-logo-animated::before {
+            content: '';
             position: absolute;
-            top: 100%;
-            left: 0;
-            background: rgba(26, 24, 26, 0.98);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1rem;
-            min-width: 280px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent-red);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
         }
 
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+        .triangle-logo-animated::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background: rgba(212, 219, 105, 0.3);
+            border: 2px solid #d4db69;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: inner-pulse 2s ease-in-out infinite alternate 0.5s;
         }
 
-        .dropdown-section {
-            margin-bottom: 1.5rem;
+        .animated-text {
+            background: linear-gradient(45deg, var(--accent-red), #d4db69);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-flow 3s ease-in-out infinite;
         }
 
-        .dropdown-section:last-child {
-            margin-bottom: 0;
+        .floating-icon {
+            animation: icon-float 2s ease-in-out infinite;
         }
 
-        .dropdown-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--accent-red);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
         }
 
-        .dropdown-link {
-            display: block;
-            color: var(--text-gray);
-            text-decoration: none;
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            border-radius: 6px;
-            padding-left: 0.5rem;
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(226, 2, 26, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(226, 2, 26, 0.8); }
         }
 
-        .dropdown-link:hover {
-            color: var(--text-white);
-            background: rgba(226, 2, 26, 0.1);
-            transform: translateX(5px);
+        @keyframes inner-pulse {
+            0% { box-shadow: 0 0 15px rgba(212, 219, 105, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(212, 219, 105, 0.6); }
         }
 
-        .dropdown-description {
-            font-size: 0.8rem;
-            color: var(--text-dark-gray);
-            margin-top: 0.25rem;
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Mobile Navigation */
-        .mobile-nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
+        @keyframes icon-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
 
-        .mobile-nav-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-white);
-            transition: all 0.3s ease;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 24, 26, 0.98);
-                backdrop-filter: blur(15px);
-                flex-direction: column;
-                padding: 2rem;
-                transform: translateY(-100vh);
-                transition: transform 0.3s ease;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-            }
-
-            .mobile-nav-toggle {
-                display: flex;
-            }
-
-            .dropdown {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                background: transparent;
-                border: none;
-                padding: 0;
-                margin-top: 1rem;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 8rem 2rem 4rem;
+        .hero-enhanced {
             position: relative;
             overflow: hidden;
         }
 
-        .hero-background {
+        .hero-enhanced::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(226, 2, 26, 0.1) 0%, transparent 70%);
+            animation: bg-pulse 4s ease-in-out infinite;
         }
 
-        .hero-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(226, 2, 26, 0.5);
-            animation: float 6s infinite ease-in-out;
-        }
-
-        .particle:nth-child(even) {
-            background: rgba(212, 219, 105, 0.3);
-            animation-delay: -3s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            z-index: 1;
-        }
-
-        .hero-logo {
-            margin-bottom: 2rem;
-            animation: logoGlow 3s ease-in-out infinite alternate;
-        }
-
-        .triangle-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1rem;
-            position: relative;
-            animation: triangleFloat 4s ease-in-out infinite;
-        }
-
-        .triangle-logo svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 20px rgba(226, 2, 26, 0.5));
-        }
-
-        @keyframes logoGlow {
-            0% { filter: drop-shadow(0 0 20px rgba(226, 2, 26, 0.5)); }
-            100% { filter: drop-shadow(0 0 40px rgba(226, 2, 26, 0.8)); }
-        }
-
-        @keyframes triangleFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(2deg); }
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -2px;
-            line-height: 1.1;
-        }
-
-        .hero-title .letter-a {
-            color: var(--accent-red);
-            text-shadow: 0 0 20px rgba(226, 2, 26, 0.5);
-        }
-
-        .hero-title .letter-m {
-            color: var(--accent-lime);
-            text-shadow: 0 0 20px rgba(212, 219, 105, 0.5);
-        }
-
-        .hero-title .letter-t {
-            color: var(--text-gray);
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text-gray);
-            text-align: justify;
-        }
-
-        .hero-tagline {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 3rem;
-            color: var(--text-dark-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: justify;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-red) 0%, #ff1a2e 100%);
-            color: var(--text-white);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(226, 2, 26, 0.3);
-            text-align: center;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(226, 2, 26, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-white);
-            padding: 1rem 2rem;
-            border: 2px solid var(--accent-lime);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-lime);
-            color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(212, 219, 105, 0.3);
-        }
-
-        /* Quick Access Cards */
-        .quick-access {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(21, 21, 26, 0.8) 0%, rgba(78, 80, 100, 0.8) 100%);
-        }
-
-        .quick-access-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .quick-access-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--text-white);
-        }
-
-        .quick-access-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .quick-access-card {
-            background: rgba(26, 24, 26, 0.8);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-white);
-            backdrop-filter: blur(10px);
-        }
-
-        .quick-access-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-red);
-            box-shadow: 0 10px 30px rgba(226, 2, 26, 0.2);
-        }
-
-        .quick-access-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1rem;
-            color: var(--accent-red);
-            font-size: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: rgba(226, 2, 26, 0.1);
-            animation: iconPulse 2s infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .quick-access-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--accent-red);
-        }
-
-        .quick-access-card p {
-            color: var(--text-gray);
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-tagline {
-                font-size: 1rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .quick-access-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(226, 2, 26, 0.3);
-            border-top: 3px solid var(--accent-red);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Scroll Reveal Animation */
-        [data-reveal] {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        [data-reveal].revealed {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes bg-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-
     <!-- Navigation -->
-    <nav class="navigation">
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">
-                <svg class="logo-icon" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                    <path d="M2 17L12 22L22 17"/>
-                    <path d="M2 12L12 17L22 12"/>
-                </svg>
-                AMT
-            </a>
-            
-            <ul class="nav-links">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        REVOLUTION
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Platform Overview</div>
-                            <a href="platform.html" class="dropdown-link">
-                                Platform Dashboard
-                                <div class="dropdown-description">Access all 12 specialized modules</div>
-                            </a>
-                            <a href="leadership.html" class="dropdown-link">
-                                AI Leadership Team
-                                <div class="dropdown-description">Meet our championship professionals</div>
-                            </a>
-                        </div>
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Innovation</div>
-                            <a href="innovation.html" class="dropdown-link">
-                                Research & Development
-                                <div class="dropdown-description">Technology 5 years ahead</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        TRIANGLE
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Methodology</div>
-                            <a href="triangle.html" class="dropdown-link">
-                                5-3-1 System
-                                <div class="dropdown-description">Revolutionary Triangle Defense</div>
-                            </a>
-                        </div>
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Framework</div>
-                            <a href="triangle.html#cls" class="dropdown-link">
-                                CLS Analysis
-                                <div class="dropdown-description">Configuration, Location, Situation</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        INTELLIGENCE
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">AI Systems</div>
-                            <a href="mel.html" class="dropdown-link">
-                                M.E.L. Engine
-                                <div class="dropdown-description">Master Intelligence coordination</div>
-                            </a>
-                            <a href="modules.html" class="dropdown-link">
-                                Platform Modules
-                                <div class="dropdown-description">12 specialized AI modules</div>
-                            </a>
-                        </div>
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Analytics</div>
-                            <a href="innovation.html#analytics" class="dropdown-link">
-                                Predictive Analytics
-                                <div class="dropdown-description">Formation tendency prediction</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        ENTERPRISE
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Solutions</div>
-                            <a href="enterprise.html" class="dropdown-link">
-                                NFL Enterprise
-                                <div class="dropdown-description">Professional franchise solutions</div>
-                            </a>
-                            <a href="enterprise.html#college" class="dropdown-link">
-                                College Programs
-                                <div class="dropdown-description">University athletic departments</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        DOMINATION
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Proven Results</div>
-                            <a href="domination.html" class="dropdown-link">
-                                Success Metrics
-                                <div class="dropdown-description">87% win rate improvement</div>
-                            </a>
-                            <a href="domination.html#championships" class="dropdown-link">
-                                Championship Stories
-                                <div class="dropdown-description">50+ championships won</div>
-                            </a>
-                        </div>
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">ROI Analysis</div>
-                            <a href="domination.html#calculator" class="dropdown-link">
-                                ROI Calculator
-                                <div class="dropdown-description">Calculate your investment return</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        INNOVATION
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Technology</div>
-                            <a href="innovation.html" class="dropdown-link">
-                                Computer Vision
-                                <div class="dropdown-description">Real-time formation recognition</div>
-                            </a>
-                            <a href="innovation.html#roadmap" class="dropdown-link">
-                                Future Roadmap
-                                <div class="dropdown-description">2024-2027+ innovation timeline</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        PRICING
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <div class="dropdown-section">
-                            <div class="dropdown-title">Investment Tiers</div>
-                            <a href="pricing.html" class="dropdown-link">
-                                All Pricing Tiers
-                                <div class="dropdown-description">Youth to NFL enterprise</div>
-                            </a>
-                            <a href="pricing.html#college" class="dropdown-link">
-                                College Domination
-                                <div class="dropdown-description">$2,999/month - Most Popular</div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
+            <div class="nav-logo">
+                <a href="#" class="logo-text">AnalyzeMyTeam</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="triangle.html">Triangle Defense</a></li>
+                <li><a href="leadership.html">AI Leaders</a></li>
+                <li><a href="innovation.html">Innovation</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="enterprise.html">Enterprise</a></li>
+                <li><a href="domination.html">Results</a></li>
+                <li><a href="platform.html" class="nav-cta">Enter Platform</a></li>
             </ul>
-            
-            <div class="mobile-nav-toggle">
+            <div class="mobile-menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -739,210 +129,151 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="hero-particles">
-                <!-- Particles will be generated by JavaScript -->
-            </div>
-        </div>
-        
-        <div class="hero-content">
-            <div class="hero-logo">
-                <div class="triangle-logo">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Outer Triangle -->
-                        <path d="M100 20 L170 160 L30 160 Z" 
-                              fill="none" 
-                              stroke="#e2021a" 
-                              stroke-width="3"
-                              filter="url(#glow)"/>
-                        
-                        <!-- Inner Triangle -->
-                        <path d="M100 50 L140 130 L60 130 Z" 
-                              fill="rgba(212, 219, 105, 0.3)"
-                              stroke="#d4db69" 
-                              stroke-width="2"/>
-                        
-                        <!-- Center Point -->
-                        <circle cx="100" cy="100" r="4" fill="#ffffff"/>
-                        
-                        <!-- Glow Effect -->
-                        <defs>
-                            <filter id="glow">
-                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
-                    </svg>
+    <section class="hero hero-enhanced">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Animated Triangle Logo -->
+                <div class="triangle-logo-animated"></div>
+
+                <h1 class="hero-title">
+                    <span class="animated-text">TRIANGLE DEFENSE</span>
+                </h1>
+                
+                <p class="hero-subtitle">Revolutionary Defensive Methodology</p>
+                
+                <p class="hero-description">
+                    <strong>Where Geometry Meets Football Intelligence</strong>
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="platform.html" class="btn-primary large">
+                        <i class="fas fa-rocket floating-icon"></i>
+                        Enter Platform
+                    </a>
+                    <a href="leadership.html" class="btn-secondary large">
+                        <i class="fas fa-users floating-icon"></i>
+                        Meet Our AI Leaders
+                    </a>
+                </div>
+
+                <div class="revolution-text">
+                    <p>Every week, we're building tomorrow's defensive playbook, turning offensive chaos into defensive order.</p>
+                    <p class="cta-tagline">Stop guessing. Start knowing.</p>
                 </div>
             </div>
-            
-            <h1 class="hero-title">
-                <span class="letter-a">A</span>NALYZE<span class="letter-m">M</span>Y<span class="letter-t">T</span>EAM
-            </h1>
-            
-            <p class="hero-subtitle">
-                Coaching Intelligence Platform
-            </p>
-            
-            <p class="hero-tagline">
-                Powered by the Defensive Algorithm
-            </p>
-            
-            <div class="hero-actions">
-                <a href="platform.html" class="btn-primary">Enter Platform</a>
-                <a href="leadership.html" class="btn-secondary">Meet Our AI Leaders</a>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="section-grid">
+                <div class="problem-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exclamation-triangle floating-icon"></i> What We Solve</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>While offensive coordinators innovate at light speed, defensive coaching remains stuck in the past. Traditional "see ball, hit ball" strategies leave defenses vulnerable to modern offensive schemes.</p>
+                        <ul class="problem-list">
+                            <li><i class="fas fa-times-circle"></i> Reactive defensive strategies</li>
+                            <li><i class="fas fa-times-circle"></i> Predictable play calling</li>
+                            <li><i class="fas fa-times-circle"></i> Limited analytical insight</li>
+                            <li><i class="fas fa-times-circle"></i> Outdated methodologies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-lightbulb floating-icon"></i> Our Solution: The 5-3-1 Triangle Defense</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>A revolutionary system that combines spatial geometry with artificial intelligence to predict and counter offensive strategies before they unfold:</p>
+                        <ul class="solution-list">
+                            <li><i class="fas fa-check-circle"></i> Triangulates off the "middle of five" eligible receivers</li>
+                            <li><i class="fas fa-check-circle"></i> Combines man and zone principles in innovative framework</li>
+                            <li><i class="fas fa-check-circle"></i> Adapts dynamically to offensive alignments and movements</li>
+                            <li><i class="fas fa-check-circle"></i> Uses AI to predict and exploit offensive tendencies</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Quick Access Cards -->
-    <section class="quick-access" data-reveal>
-        <div class="quick-access-container">
-            <h2 class="quick-access-title">Championship Intelligence</h2>
-            
-            <div class="quick-access-grid">
-                <a href="triangle.html" class="quick-access-card">
-                    <div class="quick-access-icon">
-                        <i class="fas fa-draw-polygon"></i>
+    <!-- Triangle Defense Section -->
+    <section class="triangle-defense">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Mind Behind the Method</h2>
+                <p>Denauld Brown - Elite Experience Meets AI Innovation</p>
+            </div>
+
+            <div class="cls-framework">
+                <div class="cls-card">
+                    <div class="cls-icon">
+                        <i class="fas fa-cogs floating-icon"></i>
                     </div>
-                    <h3>Triangle Defense</h3>
-                    <p>Revolutionary 5-3-1 system that triangulates off the middle of five eligible receivers, combining spatial geometry with AI prediction to anticipate offensive moves.</p>
-                </a>
-                
-                <a href="mel.html" class="quick-access-card">
-                    <div class="quick-access-icon">
-                        <i class="fas fa-brain"></i>
+                    <h3>Configuration</h3>
+                    <p>How the offense aligns and organizes eligible receivers</p>
+                </div>
+
+                <div class="cls-card">
+                    <div class="cls-icon">
+                        <i class="fas fa-map-marker-alt floating-icon"></i>
                     </div>
-                    <h3>M.E.L. Intelligence</h3>
-                    <p>Master Intelligence Engine providing game plan preparation, salary cap analysis, play call suggestions, and comprehensive opponent simulations.</p>
-                </a>
-                
-                <a href="innovation.html" class="quick-access-card">
-                    <div class="quick-access-icon">
-                        <i class="fas fa-rocket"></i>
+                    <h3>Location</h3>
+                    <p>Field position, hash marks, and spatial relationships</p>
+                </div>
+
+                <div class="cls-card">
+                    <div class="cls-icon">
+                        <i class="fas fa-clock floating-icon"></i>
                     </div>
-                    <h3>Innovation Pipeline</h3>
-                    <p>Cutting-edge research combining computer vision, predictive analytics, and AI integration to stay 5 years ahead of the competition.</p>
-                </a>
-                
-                <a href="domination.html" class="quick-access-card">
-                    <div class="quick-access-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3>Championship Results</h3>
-                    <p>87% win rate improvement, 50+ championships won, and 312% increase in strategic efficiency across all coaching levels.</p>
-                </a>
+                    <h3>Situation</h3>
+                    <p>Down, distance, time, and score patterns</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <script>
-        // Loading Animation
-        window.addEventListener('load', function() {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-            }, 1000);
-        });
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join the Revolution</h2>
+                <p class="cta-description">
+                    Are you ready to stop guessing and start knowing? Join the defensive revolution that's rewriting football's future. Transform your defensive philosophy with the mathematical precision of the 5-3-1 Triangle System.
+                </p>
 
-        // Mobile Navigation Toggle
-        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
+                <div class="cta-stats">
+                    <div class="cta-stat">
+                        <span class="stat-number">1,000+</span>
+                        <span class="stat-label">Coaches Using System</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Championships Won</span>
+                    </div>
+                    <div class="cta-stat">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                </div>
 
-        mobileNavToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-
-        // Particle Generation
-        function createParticles() {
-            const particleContainer = document.querySelector('.hero-particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                particleContainer.appendChild(particle);
-            }
-        }
-
-        // Scroll Reveal Animation
-        function revealOnScroll() {
-            const reveals = document.querySelectorAll('[data-reveal]');
-            
-            reveals.forEach(reveal => {
-                const windowHeight = window.innerHeight;
-                const revealTop = reveal.getBoundingClientRect().top;
-                const revealPoint = 150;
-                
-                if (revealTop < windowHeight - revealPoint) {
-                    reveal.classList.add('revealed');
-                }
-            });
-        }
-
-        // Smooth Scrolling for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navigation Background on Scroll
-        window.addEventListener('scroll', function() {
-            const navigation = document.querySelector('.navigation');
-            if (window.scrollY > 50) {
-                navigation.style.background = 'rgba(26, 24, 26, 0.98)';
-            } else {
-                navigation.style.background = 'rgba(26, 24, 26, 0.95)';
-            }
-            
-            // Reveal animation
-            revealOnScroll();
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            revealOnScroll();
-        });
-
-        // Keyboard Navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Focus Management
-        document.addEventListener('focusin', function(e) {
-            if (e.target.closest('.dropdown')) {
-                e.target.closest('.nav-item').classList.add('focus');
-            }
-        });
-
-        document.addEventListener('focusout', function(e) {
-            if (!e.relatedTarget || !e.relatedTarget.closest('.nav-item')) {
-                document.querySelectorAll('.nav-item').forEach(item => {
-                    item.classList.remove('focus');
-                });
-            }
-        });
-    </script>
+                <div class="cta-buttons">
+                    <a href="platform.html" class="btn-primary large">
+                        <i class="fas fa-rocket floating-icon"></i>
+                        Join the Revolution
+                    </a>
+                    <a href="pricing.html" class="btn-secondary large">
+                        <i class="fas fa-chart-line floating-icon"></i>
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- AMT Chatbot Integration -->
     <script src="chatbot-integration.js"></script>
